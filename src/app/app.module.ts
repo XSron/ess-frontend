@@ -15,17 +15,17 @@ import { CatalogComponent } from './components/home/catalog/catalog.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailComponent } from './components/home/productdetail/productdetail.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { DeliveryAddressComponent } from './components/delivery-address/delivery-address.component';
+import { CreditCardComponent } from './components/credit-card/credit-card.component';
 
 import { AuthenticationService } from './services/authservice.service';
 import { InterceptorService } from './interceptors/interceptor.service';
 import { ProductService } from './services/productservice.service';
 import { CartService } from './services/cartservice.service';
-import { DeliveryAddressComponent } from './components/delivery-address/delivery-address.component';
-import { CreditCardComponent } from './components/credit-card/credit-card.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'productdetail/:id', component: ProductDetailComponent }, 
+  { path: 'productdetail/:id', component: ProductDetailComponent },
   { path: 'vendor', component: VendorComponent },
   { path: 'signin', component: AuthenticationComponent },
   { path: 'mycart', component: CartComponent },
@@ -46,6 +46,7 @@ const routes: Routes = [
     ProductListComponent,
     CartComponent,
     ProductDetailComponent,
+    CheckoutComponent,
     DeliveryAddressComponent,
     CreditCardComponent
   ],
