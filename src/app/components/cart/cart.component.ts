@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,13 +18,9 @@ export class CartComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.cartSubscription = this.cartService.cartSubject.subscribe((products: ProductModel[]) => {
             this.products = products;
-            //reset count & calculate
-            this.totalItem = 0; 
-            this.subTotal = 0;
-            this.products.forEach((product: ProductModel) => {
-                this.totalItem += +product.qty;
-                this.subTotal += +product.qty * +product.price;
-            })
+            let {totalItem, subTotal} = this.cartService.calculateTotal(this.products);
+            this.totalItem = totalItem;
+            this.subTotal = subTotal;
         });
     }
     public handleQtyChange(productId: number, qty: number) {
@@ -33,7 +30,9 @@ export class CartComponent implements OnInit, OnDestroy {
         this.cartService.deleteFromCart(productId);
     }
     public handleCheckout() {
-        this.router.navigate(['/checkout']);
+        //check if it is authenticate & having a complete address & payment
+        //this.router.navigate(['/checkout']);
+        this.router.navigate(['/checkoutform']);
     }
     ngOnDestroy() {
         this.cartSubscription.unsubscribe();

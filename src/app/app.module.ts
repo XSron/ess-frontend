@@ -15,13 +15,14 @@ import { CatalogComponent } from './components/home/catalog/catalog.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailComponent } from './components/home/productdetail/productdetail.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { DeliveryAddressComponent } from './components/delivery-address/delivery-address.component';
 import { CreditCardComponent } from './components/credit-card/credit-card.component';
 
 import { AuthenticationService } from './services/authservice.service';
 import { InterceptorService } from './interceptors/interceptor.service';
 import { ProductService } from './services/productservice.service';
 import { CartService } from './services/cartservice.service';
+import { CheckoutFormComponent } from './components/checkoutform/checkoutform.component';
+import { AddressComponent } from './components/address/address.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'vendor', component: VendorComponent },
   { path: 'signin', component: AuthenticationComponent },
   { path: 'mycart', component: CartComponent },
+  { path: 'checkoutform', component: CheckoutFormComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
@@ -47,8 +49,9 @@ const routes: Routes = [
     CartComponent,
     ProductDetailComponent,
     CheckoutComponent,
-    DeliveryAddressComponent,
-    CreditCardComponent
+    AddressComponent,
+    CreditCardComponent,
+    CheckoutFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { DeliveryAddressService } from '../../services/delivery-address.service';
+import { AddressService } from '../../services/address.service';
 import {AddressModel} from '../../model/AddressModel';
 
 @Component({
-  selector: 'app-delivery-address',
-  templateUrl: './delivery-address.component.html',
-  styleUrls: ['./delivery-address.component.css']
+  selector: 'app-address',
+  templateUrl: './address.component.html'
 })
-export class DeliveryAddressComponent implements OnInit {
+export class AddressComponent implements OnInit {
 
   public addressList: AddressModel[] = [];
 
-  constructor(private deliveryAddressService: DeliveryAddressService) { }
+  constructor(private deliveryAddressService: AddressService) { }
 
   ngOnInit(): void {
     // this.addressList = [];

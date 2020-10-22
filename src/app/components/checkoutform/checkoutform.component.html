@@ -1,0 +1,32 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="card card-body">
+            <h4>Shipping Address</h4>
+            <app-address></app-address> <br>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="isCheck">
+                <label class="form-check-label">Same as billing address</label>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row" *ngIf="!isCheck">
+        <div class="card card-body">
+            <h4>Billing Address</h4>
+            <app-address></app-address>
+        </div>
+        <br>
+    </div>
+    <div class="row">
+        <div class="card card-body">
+            <h4>Credit card</h4>
+            <app-credit-card></app-credit-card>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <button class="btn btn-primary" (click)="handleReview()">Review Shipping Information</button>
+    </div>
+    <br>
+</div>

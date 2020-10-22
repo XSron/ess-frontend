@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AddressModel } from '../model/AddressModel';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DeliveryAddressService {
+export class AddressService {
 
   private REST_API_SERVER = 'http://localhost:3000';
 

@@ -4,8 +4,7 @@ import {CreditCardModel} from '../../model/CreditCardModel';
 
 @Component({
   selector: 'app-credit-card',
-  templateUrl: './credit-card.component.html',
-  styleUrls: ['./credit-card.component.css']
+  templateUrl: './credit-card.component.html'
 })
 export class CreditCardComponent implements OnInit {
 
