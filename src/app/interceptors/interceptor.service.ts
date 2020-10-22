@@ -12,14 +12,13 @@ export class InterceptorService implements HttpInterceptor {
         });
     }
     intercept(http: HttpRequest<any>, next: HttpHandler) {
-        /*let cloneHttpRequest: HttpRequest<any>;
+        let cloneHttpRequest: HttpRequest<any>;
         if(this.auth) {
             cloneHttpRequest = http.clone({
                 headers: http.headers.set("Authorization", `bearer ${this.auth.accessToken}`)
             });
             return next.handle(cloneHttpRequest);
-        }*/ 
-        console.log(http);
+        }
         return next.handle(http);
     }
 }

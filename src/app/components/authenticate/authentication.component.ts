@@ -19,7 +19,7 @@ export class AuthenticationComponent {
     }
     onSubmit(form: NgForm) {
         const { username, password } = form.value;
-        let authObs: Observable<any>;
+        let authObs: Observable<AuthModel>;
         this.isLoading = true;
         if(this.isLogin) {
             authObs = this.authService.signIn(username, password);

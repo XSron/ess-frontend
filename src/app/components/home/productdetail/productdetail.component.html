@@ -1,0 +1,13 @@
+<div class="container">
+    <br>
+    <div class="jumbotron">
+        <img [src]="product.url" class="card-img-top" alt="Image not found" style="width: 300px; height: 220px;">
+        <h1 class="display-4">Product Name: {{ product.name }}</h1>
+        <p class="lead">Description: {{ product.description }}</p>
+        <hr class="my-4">
+        <p>Vendor: {{ product.vendor }}</p>
+        <p>Category: {{ product.category }}</p>
+        <p>Avaiable Qty: {{ product.qty }}</p>
+        <button class="btn btn-primary btn-lg" (click)="addToCart()">Add to Cart</button>
+    </div>
+</div>
