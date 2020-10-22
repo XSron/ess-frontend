@@ -20,6 +20,8 @@ import { AuthenticationService } from './services/authservice.service';
 import { InterceptorService } from './interceptors/interceptor.service';
 import { ProductService } from './services/productservice.service';
 import { CartService } from './services/cartservice.service';
+import { DeliveryAddressComponent } from './components/delivery-address/delivery-address.component';
+import { CreditCardComponent } from './components/credit-card/credit-card.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,7 +45,9 @@ const routes: Routes = [
     CatalogComponent,
     ProductListComponent,
     CartComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    DeliveryAddressComponent,
+    CreditCardComponent
   ],
   imports: [
     BrowserModule,

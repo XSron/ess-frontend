@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "authentication"
+    }
+  },
+  "defaultProject": "authentication",
+  "cli": {
+    "analytics": "c00acee4-75e8-49df-ab86-1fe0b88f1b05"
+  }
 }

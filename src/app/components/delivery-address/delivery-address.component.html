@@ -1,0 +1,93 @@
+<div *ngIf="addressList.length > 0; then showAddressList; else showAddressInputForm"></div>
+
+<ng-template #showAddressInputForm>
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputFirstName">First Name</label>
+        <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputLastName">Last Name</label>
+        <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputState">State</label>
+        <input type="text" class="form-control" id="inputState">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputCountry">Country</label>
+        <select id="inputCountry" class="form-control">
+          <!--        <option selected>Choose Country</option>-->
+          <option value="AU">Australia</option>
+          <option value="BR">Brazil</option>
+          <option value="KH">Cambodia</option>
+          <option value="CA">Canada</option>
+          <option value="CN">China</option>
+          <option value="CU">Cuba</option>
+          <option value="FR">France</option>
+          <option value="DE">Germany</option>
+          <option value="HK">Hong Kong</option>
+          <option value="HU">Hungary</option>
+          <option value="IS">Iceland</option>
+          <option value="IN">India</option>
+          <option value="ID">Indonesia</option>
+          <option value="IT">Italy</option>
+          <option value="JP">Japan</option>
+          <option value="KP">Korea, Democratic People's Republic of</option>
+          <option value="KR">Korea, Republic of</option>
+          <option value="MY">Malaysia</option>
+          <option value="MX">Mexico</option>
+          <option value="MN">Mongolia</option>
+          <option value="MM">Myanmar</option>
+          <option value="NP">Nepal</option>
+          <option value="PH">Philippines</option>
+          <option value="PL">Poland</option>
+          <option value="SG">Singapore</option>
+          <option value="SE">Sweden</option>
+          <option value="CH">Switzerland</option>
+          <option value="TW">Taiwan, Province of China</option>
+          <option value="TH">Thailand</option>
+          <option value="TR">Turkey</option>
+          <option value="GB">United Kingdom</option>
+          <option value="US" selected>United States</option>
+          <option value="VE">Venezuela, Bolivarian Republic of</option>
+          <option value="VN">Viet Nam</option>
+          <option value="YE">Yemen</option>
+          <option value="ZM">Zambia</option>
+          <option value="ZW">Zimbabwe</option>
+        </select>
+      </div>
+    </div>
+    <!--  <button type="submit" class="btn btn-primary">Sign in</button>-->
+  </form>
+
+</ng-template>
+
+<ng-template #showAddressList>
+  <div class="container" *ngFor="let address of addressList">
+    <p>Default Address</p>
+    <p>Name</p>
+    <p>Street: {{ address.number }}, {{ address.street }}</p>
+    <p>{{ address.city }}, {{ address.state }}, {{ address.zipCode }}, {{ address.country }}</p>
+  </div>
+
+</ng-template>
