@@ -1,42 +1,71 @@
 <div *ngIf="addressList.length > 0; then showAddressList; else showAddressInputForm"></div>
 
 <ng-template #showAddressInputForm>
-  <form>
+  <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)">
+    <!--    First Name & Last Name-->
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inputFirstName">First Name</label>
-        <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+        <label>First Name</label>
+        <input type="text" name="firstName" class="form-control" placeholder="First Name" required
+               [(ngModel)]="model.firstName" #firstName="ngModel"
+               [ngClass]="{'is-invalid': userForm.submitted && firstName.invalid}">
+        <div class="invalid-feedback" *ngIf="userForm.submitted && firstName.invalid">
+          <p *ngIf="firstName.errors.required">First Name is required</p>
+        </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="inputLastName">Last Name</label>
-        <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+        <label>Last Name</label>
+        <input type="text" name="lastName" class="form-control" placeholder="Last Name" required
+               [(ngModel)]="model.lastName" #lastName="ngModel"
+               [ngClass]="{'is-invalid': userForm.submitted && lastName.invalid}">
+        <div class="invalid-feedback" *ngIf="userForm.submitted && lastName.invalid">
+          <p *ngIf="lastName.errors.required">Last Name is required</p>
+        </div>
+      </div>
+    </div>
+    <!--    Address-->
+    <div class="form-group">
+      <label>Address</label>
+      <input type="text" name="address1" class="form-control" placeholder="1234 Main St" required
+             [(ngModel)]="model.street1" #address1="ngModel"
+             [ngClass]="{'is-invalid': userForm.submitted && address1.invalid}">
+      <div class="invalid-feedback" *ngIf="userForm.submitted && address1.invalid">
+        <p *ngIf="address1.errors.required">Address is required</p>
       </div>
     </div>
     <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      <label>Address 2 (Optional)</label>
+      <input type="text" name="address2" class="form-control" placeholder="Apartment, studio, or floor"
+             [(ngModel)]="model.street2" #address2="ngModel">
     </div>
-    <div class="form-group">
-      <label for="inputAddress2">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
+    <!--    City, State, ZipCode, Country-->
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity">
+        <label>City</label>
+        <input type="text" name="city" class="form-control" required
+               [(ngModel)]="model.city" #city="ngModel"
+               [ngClass]="{'is-invalid': userForm.submitted && city.invalid}">
+        <div class="invalid-feedback" *ngIf="userForm.submitted && city.invalid">
+          <p *ngIf="city.errors.required">City is required</p>
+        </div>
       </div>
       <div class="form-group col-md-2">
-        <label for="inputState">State</label>
-        <input type="text" class="form-control" id="inputState">
+        <label>State</label>
+        <input type="text" name="state" class="form-control" [(ngModel)]="model.state" #state="ngModel">
       </div>
       <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip">
+        <label>ZipCode</label>
+        <input type="text" name="zipcode" class="form-control" [(ngModel)]="model.zipCode" #zipcode="ngModel">
       </div>
       <div class="form-group col-md-4">
-        <label for="inputCountry">Country</label>
-        <select id="inputCountry" class="form-control">
-          <!--        <option selected>Choose Country</option>-->
+        <label>Country</label>
+        <select name="country" class="form-control"
+                [(ngModel)]="model.country" #country="ngModel"
+                [ngClass]="{'is-invalid': userForm.submitted && country.invalid}">
+          <div class="invalid-feedback" *ngIf="userForm.submitted && country.invalid">
+            <p *ngIf="country.errors.required">Country is required</p>
+          </div>
+<!--          <option selected>Choose Country</option>-->
           <option value="AU">Australia</option>
           <option value="BR">Brazil</option>
           <option value="KH">Cambodia</option>
@@ -56,10 +85,6 @@
           <option value="KR">Korea, Republic of</option>
           <option value="MY">Malaysia</option>
           <option value="MX">Mexico</option>
-          <option value="MN">Mongolia</option>
-          <option value="MM">Myanmar</option>
-          <option value="NP">Nepal</option>
-          <option value="PH">Philippines</option>
           <option value="PL">Poland</option>
           <option value="SG">Singapore</option>
           <option value="SE">Sweden</option>
@@ -68,7 +93,7 @@
           <option value="TH">Thailand</option>
           <option value="TR">Turkey</option>
           <option value="GB">United Kingdom</option>
-          <option value="US" selected>United States</option>
+          <option value="US">United States</option>
           <option value="VE">Venezuela, Bolivarian Republic of</option>
           <option value="VN">Viet Nam</option>
           <option value="YE">Yemen</option>
@@ -77,16 +102,18 @@
         </select>
       </div>
     </div>
+    <button class="col-md-2 btn btn-primary btn-lg btn-block">Add Address</button>
   </form>
-  <button class="col-md-2 btn btn-primary btn-lg btn-block" type="submit">Add Address</button>
 </ng-template>
 
 <ng-template #showAddressList>
-  <div class="container" *ngFor="let address of addressList">
-    <p>Default Address</p>
-    <p>Name</p>
-    <p>Street: {{ address.number }}, {{ address.street }}</p>
+  <div class="card card-body" *ngFor="let address of addressList">
+    <p class="heading-text">Default Address</p>
+    <p><span class="heading-text">Name: </span>{{address.firstName}} {{address.lastName}}</p>
+    <p><span class="heading-text">
+      Address: </span>{{ address.street1 }}
+      <span *ngIf="address.street2.toString().length > 0">, {{ address.street2 }}</span>
+    </p>
     <p>{{ address.city }}, {{ address.state }}, {{ address.zipCode }}, {{ address.country }}</p>
   </div>
-
 </ng-template>

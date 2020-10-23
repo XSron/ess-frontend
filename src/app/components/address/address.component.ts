@@ -1,19 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { AddressService } from '../../services/address.service';
-import {AddressModel} from '../../model/AddressModel';
+import { AddressModel } from '../../model/AddressModel';
+
+class Address implements AddressModel {
+  id: number;
+  firstName: string;
+  lastName: string;
+  street1: string;
+  street2: string;
+  city: string;
+  state: string;
+  zipCode: number;
+  country: string;
+  isDefault: boolean;
+}
 
 @Component({
   selector: 'app-address',
-  templateUrl: './address.component.html'
+  templateUrl: './address.component.html',
+  styleUrls: ['./address.component.css']
 })
+
 export class AddressComponent implements OnInit {
 
   public addressList: AddressModel[] = [];
+  public model = new Address();
 
   constructor(private deliveryAddressService: AddressService) { }
 
   ngOnInit(): void {
-    // this.addressList = [];
     this.deliveryAddressService
       .getDeliveryAddressList()
       .subscribe(data => {
@@ -21,19 +36,24 @@ export class AddressComponent implements OnInit {
       });
   }
 
-  addDeliveryAddress(): void {
-    const mockBody = {
-      // id: 4,
-      number: '332',
-      street: 'ACV',
-      city: 'SDD',
-      state: 'EF',
-      zipCode: 34255,
-      country: 'AG',
-      isDefault: false
-    };
+  onSubmit(form): void {
+    console.log(form.value);
+    this.addDeliveryAddress(form.value);
+  }
+
+  addDeliveryAddress(address): void {
+    // const mockBody = {
+    //   // id: 4,
+    //   number: '332',
+    //   street: 'ACV',
+    //   city: 'SDD',
+    //   state: 'EF',
+    //   zipCode: 34255,
+    //   country: 'AG',
+    //   isDefault: false
+    // };
     this.deliveryAddressService
-      .addDeliveryAddress(mockBody)
+      .addDeliveryAddress(address)
       .subscribe(data => {
         console.log(data);
       });

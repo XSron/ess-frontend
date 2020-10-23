@@ -1,6 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CreditCardService } from '../../services/credit-card.service';
-import {CreditCardModel} from '../../model/CreditCardModel';
+import { CreditCardModel } from '../../model/CreditCardModel';
+import {AddressModel} from '../../model/AddressModel';
+
+class CreditCar implements CreditCardModel {
+  id: number;
+  name: string;
+  number: string;
+  cvv: number;
+  expiredDate: string;
+  type: string;
+  limit: number;
+  isDefault: boolean;
+}
 
 @Component({
   selector: 'app-credit-card',
@@ -9,11 +21,11 @@ import {CreditCardModel} from '../../model/CreditCardModel';
 export class CreditCardComponent implements OnInit {
 
   public creditCardList: CreditCardModel[] = [];
+  public model = new CreditCar();
 
   constructor(private creditCardService: CreditCardService) { }
 
   ngOnInit(): void {
-    // this.creditCardList = [];
     this.creditCardService
       .getCreditCardList()
       .subscribe(data => {
@@ -21,19 +33,24 @@ export class CreditCardComponent implements OnInit {
       });
   }
 
-  addCreditCard(): void {
-    const mockBody = {
-      // id: 4,
-      name: 'Gabriel Campbell',
-      number: '5380531937114059',
-      cvv: '357',
-      expiredDate: '12/2021',
-      type: 'Master Card',
-      limit: '1049',
-      isDefault: false
-    };
+  onSubmit(form): void {
+    console.log(form.value);
+    this.addCreditCard(form.value);
+  }
+
+  addCreditCard(creditCard): void {
+    // const mockBody = {
+    //   // id: 4,
+    //   name: 'Gabriel Campbell',
+    //   number: '5380531937114059',
+    //   cvv: '357',
+    //   expiredDate: '12/2021',
+    //   type: 'Master Card',
+    //   limit: '1049',
+    //   isDefault: false
+    // };
     this.creditCardService
-      .addCreditCard(mockBody)
+      .addCreditCard(creditCard)
       .subscribe(data => {
         console.log(data);
       });

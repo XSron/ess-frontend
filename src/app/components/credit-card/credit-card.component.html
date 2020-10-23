@@ -1,45 +1,70 @@
-<div class="d-block my-3">
-  <div class="custom-control custom-radio">
-    <input id="visa" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-    <label class="custom-control-label" for="visa">Visa Card</label>
-  </div>
-  <div class="custom-control custom-radio">
-    <input id="master" name="paymentMethod" type="radio" class="custom-control-input" required>
-    <label class="custom-control-label" for="master">Master Card</label>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6 mb-3">
-    <label for="card-name">Name on card</label>
-    <input type="text" class="form-control" id="card-name" placeholder="" required>
-    <small class="text-muted">Full name as displayed on card</small>
-    <div class="invalid-feedback">
-      Name on card is required.
+<div *ngIf="creditCardList.length > 0; then showCreditCardList; else showCreditCardInputForm"></div>
+
+<ng-template #showCreditCardInputForm>
+  <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)">
+    <div class="d-block my-3">
+      <div class="custom-control custom-radio">
+        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+        <label class="custom-control-label" for="credit">Credit card</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+        <label class="custom-control-label" for="debit">Debit card</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label>Name on card</label>
+        <input type="text" name="name" class="form-control" placeholder="" required
+               [(ngModel)]="model.name" #name="ngModel"
+               [ngClass]="{'is-invalid': userForm.submitted && name.invalid}">
+        <small class="text-muted">Full name as displayed on card</small>
+        <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+          <p *ngIf="name.errors.required">Name on card is required</p>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Credit card number</label>
+        <input type="text" class="form-control" name="number" placeholder="" required
+               [(ngModel)]="model.number" #number="ngModel"
+               [ngClass]="{'is-invalid': userForm.submitted && number.invalid}">
+        <div class="invalid-feedback" *ngIf="userForm.submitted && number.invalid">
+          <p *ngIf="number.errors.required">Credit card number is required</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <label>Expiration</label>
+        <input type="text" class="form-control" name="expiredDate" placeholder="MMYY" required
+               [(ngModel)]="model.expiredDate" #expiredDate="ngModel"
+               [ngClass]="{'is-invalid': userForm.submitted && expiredDate.invalid}">
+        <div class="invalid-feedback" *ngIf="userForm.submitted && expiredDate.invalid">
+          <p *ngIf="expiredDate.errors.required">Expiration date required</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>CVV</label>
+        <input type="text" class="form-control" name="cvv" placeholder="•••" required
+               [(ngModel)]="model.cvv" #cvv="ngModel"
+               [ngClass]="{'is-invalid': userForm.submitted && cvv.invalid}">
+        <div class="invalid-feedback" *ngIf="userForm.submitted && cvv.invalid">
+          <p *ngIf="cvv.errors.required">Security code required </p>
+        </div>
+      </div>
+    </div>
+    <hr class="mb-4">
+    <button class="col-md-2 btn btn-primary btn-lg btn-block" type="submit">Add Card</button>
+  </form>
+
+</ng-template>
+
+<ng-template #showCreditCardList>
+  <div class="container" *ngFor="let creditCard of creditCardList">
+    <div>
+      <img class="credit-image" src="../../../assets/images/visa.png" width="50px" height="15px">
+      <p class="credit-text">Ending in {{ creditCard.number.toString().slice(-4) }}</p>
     </div>
   </div>
-  <div class="col-md-6 mb-3">
-    <label for="card-number">Card number</label>
-    <input type="text" class="form-control" id="card-number" placeholder="" required>
-    <div class="invalid-feedback">
-      Card number is required.
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6 mb-3">
-    <label for="card-expiration">Expiration</label>
-    <input type="text" class="form-control" id="card-expiration" placeholder="" required>
-    <div class="invalid-feedback">
-      Expiration date required.
-    </div>
-  </div>
-  <div class="col-md-6 mb-3">
-    <label for="card-cvv">CVV</label>
-    <input type="text" class="form-control" id="card-cvv" placeholder="" required>
-    <div class="invalid-feedback">
-      Security code required.
-    </div>
-  </div>
-</div>
-<button class="col-md-2 btn btn-primary btn-lg btn-block" type="submit">Add Card</button>
+</ng-template>
 
