@@ -1,31 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { CreditCardService } from '../../services/credit-card.service';
 import { CreditCardModel } from '../../model/CreditCardModel';
-import {AddressModel} from '../../model/AddressModel';
-
-class CreditCar implements CreditCardModel {
-  id: number;
-  name: string;
-  number: string;
-  cvv: number;
-  expiredDate: string;
-  type: string;
-  limit: number;
-  isDefault: boolean;
-}
 
 @Component({
   selector: 'app-credit-card',
   templateUrl: './credit-card.component.html'
 })
+
 export class CreditCardComponent implements OnInit {
 
   public creditCardList: CreditCardModel[] = [];
-  public model = new CreditCar();
+  private form: FormGroup;
+  private submitted = false;
 
-  constructor(private creditCardService: CreditCardService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private creditCardService: CreditCardService
+  ) { }
 
   ngOnInit(): void {
+    // Form setup
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      number: ['', [Validators.required, Validators.pattern('^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$')]],
+      expiredDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])([0-9]{2})$')]],
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]]
+    });
+
+    // Load Credit Card data
     this.creditCardService
       .getCreditCardList()
       .subscribe(data => {
@@ -33,9 +36,23 @@ export class CreditCardComponent implements OnInit {
       });
   }
 
-  onSubmit(form): void {
-    console.log(form.value);
-    this.addCreditCard(form.value);
+  // convenience getter for easy access to form fields
+  get f(): { [p: string]: AbstractControl } {
+    return this.form.controls;
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    }
+    console.log(this.form.value);
+    this.addCreditCard(this.form.value);
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.form.reset();
   }
 
   addCreditCard(creditCard): void {

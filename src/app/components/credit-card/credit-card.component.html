@@ -1,7 +1,7 @@
 <div *ngIf="creditCardList.length > 0; then showCreditCardList; else showCreditCardInputForm"></div>
 
 <ng-template #showCreditCardInputForm>
-  <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="d-block my-3">
       <div class="custom-control custom-radio">
         <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
@@ -15,41 +15,46 @@
     <div class="row">
       <div class="col-md-6 mb-3">
         <label>Name on card</label>
-        <input type="text" name="name" class="form-control" placeholder="" required
-               [(ngModel)]="model.name" #name="ngModel"
-               [ngClass]="{'is-invalid': userForm.submitted && name.invalid}">
+        <input type="text" formControlName="name" class="form-control" placeholder=""
+               [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
         <small class="text-muted">Full name as displayed on card</small>
-        <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-          <p *ngIf="name.errors.required">Name on card is required</p>
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Card Name is required</div>
         </div>
       </div>
       <div class="col-md-6 mb-3">
         <label>Credit card number</label>
-        <input type="text" class="form-control" name="number" placeholder="" required
-               [(ngModel)]="model.number" #number="ngModel"
-               [ngClass]="{'is-invalid': userForm.submitted && number.invalid}">
-        <div class="invalid-feedback" *ngIf="userForm.submitted && number.invalid">
-          <p *ngIf="number.errors.required">Credit card number is required</p>
+        <input type="text" formControlName="number" class="form-control" placeholder=""
+               [ngClass]="{ 'is-invalid': submitted && f.number.errors }">
+        <div *ngIf="submitted && f.number.errors" class="invalid-feedback">
+          <div *ngIf="f.number.errors.required">Card Number is required</div>
+          <div *ngIf="f.number.invalid && f.number.touched && f.number.errors.pattern">
+            Only accept Visa Card and Master Card.
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 mb-3">
         <label>Expiration</label>
-        <input type="text" class="form-control" name="expiredDate" placeholder="MMYY" required
-               [(ngModel)]="model.expiredDate" #expiredDate="ngModel"
-               [ngClass]="{'is-invalid': userForm.submitted && expiredDate.invalid}">
-        <div class="invalid-feedback" *ngIf="userForm.submitted && expiredDate.invalid">
-          <p *ngIf="expiredDate.errors.required">Expiration date required</p>
+        <input type="text" formControlName="expiredDate" class="form-control" placeholder="MMYY"
+               [ngClass]="{ 'is-invalid': submitted && f.expiredDate.errors }">
+        <div *ngIf="submitted && f.expiredDate.errors" class="invalid-feedback">
+          <div *ngIf="f.expiredDate.errors.required">Expired Date is required</div>
+          <div *ngIf="f.expiredDate.invalid && f.expiredDate.touched && f.expiredDate.errors.pattern">
+            Only accept MMYY format.
+          </div>
         </div>
       </div>
       <div class="col-md-3 mb-3">
         <label>CVV</label>
-        <input type="text" class="form-control" name="cvv" placeholder="•••" required
-               [(ngModel)]="model.cvv" #cvv="ngModel"
-               [ngClass]="{'is-invalid': userForm.submitted && cvv.invalid}">
-        <div class="invalid-feedback" *ngIf="userForm.submitted && cvv.invalid">
-          <p *ngIf="cvv.errors.required">Security code required </p>
+        <input type="text" formControlName="cvv" class="form-control" placeholder="•••"
+               [ngClass]="{ 'is-invalid': submitted && f.cvv.errors }">
+        <div *ngIf="submitted && f.cvv.errors" class="invalid-feedback">
+          <div *ngIf="f.cvv.errors.required">CVV Number is required</div>
+          <div *ngIf="f.cvv.invalid && f.cvv.touched && f.cvv.errors.pattern">
+            Invalid CVV number.
+          </div>
         </div>
       </div>
     </div>
