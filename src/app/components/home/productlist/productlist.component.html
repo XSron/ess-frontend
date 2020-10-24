@@ -46,16 +46,12 @@
   </div>
   <!--  Products-->
   <div class="row">
-    <div *ngFor="let product of products;">
-      <div class="col-md-3">
-        <catalog [productId]="product.productId"
-                 [price]="product.price"
-                 [url]="product.url"
-                 [name]="product.name"
-                 [description]="product.description">
-        </catalog>
-      </div>
-      <br>
-    </div>
+    <catalog class="col-md-3"
+             *ngFor="let product of products;"
+             [product]="product">
+    </catalog>
   </div>
 </div>
+
+
+

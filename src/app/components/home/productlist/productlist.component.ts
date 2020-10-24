@@ -64,7 +64,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       return;
     }
     console.log(this.searchForm.value);
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.searchForm.value, null, 4));
+    alert('SUCCESS!! :-)\n' + JSON.stringify(this.searchForm.value, null, 5));
   }
 
   changeLayout(): void {
