@@ -6,10 +6,11 @@ import { CartService } from 'src/app/services/cartservice.service';
 @Component({
     selector: 'catalog',
     templateUrl: 'catalog.component.html',
+    styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent {
     @Input() public productId: number;
-    @Input() public url: string; 
+    @Input() public url: string;
     @Input() public name: string;
     @Input() public description: string;
     @Input() public category: string;
@@ -20,5 +21,5 @@ export class CatalogComponent {
     }
     public viewDetail() {
         this.router.navigate(['/productdetail', this.productId]);
-    }  
+    }
 }

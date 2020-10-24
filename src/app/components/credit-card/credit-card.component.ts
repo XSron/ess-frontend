@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { CreditCardService } from '../../services/credit-card.service';
-import { CreditCardModel } from '../../model/CreditCardModel';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CreditCardService} from '../../services/credit-card.service';
+import {CreditCardModel, CreditCardType} from '../../model/CreditCardModel';
 
 @Component({
   selector: 'app-credit-card',
@@ -11,6 +11,7 @@ import { CreditCardModel } from '../../model/CreditCardModel';
 export class CreditCardComponent implements OnInit {
 
   public creditCardList: CreditCardModel[] = [];
+  private cardType: CreditCardType = CreditCardType.master;
   private form: FormGroup;
   private submitted = false;
 
@@ -30,7 +31,7 @@ export class CreditCardComponent implements OnInit {
 
     // Load Credit Card data
     this.creditCardService
-      .getCreditCardList()
+      .getCreditCardList(this.cardType)
       .subscribe(data => {
         this.creditCardList = data;
       });
@@ -67,7 +68,7 @@ export class CreditCardComponent implements OnInit {
     //   isDefault: false
     // };
     this.creditCardService
-      .addCreditCard(creditCard)
+      .addCreditCard(this.cardType, creditCard)
       .subscribe(data => {
         console.log(data);
       });
@@ -75,7 +76,7 @@ export class CreditCardComponent implements OnInit {
 
   deleteCreditCard(addressID): void {
     this.creditCardService
-      .deleteCreditCard(addressID)
+      .deleteCreditCard(this.cardType, addressID)
       .subscribe(data => {
         console.log(data);
       });
