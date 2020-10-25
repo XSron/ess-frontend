@@ -1,0 +1,10 @@
+.credit-image {
+  float: left;
+}
+
+.credit-text {
+  position: absolute;
+  top: 74px;
+  left: 100px;
+  font-size: 18px;
+}

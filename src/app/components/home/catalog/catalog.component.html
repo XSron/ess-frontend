@@ -1,10 +1,14 @@
-<div class="card" style="width: 18rem;">
-    <img [src]="url" class="card-img-top" alt="Image not found" style="width: 285px; height: 200px;">
-    <div class="card-body">
-      <h5 class="card-title">{{ name }}</h5>
-      <p class="card-text">{{ description }}</p>
-      <p class="card-text" style="font-weight: bold; color: red;">${{ price }}</p>
-      <button class="btn btn-primary" (click)="addToCart()">Add to Cart</button> &nbsp;
-      <button class="btn btn-primary" (click)="viewDetail()">View Detail</button>
+<div class="card">
+  <img class="card-img" [src]="product.url" alt="Product Image">
+  <div class="card-body">
+    <h4 class="card-title stretched-link" (click)="viewDetail()">{{product.name}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">ID: {{product.productId}}</h6>
+    <p class="card-text">{{product.description}}</p>
+    <div class="buy d-flex justify-content-between align-items-center">
+      <div class="price text-success"><h5 class="mt-4">${{product.price}}</h5></div>
+      <button class="btn btn-danger mt-3" (click)="addToCart()">Add to Cart</button>
     </div>
+  </div>
 </div>
+
+

@@ -1,0 +1,15 @@
+.tool-bar {
+  padding: 20px;
+}
+
+.button-search {
+  color: black;
+  border: 1px solid #e7e7e7;
+}
+
+.button-layout {
+  height: 25px;
+  width: 25px;
+}
+
+

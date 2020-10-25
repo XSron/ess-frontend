@@ -1,26 +1,8 @@
 {
   "address": [
-    {
-      "id": 1,
-      "number": "4500",
-      "street": "Wilma Ln St",
-      "city": "Arlington",
-      "state": "TX",
-      "zipCode": 76012,
-      "country": "US",
-      "isDefault": true
-    }
   ],
-  "cards": [
-    {
-      "id": 1,
-      "name": "Elizabeth Miller",
-      "number": "4391103734915078",
-      "cvv": "209",
-      "expiredDate": "04/2023",
-      "type": "Visa",
-      "limit": 544,
-      "isDefault": true
-    }
+  "master-cards": [
+  ],
+  "visa-cards": [
   ]
 }

@@ -4,21 +4,31 @@ import { ProductModel } from 'src/app/model/ProductModel';
 import { CartService } from 'src/app/services/cartservice.service';
 
 @Component({
-    selector: 'catalog',
-    templateUrl: 'catalog.component.html',
+  selector: 'catalog',
+  templateUrl: 'catalog.component.html',
+  styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent {
-    @Input() public productId: number;
-    @Input() public url: string; 
-    @Input() public name: string;
-    @Input() public description: string;
-    @Input() public category: string;
-    @Input() public price: number;
-    constructor(private cartService: CartService, private router: Router) {}
-    public addToCart() {
-        this.cartService.addToCart(new ProductModel(this.productId, this.name, this.description, this.price, this.url, 1, '', ''));
-    }
-    public viewDetail() {
-        this.router.navigate(['/productdetail', this.productId]);
-    }  
+
+  @Input() public product: ProductModel;
+
+  constructor(private cartService: CartService, private router: Router) {}
+
+  public addToCart(): void {
+    const selectedProduct = new ProductModel(
+      this.product.productId,
+      this.product.name,
+      this.product.description,
+      this.product.price,
+      this.product.url,
+      1,
+      '',
+      '');
+    this.cartService.addToCart(selectedProduct);
+  }
+
+  public viewDetail(): void {
+    this.router.navigate(['/productdetail', this.product.productId]);
+  }
+
 }
