@@ -2,15 +2,23 @@
     <div class="container">
       <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
         <div class="form-group">
-          <div *ngIf="error" class="alert alert-danger" role="alert">
-            {{ error }}
+          <div class="row">
+            <div class="col-md-6">
+              <div *ngIf="error" class="alert alert-danger" role="alert">
+                {{ error }}
+              </div>
+              <label for="username">Username</label>
+              <input type="text" class="form-control" ngModel name="username" required>
+            </div>
           </div>
-          <label for="username">Username</label>
-          <input type="username" class="form-control" ngModel name="username" required>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" ngModel name="password" required>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" ngModel name="password" required>
+            </div>
+          </div>
         </div>
 
         <div *ngIf="isLoading">
@@ -19,8 +27,9 @@
             Loading...
           </button>
         </div>
-
-        <button *ngIf="!isLoading" type="submit" class="btn btn-primary" [disabled]="!authForm.valid">{{ isLogin? 'Login': 'Sign Up' }}</button> | 
+        
+        <button *ngIf="!isLoading" type="submit" class="btn btn-primary" [disabled]="!authForm.valid">{{ isLogin? 'Login': 'Sign Up' }}</button> 
+        &nbsp; 
         <button *ngIf="!isLoading" type="button" (click)="onSwitch()" class="btn btn-primary">Switch to {{ isLogin? 'Sign Up': 'Login' }}</button>
       </form>
     </div>

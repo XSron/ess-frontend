@@ -12,11 +12,19 @@
         <a routerLink="/vendor" class="nav-link">Vendor</a>
       </li>
     </ul>
-    
     <ul class="navbar-nav">
       <li class="nav-item" routerLinkActive="active">
         <a routerLink="/mycart" class="nav-link" tabindex="-1">My Cart({{ totalCart }})</a>
       </li>
+      <div class="dropdown">
+        <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hello, John
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" [routerLink]="['/user/userprofile', 1]">My Profile</a>
+          <a class="dropdown-item" [routerLink]="['/user/orderhistory', 1]">Order History</a>
+        </div>
+      </div>
       <li class="nav-item">
           <a *ngIf="auth" style="cursor: pointer;" class="nav-link" (click)="onLogout()">Logout</a>
       </li>
