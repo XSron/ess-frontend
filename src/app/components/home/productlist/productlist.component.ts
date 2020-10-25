@@ -71,15 +71,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     switch (this.layout) {
       case Layout.grid:
         this.layout = Layout.list;
-        console.log('Load List Layout');
         break;
       case Layout.list:
         this.layout = Layout.grid;
-        console.log('Load Grid Layout');
         break;
       default:
         this.layout = Layout.grid;
-        console.log('Load Grid Default Layout');
     }
   }
 

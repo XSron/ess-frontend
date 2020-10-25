@@ -13,7 +13,7 @@ export class ProductDetailComponent {
     constructor(private activatedRoute: ActivatedRoute, private productService: ProductService, private cartService: CartService) {
         let productId: number = this.activatedRoute.snapshot.params.id;
         this.product = this.productService.getProductById(productId);
-        alert(JSON.stringify(this.product));
+        // alert(JSON.stringify(this.product));
     }
     public addToCart() {
         this.cartService.addToCart(this.product);

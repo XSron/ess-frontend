@@ -11,7 +11,7 @@ import { VendorComponent } from './components/vendor/vendor.component';
 import { AuthenticationComponent } from './components/authenticate/authentication.component';
 import { ProductListComponent } from './components/home/productlist/productlist.component';
 import { NotFoundComponent } from './components/notfound/notfound.component';
-import { CatalogComponent } from './components/home/catalog/catalog.component';
+import { ProductItemGridComponent } from './components/home/product-item-grid/product-item-grid.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailComponent } from './components/home/productdetail/productdetail.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
@@ -25,6 +25,7 @@ import { AuthenticationService } from './services/authservice.service';
 import { InterceptorService } from './interceptors/interceptor.service';
 import { ProductService } from './services/productservice.service';
 import { CartService } from './services/cartservice.service';
+import { ProductItemListComponent } from './components/home/product-item-list/product-item-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,7 +35,7 @@ const routes: Routes = [
   { path: 'mycart', component: CartComponent },
   { path: 'checkoutform', component: CheckoutFormComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'user/userprofile/:id', component: UserProfileComponent }, 
+  { path: 'user/userprofile/:id', component: UserProfileComponent },
   { path: 'user/orderhistory/:id', component: OrderHistoryComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
@@ -48,14 +49,15 @@ const routes: Routes = [
     VendorComponent,
     AuthenticationComponent,
     NotFoundComponent,
-    CatalogComponent,
+    ProductItemGridComponent,
     ProductListComponent,
     CartComponent,
     ProductDetailComponent,
     CheckoutComponent,
     AddressComponent,
     CreditCardComponent,
-    CheckoutFormComponent
+    CheckoutFormComponent,
+    ProductItemListComponent
   ],
   imports: [
     BrowserModule,

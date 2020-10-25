@@ -4,15 +4,24 @@ import { ProductModel } from 'src/app/model/ProductModel';
 import { CartService } from 'src/app/services/cartservice.service';
 
 @Component({
-  selector: 'catalog',
-  templateUrl: 'catalog.component.html',
-  styleUrls: ['./catalog.component.css']
+  selector: 'product-item-grid',
+  templateUrl: 'product-item-grid.component.html',
+  styleUrls: ['./product-item-grid.component.css']
 })
-export class CatalogComponent {
+export class ProductItemGridComponent {
+
+  // MARK: - Properties
 
   @Input() public product: ProductModel;
 
-  constructor(private cartService: CartService, private router: Router) {}
+  // MARK: - Angular Core functions
+
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) { }
+
+  // MARK: - Item functions
 
   public addToCart(): void {
     const selectedProduct = new ProductModel(
