@@ -21,10 +21,7 @@
     "@angular/router": "~10.1.0",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
-<<<<<<< HEAD
-=======
     "popper": "^1.0.1",
->>>>>>> bc52fd9dc9163f53f265abf22e1609b726a96117
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
