@@ -32,14 +32,14 @@
       </form>
     </div>
     <!--  Layout Button-->
-    <div class="col-md-1" [ngSwitch]="layout">
+    <div class="col-md-1" [ngSwitch]="productLayout">
       <ng-container *ngSwitchCase="Layout.grid" [ngTemplateOutlet]="gridButton" ]></ng-container>
       <ng-container *ngSwitchCase="Layout.list" [ngTemplateOutlet]="listButton" ]></ng-container>
       <ng-container *ngSwitchDefault [ngTemplateOutlet]="gridButton" ]></ng-container>
     </div>
   </div>
   <!--  Products-->
-  <div class="row" [ngSwitch]="layout">
+  <div class="row" [ngSwitch]="productLayout">
     <ng-container *ngSwitchCase="Layout.grid" [ngTemplateOutlet]="gridLayout" ]></ng-container>
     <ng-container *ngSwitchCase="Layout.list" [ngTemplateOutlet]="listLayout" ]></ng-container>
     <ng-container *ngSwitchDefault [ngTemplateOutlet]="gridLayout" ]></ng-container>

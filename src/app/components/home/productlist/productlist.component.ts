@@ -3,11 +3,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { Subscription } from 'rxjs';
 import { ProductModel } from 'src/app/model/ProductModel';
 import { ProductService } from 'src/app/services/productservice.service';
-
-export enum Layout {
-  grid,
-  list
-}
+import { AppConfig } from '../../../common/global-constants';
+import { Layout } from '../../../common/enum';
 
 @Component({
   selector: 'productlist',
@@ -19,11 +16,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
   // MARK: - Properties
 
   public products: ProductModel[];
-  public layout: Layout = Layout.grid;
   public Layout = Layout;
   public iconFolderPath = '../../../assets/icons';
   public searchForm: FormGroup;
   public searchFormSubmitted = false;
+
+  get productLayout(): Layout {
+    return AppConfig.layout;
+  }
 
   private subscription: Subscription;
 
@@ -68,15 +68,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   changeLayout(): void {
-    switch (this.layout) {
+    switch (AppConfig.layout) {
       case Layout.grid:
-        this.layout = Layout.list;
+        AppConfig.layout = Layout.list;
         break;
       case Layout.list:
-        this.layout = Layout.grid;
+        AppConfig.layout = Layout.grid;
         break;
       default:
-        this.layout = Layout.grid;
+        AppConfig.layout = Layout.grid;
     }
   }
 
