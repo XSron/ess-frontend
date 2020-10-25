@@ -37,7 +37,7 @@ export class ProductService {
 
   public getProductById(productId: number): ProductModel {
     return this.products.filter((product: ProductModel) => {
-      return product.productId === productId;
+      return product.productId === +productId;
     })[0];
   }
 
