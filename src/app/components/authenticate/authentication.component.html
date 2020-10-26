@@ -12,6 +12,17 @@
             </div>
           </div>
         </div>
+        <div class="form-group" *ngIf="!isLogin">
+          <div class="row">
+            <div class="col-md-12">
+              <label for="sel1">Select Role:</label>
+              <select class="form-control" id="sel1">
+                <option>Register User</option>
+                <option>Register Vendor</option>
+              </select>
+            </div>
+          </div>
+        </div>
         <div class="form-group">
           <div class="row">
             <div class="col-md-12">

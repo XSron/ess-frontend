@@ -28,7 +28,7 @@
     <div class="jumbotron">
       <h1 class="display-10">Subtotal ({{totalItem}} items)</h1>
       <p class="lead" style="font-size: 40px; font-weight: bold; color: red;">${{ subTotal }}</p>
-      <button class="btn btn-primary btn-lg" (click)="handleCheckout()">Proceed to checkout</button>
+      <button class="btn btn-primary btn-lg" (click)="handleCheckout()" *ngIf="totalItem > 0">Proceed to checkout</button>
     </div>
 </div>
 

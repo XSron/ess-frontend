@@ -1,12 +1,12 @@
 import { RoleModel } from '../model/RoleModel';
 
 export interface AuthModel {
-    username: string,
-    roles: RoleModel[],
-    accessToken: string;
-    tokenType: string;
-    refreshToken: string;
-    expireIn: string;
+    access_token: string,
+    token_type: RoleModel[],
+    refresh_token: string;
+    expires_in: string;
     scope: string;
-    jti: string
+    privileges: string;
+    user_id: string;
+    jti: string;
 }

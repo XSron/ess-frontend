@@ -33,15 +33,15 @@ export class CartService {
     }
     public calculateTotal(products: ProductModel[]) {
         //reset count & calculate
-        let totalItem = 0; 
-        let subTotal = 0;
+        let totalItem: number = 0; 
+        let subTotal: number = 0;
         products.forEach((product: ProductModel) => {
             totalItem += +product.qty;
             subTotal += +product.qty * +product.price;
         });
         return {
             totalItem,
-            subTotal
+            subTotal: +subTotal.toFixed(2)
         }
     }
 }

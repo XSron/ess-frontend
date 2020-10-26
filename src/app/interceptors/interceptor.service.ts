@@ -15,7 +15,7 @@ export class InterceptorService implements HttpInterceptor {
         let cloneHttpRequest: HttpRequest<any>;
         if(this.auth) {
             cloneHttpRequest = http.clone({
-                headers: http.headers.set("Authorization", `bearer ${this.auth.accessToken}`)
+                headers: http.headers.set("Authorization", `bearer ${this.auth.access_token}`)
             });
             return next.handle(cloneHttpRequest);
         }
