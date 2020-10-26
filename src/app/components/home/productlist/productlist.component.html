@@ -3,7 +3,7 @@
   <!--  Toolbar-->
   <div class="row tool-bar">
     <!--  SearchBox-->
-    <div class="col-md-11 card-margin">
+    <div class="col-md-11">
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <div class="row no-gutters">
           <div class="col-md-2 mr-2">
@@ -32,26 +32,40 @@
       </form>
     </div>
     <!--  Layout Button-->
-    <div class="col-md-1" [ngSwitch]="layout">
-      <button *ngSwitchCase="Layout.grid" class="btn btn-default float-right" (click)="changeLayout()">
-        <img class="button-layout" src="{{iconFolderPath}}/grid_view.png">
-      </button>
-      <button *ngSwitchCase="Layout.list" class="btn btn-default float-right" (click)="changeLayout()">
-        <img class="button-layout" src="{{iconFolderPath}}/list_view.png">
-      </button>
-      <button *ngSwitchDefault class="btn btn-default float-right" (click)="changeLayout()">
-        <img class="button-layout" src="{{iconFolderPath}}/grid_view.png">
-      </button>
+    <div class="col-md-1" [ngSwitch]="productLayout">
+      <ng-container *ngSwitchCase="Layout.grid" [ngTemplateOutlet]="gridButton" ]></ng-container>
+      <ng-container *ngSwitchCase="Layout.list" [ngTemplateOutlet]="listButton" ]></ng-container>
+      <ng-container *ngSwitchDefault [ngTemplateOutlet]="gridButton" ]></ng-container>
     </div>
   </div>
   <!--  Products-->
-  <div class="row">
-    <catalog class="col-md-3"
-             *ngFor="let product of products;"
-             [product]="product">
-    </catalog>
+  <div class="row" [ngSwitch]="productLayout">
+    <ng-container *ngSwitchCase="Layout.grid" [ngTemplateOutlet]="gridLayout" ]></ng-container>
+    <ng-container *ngSwitchCase="Layout.list" [ngTemplateOutlet]="listLayout" ]></ng-container>
+    <ng-container *ngSwitchDefault [ngTemplateOutlet]="gridLayout" ]></ng-container>
   </div>
 </div>
+
+<!--Button Template-->
+<ng-template #gridButton>
+  <button class="btn btn-default float-right" (click)="changeLayout()">
+    <img class="button-layout" src="{{iconFolderPath}}/grid_view.png">
+  </button>
+</ng-template>
+<ng-template #listButton>
+  <button class="btn btn-default float-right" (click)="changeLayout()">
+    <img class="button-layout" src="{{iconFolderPath}}/list_view.png">
+  </button>
+</ng-template>
+
+<!--Layout Template-->
+<ng-template #gridLayout>
+  <product-item-grid class="col-md-3" *ngFor="let product of products;" [product]="product"></product-item-grid>
+</ng-template>
+<ng-template #listLayout>
+  <app-product-item-list class="col-md-11" *ngFor="let product of products;" [product]="product"></app-product-item-list>
+</ng-template>
+
 
 
 

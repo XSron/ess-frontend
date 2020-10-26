@@ -13,6 +13,10 @@ export class ProductDetailComponent {
     constructor(private activatedRoute: ActivatedRoute, private productService: ProductService, private cartService: CartService) {
         let productId: number = this.activatedRoute.snapshot.params.id;
         this.product = this.productService.getProductById(productId);
+<<<<<<< HEAD
+=======
+        // alert(JSON.stringify(this.product));
+>>>>>>> e2fc3cc274892c5be6949ae10e85cd596f4ce2d5
     }
     public addToCart() {
         this.cartService.addToCart(this.product);
