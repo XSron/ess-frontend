@@ -16,6 +16,8 @@ export class CartService {
     public changeCartQty(productId: number, newQty: number) {
         if(this.carts.get(productId)) {
             let updatingProduct: ProductModel = this.carts.get(productId);
+            //check if they select the same qty
+            if(updatingProduct.qty === +newQty) return;
             updatingProduct.qty = newQty;
             this.carts.set(productId, updatingProduct);
             this.cartSubject.next(Array.from(this.carts.values()));

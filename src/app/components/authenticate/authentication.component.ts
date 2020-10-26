@@ -1,19 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../../services/authservice.service';
 import { AuthModel } from '../../model/AuthModel';
 import { Router } from '@angular/router';
+import { MenuService } from 'src/app/services/menuservice.service';
 
 @Component({
     selector: 'signin',
-    templateUrl: 'authentication.component.html'
+    templateUrl: 'authentication.component.html',
+    styleUrls: ['./authentication.component.css']
 })
-export class AuthenticationComponent {
+export class AuthenticationComponent implements OnInit, OnDestroy {
     public isLogin: boolean = false;
     public isLoading: boolean = false;
     public error: string
-    constructor(private authService: AuthenticationService, private router: Router) {}
+    constructor(private authService: AuthenticationService, private menuService: MenuService, private router: Router) {}
+    ngOnInit() {
+        this.menuService.routingChangeSubject.next(true);
+    }
     onSwitch() {
         this.isLogin = !this.isLogin;
     }
@@ -40,5 +45,8 @@ export class AuthenticationComponent {
             //this.error = error.error.error.message;
             this.isLoading = false;
         })
+    }
+    ngOnDestroy() {
+        this.menuService.routingChangeSubject.next(false);
     }
 }

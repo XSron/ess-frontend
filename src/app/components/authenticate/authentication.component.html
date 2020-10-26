@@ -1,9 +1,9 @@
-<div class="row">
+<body>
     <div class="container">
-      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+      <form #authForm="ngForm" class="form-signin" (ngSubmit)="onSubmit(authForm)">
         <div class="form-group">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div *ngIf="error" class="alert alert-danger" role="alert">
                 {{ error }}
               </div>
@@ -14,23 +14,20 @@
         </div>
         <div class="form-group">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <label for="password">Password</label>
               <input type="password" class="form-control" ngModel name="password" required>
             </div>
           </div>
         </div>
-
-        <div *ngIf="isLoading">
+        <div *ngIf="isLoading" class="btn btn-lg btn-primary btn-block">
           <button class="btn btn-primary" type="button" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Loading...
           </button>
         </div>
-        
-        <button *ngIf="!isLoading" type="submit" class="btn btn-primary" [disabled]="!authForm.valid">{{ isLogin? 'Login': 'Sign Up' }}</button> 
-        &nbsp; 
-        <button *ngIf="!isLoading" type="button" (click)="onSwitch()" class="btn btn-primary">Switch to {{ isLogin? 'Sign Up': 'Login' }}</button>
+        <button *ngIf="!isLoading" type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!authForm.valid">{{ isLogin? 'Login': 'Sign Up' }}</button>   
+        <button *ngIf="!isLoading" type="button" (click)="onSwitch()" class="btn btn-lg btn-primary btn-block">Switch to {{ isLogin? 'Sign Up': 'Login' }}</button>
       </form>
     </div>
-</div>
+</body>

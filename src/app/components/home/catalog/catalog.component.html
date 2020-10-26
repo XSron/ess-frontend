@@ -2,7 +2,6 @@
   <img class="card-img" [src]="product.url" alt="Product Image">
   <div class="card-body" style="cursor: pointer;">
     <h4 class="card-title stretched-link" (click)="viewDetail()">{{product.name}}</h4>
-    <h6 class="card-subtitle mb-2 text-muted">ID: {{product.productId}}</h6>
     <p class="card-text">{{product.description}}</p>
     <div class="buy d-flex justify-content-between align-items-center">
       <div class="price text-success"><h5 class="mt-4">${{product.price}}</h5></div>

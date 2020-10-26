@@ -25,6 +25,7 @@ import { AuthenticationService } from './services/authservice.service';
 import { InterceptorService } from './interceptors/interceptor.service';
 import { ProductService } from './services/productservice.service';
 import { CartService } from './services/cartservice.service';
+import { MenuService } from './services/menuservice.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -64,7 +65,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService, ProductService, CartService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}],
+  providers: [AuthenticationService, ProductService, CartService, MenuService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav *ngIf="!isAuthenticatePage" class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink="/">Group 3 Ecommerce</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,23 +8,47 @@
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <a routerLink="/" class="nav-link">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a routerLink="/vendor" class="nav-link">Vendor</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Vendor
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/vendor/products" routerLinkActive="active">Manage Product</a>
+          <a class="dropdown-item" routerLink="/vendor/reports" routerLinkActive="active">View Report</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/admin/users" routerLinkActive="active">Manage User</a>
+          <a class="dropdown-item" routerLink="/admin/products" routerLinkActive="active">Approve/Reject Product</a>
+          <a class="dropdown-item" routerLink="/admin/reports" routerLinkActive="active">View Report</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Client
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/client/reports" routerLinkActive="active">View Report</a>
+        </div>
       </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item" routerLinkActive="active">
         <a routerLink="/mycart" class="nav-link" tabindex="-1">My Cart({{ totalCart }})</a>
       </li>
-      <div class="dropdown">
-        <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Hello, John
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hello, Group 3
         </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" [routerLink]="['/user/userprofile', 1]">My Profile</a>
           <a class="dropdown-item" [routerLink]="['/user/orderhistory', 1]">Order History</a>
         </div>
-      </div>
+      </li>
       <li class="nav-item">
           <a *ngIf="auth" style="cursor: pointer;" class="nav-link" (click)="onLogout()">Logout</a>
       </li>
