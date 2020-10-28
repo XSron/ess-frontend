@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthModel } from '../model/AuthModel';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AppConfig } from '../common/global-constants';
  
 @Injectable()
 export class AuthenticationService {
@@ -21,7 +22,7 @@ export class AuthenticationService {
                                                 .set("password", password)
                                                 .set("grant_type", 'password');
         return (
-            this.http.post<AuthModel>(`https://pm-authentication-service.herokuapp.com/oauth/token`, {}, {
+            this.http.post<AuthModel>(AppConfig.SIGN_IN_ENDPOINT, {}, {
                 headers: httpHeaders,
                 params: httpParams
             })

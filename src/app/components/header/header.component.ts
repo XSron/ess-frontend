@@ -29,8 +29,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
             //decode access token
             if(this.auth) {
                 let afterDecoded: string = jwt_decode(auth.access_token);
-                this.roles = afterDecoded['authorities'];
-            }
+                return this.roles = afterDecoded['authorities'];
+            } 
+            this.roles = null; //reset roles in case the user logout
         });
         this.cartSubscription = this.cartService.cartSubject.subscribe((products: ProductModel[]) => {
             if(products) this.totalCart = products.length;
@@ -44,10 +45,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.cartSubscription.unsubscribe();
         this.menuSubscription.unsubscribe();
     }
-    public hasRole(role: string): boolean {
+    public hasRole(...roles: string[]): boolean {
         if(this.roles === null) return false;
         return this.roles.findIndex((r: string) => {
-            return role === r;
+            return roles.findIndex((rl: string) => {
+                return rl.toUpperCase() === r.toUpperCase()
+            }) > - 1
         }) > -1;
     }
     onLogout() {

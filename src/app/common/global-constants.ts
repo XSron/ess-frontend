@@ -8,6 +8,12 @@ export class AppConfig {
   // Product Endpoint
   public static PRODUCT_ENDPOINT = "";
 
+  // User Endpoint
+
+
+  // Auth Endpoint
+  public static SIGN_IN_ENDPOINT = "https://pm-authentication-service.herokuapp.com/oauth/token";
+
   // Appearance
   public static layout: Layout = Layout.grid;
 
