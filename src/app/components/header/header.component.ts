@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthModel } from 'src/app/model/AuthModel';
 import { ProductModel } from 'src/app/model/ProductModel';
 import { AuthenticationService } from 'src/app/services/authservice.service';
 import { CartService } from 'src/app/services/cartservice.service';
 import { MenuService } from 'src/app/services/menuservice.service';
-import { ProductService } from 'src/app/services/productservice.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
     selector: 'header',
@@ -16,14 +16,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public isAuthenticatePage: boolean = false;
     public auth: AuthModel;
     public totalCart: number = 0;
+    public roles: string[] = null;
     private userSubscription: Subscription;
     private cartSubscription: Subscription;
     private menuSubscription: Subscription;
-    constructor(private authService: AuthenticationService, private cartService: CartService, 
+    constructor(public authService: AuthenticationService, private cartService: CartService, 
                 private menuService: MenuService, private router: Router) {}
     ngOnInit() {
         this.userSubscription = this.authService.userSubject.subscribe((auth: AuthModel) => {
             this.auth = auth;
+
+            //decode access token
+            if(this.auth) {
+                let afterDecoded: string = jwt_decode(auth.access_token);
+                this.roles = afterDecoded['authorities'];
+            }
         });
         this.cartSubscription = this.cartService.cartSubject.subscribe((products: ProductModel[]) => {
             if(products) this.totalCart = products.length;
@@ -37,8 +44,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.cartSubscription.unsubscribe();
         this.menuSubscription.unsubscribe();
     }
+    public hasRole(role: string): boolean {
+        if(this.roles === null) return false;
+        return this.roles.findIndex((r: string) => {
+            return role === r;
+        }) > -1;
+    }
     onLogout() {
         this.authService.userSubject.next(null);
+        this.cartService.clearCart();
         localStorage.removeItem("auth");
         this.router.navigate(['/']);
     }

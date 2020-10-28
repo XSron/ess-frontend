@@ -2,8 +2,11 @@ import { Layout } from './enum';
 
 export class AppConfig {
 
-  // Backend
+  // Endpoint
   public static REST_API_SERVER = 'http://localhost:3000';
+
+  // Product Endpoint
+  public static PRODUCT_ENDPOINT = "";
 
   // Appearance
   public static layout: Layout = Layout.grid;
