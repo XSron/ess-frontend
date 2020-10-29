@@ -45,7 +45,7 @@
       </li>
       <li class="nav-item dropdown" *ngIf="auth">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Hello, Admin
+          Hello, {{ username }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" [routerLink]="['/user/userprofile', 1]">My Profile</a>
@@ -59,23 +59,3 @@
     </ul>
   </div>
 </nav>
-
-
-<!--<nav class="header-section">-->
-<!--  <div class="header-top">-->
-<!--    <div class="container">-->
-<!--      <div class="ht-left">-->
-<!--        &lt;!&ndash;  <a class="navbar-brand" routerLink="/">Group 3 Ecommerce</a>&ndash;&gt;-->
-<!--        <div class="col-2 logo">-->
-<!--          <a routerLink="/">-->
-<!--            <img src="../../../assets/images/logo_header.png" alt="">-->
-<!--          </a>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="ht-right">-->
-<!--        <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>-->
-
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->

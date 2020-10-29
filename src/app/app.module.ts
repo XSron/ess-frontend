@@ -31,6 +31,10 @@ import { CartService } from './services/cartservice.service';
 import { MenuService } from './services/menuservice.service';
 import { VendorProductComponent } from './components/vendor/vendor-product/vendor-product.component';
 import { FooterComponent } from './components/fixed-blocks/footer/footer.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { ApproveRejectProductComponent } from './components/admin/approve-reject-product/approve-reject-product.component';
+import { ManageUserComponent } from './components/admin/manage-user/manage-user.component';
+import { ClientComponent } from './components/client/client.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,9 +44,16 @@ const routes: Routes = [
   { path: 'mycart', component: CartComponent },
   { path: 'checkoutform', component: CheckoutFormComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'admin', component: AdminComponent, children: [
+    { path: 'manageuser', component: ManageUserComponent},
+    { path: 'approverejectproduct', component: ApproveRejectProductComponent}
+  ]},
   { path: 'vendor', component: VendorComponent, children: [
     { path: 'product', component: VendorProductComponent}, 
-    { path: 'report', component: ReportComponent}
+    { path: 'report', component: ReportComponent }
+  ]},
+  { path: 'client', component: ClientComponent, children: [
+    { path: 'report', component: ReportComponent }
   ]},
   { path: 'user/userprofile/:id', component: UserProfileComponent },
   { path: 'user/orderhistory/:id', component: OrderHistoryComponent },
@@ -71,7 +82,11 @@ const routes: Routes = [
     VendorProductComponent,
     OrderHistoryComponent,
     ReceiptComponent,
-    FooterComponent
+    FooterComponent,
+    AdminComponent,
+    ApproveRejectProductComponent,
+    ManageUserComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

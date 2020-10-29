@@ -3,8 +3,8 @@ import { Layout } from './enum';
 export class AppConfig {
 
   //OAuth Client
-  public static CLIENT_ID = "";
-  public static SECRET_KEY = "";
+  public static CLIENT_ID = "group3";
+  public static SECRET_KEY = "JwtSecretKey";
 
   // Endpoint
   public static REST_API_SERVER = 'http://localhost:3000';

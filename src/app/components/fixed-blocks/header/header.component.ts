@@ -10,14 +10,14 @@ import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'header',
-  templateUrl: 'header.component.html',
-  styleUrls: ['./header.component.css']
+  templateUrl: 'header.component.html'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   public isAuthenticatePage: boolean = false;
   public auth: AuthModel;
   public totalCart: number = 0;
   public roles: string[] = null;
+  public username: string 
   private userSubscription: Subscription;
   private cartSubscription: Subscription;
   private menuSubscription: Subscription;
@@ -27,9 +27,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSubscription = this.authService.userSubject.subscribe((auth: AuthModel) => {
       this.auth = auth;
 
+      localStorage.clear();
+
       //decode access token
       if(this.auth) {
         let afterDecoded: string = jwt_decode(auth.access_token);
+        this.username = afterDecoded['user_name'].toUpperCase();
         return this.roles = afterDecoded['authorities'];
       }
       this.roles = null; //reset roles in case the user logout
