@@ -15,11 +15,12 @@ import { ProductItemGridComponent } from './components/home/product-item-grid/pr
 import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailComponent } from './components/home/productdetail/productdetail.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { CreditCardComponent } from './components/credit-card/credit-card.component';
+import { CreditCardComponent } from './components/payment/credit-card/credit-card.component';
 import { CheckoutFormComponent } from './components/checkoutform/checkoutform.component';
-import { AddressComponent } from './components/address/address.component';
-import { OrderHistoryComponent } from './components/orderhistory/orderhistory.component';
+import { AddressComponent } from './components/payment/address/address.component';
 import { UserProfileComponent } from './components/user/userprofile/userprofile.component';
+import { OrderHistoryComponent } from './components/payment/order-history/order-history.component';
+import { ReceiptComponent } from './components/payment/receipt/receipt.component';
 
 import { AuthenticationService } from './services/authservice.service';
 import { InterceptorService } from './interceptors/interceptor.service';
@@ -58,7 +59,9 @@ const routes: Routes = [
     AddressComponent,
     CreditCardComponent,
     CheckoutFormComponent,
-    ProductItemListComponent
+    ProductItemListComponent,
+    OrderHistoryComponent,
+    ReceiptComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,15 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService, ProductService, CartService, MenuService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthenticationService,
+    ProductService,
+    CartService,
+    MenuService,
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
