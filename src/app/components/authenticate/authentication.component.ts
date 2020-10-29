@@ -23,13 +23,13 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
         this.isLogin = !this.isLogin;
     }
     onSubmit(form: NgForm) {
-        const { username, password } = form.value;
+        const { username, password, roleId } = form.value;
         let authObs: Observable<AuthModel>;
         this.isLoading = true;
         if(this.isLogin) {
             authObs = this.authService.signIn(username, password);
         } else {
-            authObs = this.authService.signUp(username, password)
+            authObs = this.authService.signUp(username, password, roleId)
         }
         authObs.subscribe((auth: AuthModel) => {
             this.isLoading = false;

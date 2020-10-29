@@ -26,9 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSubscription = this.authService.userSubject.subscribe((auth: AuthModel) => {
       this.auth = auth;
-
-      localStorage.clear();
-
+      
       //decode access token
       if(this.auth) {
         let afterDecoded: string = jwt_decode(auth.access_token);

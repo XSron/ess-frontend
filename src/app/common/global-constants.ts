@@ -13,7 +13,7 @@ export class AppConfig {
   public static PRODUCT_ENDPOINT = "";
 
   // User Endpoint
-
+  public static USER_SIGNUP = "https://pm-user-service-v2.herokuapp.com/user/register"
 
   // Auth Endpoint
   public static SIGN_IN_ENDPOINT = "https://pm-authentication-service.herokuapp.com/oauth/token";

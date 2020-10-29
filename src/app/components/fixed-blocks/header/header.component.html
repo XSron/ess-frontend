@@ -48,8 +48,8 @@
           Hello, {{ username }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/user/userprofile', 1]">My Profile</a>
-          <a class="dropdown-item" [routerLink]="['/user/orderhistory', 1]">Order History</a>
+          <a class="dropdown-item" routerLink="/user/userprofile">My Profile</a>
+          <a class="dropdown-item" routerLink="/user/orderhistory">Order History</a>
           <a class="dropdown-item" style="cursor: pointer;" (click)="onLogout()">Logout</a>
         </div>
       </li>

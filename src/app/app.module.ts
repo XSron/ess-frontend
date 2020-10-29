@@ -21,25 +21,26 @@ import { AddressComponent } from './components/payment/address/address.component
 import { UserProfileComponent } from './components/user/userprofile/userprofile.component';
 import { ProductItemListComponent } from './components/home/product-item-list/product-item-list.component';
 import { ReportComponent } from './components/vendor/report/report.component';
-import { OrderHistoryComponent } from './components/payment/order-history/order-history.component';
-import { ReceiptComponent } from './components/payment/receipt/receipt.component';
-
-import { AuthenticationService } from './services/authservice.service';
-import { InterceptorService } from './interceptors/interceptor.service';
-import { ProductService } from './services/productservice.service';
-import { CartService } from './services/cartservice.service';
-import { MenuService } from './services/menuservice.service';
+import { OrderHistoryComponent } from './components/user/orderhistory/orderhistory.component';
 import { VendorProductComponent } from './components/vendor/vendor-product/vendor-product.component';
 import { FooterComponent } from './components/fixed-blocks/footer/footer.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ApproveRejectProductComponent } from './components/admin/approve-reject-product/approve-reject-product.component';
 import { ManageUserComponent } from './components/admin/manage-user/manage-user.component';
 import { ClientComponent } from './components/client/client.component';
+import { UserComponent } from './components/user/user.component';
+import { HistoryDetailComponent } from './components/user/orderhistory/historydetail/historydetail.component';
+import { ReceiptComponent } from './components/user/orderhistory/receipt/receipt.component';
+
+import { AuthenticationService } from './services/authservice.service';
+import { InterceptorService } from './interceptors/interceptor.service';
+import { ProductService } from './services/productservice.service';
+import { CartService } from './services/cartservice.service';
+import { MenuService } from './services/menuservice.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'productdetail/:id', component: ProductDetailComponent },
-  { path: 'vendor', component: VendorComponent },
   { path: 'signin', component: AuthenticationComponent },
   { path: 'mycart', component: CartComponent },
   { path: 'checkoutform', component: CheckoutFormComponent },
@@ -55,8 +56,12 @@ const routes: Routes = [
   { path: 'client', component: ClientComponent, children: [
     { path: 'report', component: ReportComponent }
   ]},
-  { path: 'user/userprofile/:id', component: UserProfileComponent },
-  { path: 'user/orderhistory/:id', component: OrderHistoryComponent },
+  { path: 'user', component: UserComponent, children: [
+    { path: 'userprofile', component: UserProfileComponent },
+    { path: 'orderhistory', component: OrderHistoryComponent },
+    { path: 'historydetail/:id', component: HistoryDetailComponent },
+    { path: 'receipt/:id', component: ReceiptComponent }
+  ]},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
 ]
@@ -86,7 +91,8 @@ const routes: Routes = [
     AdminComponent,
     ApproveRejectProductComponent,
     ManageUserComponent,
-    ClientComponent
+    ClientComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
