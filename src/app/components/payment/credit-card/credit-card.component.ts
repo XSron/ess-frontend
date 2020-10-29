@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CreditCardService} from '../../services/credit-card.service';
-import {CreditCardModel, CreditCardType} from '../../model/CreditCardModel';
+import {CreditCardService} from '../../../services/credit-card.service';
+import {CreditCardModel, CreditCardType} from '../../../model/CreditCardModel';
 
 @Component({
   selector: 'app-credit-card',
