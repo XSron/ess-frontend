@@ -6,8 +6,6 @@ import { AppConfig } from '../common/global-constants';
  
 @Injectable()
 export class AuthenticationService {
-    private clientId: string = 'group3';
-    private secretKey: string = 'JwtSecretKey';
     public userSubject: BehaviorSubject<AuthModel> = new BehaviorSubject<AuthModel>(null);
     constructor(private http: HttpClient) {}
     public signUp(username: string, password: string): Observable<AuthModel> {
@@ -16,7 +14,7 @@ export class AuthenticationService {
     public signIn(username: string, password: string): Observable<AuthModel> {
         let httpHeaders: HttpHeaders = new HttpHeaders()
                                             .set("Content-type", "application/x-www-form-urlencoded; charset=utf-8")
-                                            .set("Authorization", `Basic ${btoa(`${this.clientId}:${this.secretKey}`)}`);
+                                            .set("Authorization", `Basic ${btoa(`${AppConfig.CLIENT_ID}:${AppConfig.SECRET_KEY}`)}`);
         let httpParams: HttpParams = new HttpParams()
                                                 .set("username", username)
                                                 .set("password", password)

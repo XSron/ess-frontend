@@ -20,13 +20,15 @@ import { CheckoutFormComponent } from './components/checkoutform/checkoutform.co
 import { AddressComponent } from './components/address/address.component';
 import { OrderHistoryComponent } from './components/orderhistory/orderhistory.component';
 import { UserProfileComponent } from './components/user/userprofile/userprofile.component';
+import { ProductItemListComponent } from './components/home/product-item-list/product-item-list.component';
+import { ReportComponent } from './components/vendor/report/report.component';
 
 import { AuthenticationService } from './services/authservice.service';
 import { InterceptorService } from './interceptors/interceptor.service';
 import { ProductService } from './services/productservice.service';
 import { CartService } from './services/cartservice.service';
 import { MenuService } from './services/menuservice.service';
-import { ProductItemListComponent } from './components/home/product-item-list/product-item-list.component';
+import { VendorProductComponent } from './components/vendor/vendor-product/vendor-product.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,6 +38,10 @@ const routes: Routes = [
   { path: 'mycart', component: CartComponent },
   { path: 'checkoutform', component: CheckoutFormComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'vendor', component: VendorComponent, children: [
+    { path: 'product', component: VendorProductComponent}, 
+    { path: 'report', component: ReportComponent}
+  ]},
   { path: 'user/userprofile/:id', component: UserProfileComponent },
   { path: 'user/orderhistory/:id', component: OrderHistoryComponent },
   { path: 'not-found', component: NotFoundComponent },
@@ -58,7 +64,9 @@ const routes: Routes = [
     AddressComponent,
     CreditCardComponent,
     CheckoutFormComponent,
-    ProductItemListComponent
+    ProductItemListComponent,
+    ReportComponent,
+    VendorProductComponent
   ],
   imports: [
     BrowserModule,
