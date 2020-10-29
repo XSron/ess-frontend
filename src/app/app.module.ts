@@ -37,6 +37,8 @@ import { InterceptorService } from './interceptors/interceptor.service';
 import { ProductService } from './services/productservice.service';
 import { CartService } from './services/cartservice.service';
 import { MenuService } from './services/menuservice.service';
+import { ManageAddressComponent } from './components/user/userprofile/manage-address/manage-address.component';
+import { ManageCardComponent } from './components/user/userprofile/manage-card/manage-card.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -47,7 +49,8 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'admin', component: AdminComponent, children: [
     { path: 'manageuser', component: ManageUserComponent},
-    { path: 'approverejectproduct', component: ApproveRejectProductComponent}
+    { path: 'product', component: ApproveRejectProductComponent},
+    { path: 'report', component: ReportComponent}
   ]},
   { path: 'vendor', component: VendorComponent, children: [
     { path: 'product', component: VendorProductComponent}, 
@@ -60,7 +63,9 @@ const routes: Routes = [
     { path: 'userprofile', component: UserProfileComponent },
     { path: 'orderhistory', component: OrderHistoryComponent },
     { path: 'historydetail/:id', component: HistoryDetailComponent },
-    { path: 'receipt/:id', component: ReceiptComponent }
+    { path: 'receipt/:id', component: ReceiptComponent },
+    { path: 'manage-address', component: ManageAddressComponent },
+    { path: 'manage-card', component: ManageCardComponent }
   ]},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
@@ -92,7 +97,9 @@ const routes: Routes = [
     ApproveRejectProductComponent,
     ManageUserComponent,
     ClientComponent,
-    UserComponent
+    UserComponent,
+    ManageAddressComponent,
+    ManageCardComponent
   ],
   imports: [
     BrowserModule,

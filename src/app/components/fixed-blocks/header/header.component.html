@@ -25,9 +25,9 @@
           Admin
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/admin/users" routerLinkActive="active">Manage User</a>
-          <a class="dropdown-item" routerLink="/admin/products" routerLinkActive="active">Approve/Reject Product</a>
-          <a class="dropdown-item" routerLink="/admin/reports" routerLinkActive="active">View Report</a>
+          <a class="dropdown-item" routerLink="/admin/manageuser" routerLinkActive="active">Manage User</a>
+          <a class="dropdown-item" routerLink="/admin/product" routerLinkActive="active">Approve/Reject Product</a>
+          <a class="dropdown-item" routerLink="/admin/report" routerLinkActive="active">View Report</a>
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="hasRole('ROLE_CLIENT')">
