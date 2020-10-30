@@ -3,7 +3,7 @@
   <div class="row">
     <div class="card card-body">
       <h4>Shipping Address</h4>
-      <app-address #shippingAddressComponent [addressType]="AddressType.shipping"></app-address>
+      <app-address #shippingAddressComponent></app-address>
       <br>
       <div class="form-check">
         <input type="checkbox" class="form-check-input" [(ngModel)]="isUsingSameAddress">
@@ -15,7 +15,7 @@
   <div class="row" *ngIf="!isUsingSameAddress">
     <div class="card card-body">
       <h4>Billing Address</h4>
-      <app-address #billingAddressComponent [addressType]="AddressType.billing"></app-address>
+      <app-address #billingAddressComponent></app-address>
     </div>
   </div>
   <br *ngIf="!isUsingSameAddress">

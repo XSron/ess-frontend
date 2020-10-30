@@ -3,7 +3,6 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthModel } from 'src/app/model/AuthModel';
 import { AuthenticationService } from 'src/app/services/authservice.service';
-import { AddressType } from '../../../common/enum';
 import { AddressComponent } from '../address/address.component';
 import { CreditCardComponent } from '../credit-card/credit-card.component';
 import { AddressModel } from '../../../model/AddressModel';
@@ -22,7 +21,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   @ViewChild('creditCardComponent') creditCardComponent: CreditCardComponent;
 
   public isUsingSameAddress: boolean;
-  public AddressType = AddressType;
 
   private auth: AuthModel;
   private authSubscription: Subscription;

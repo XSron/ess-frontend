@@ -4,7 +4,7 @@
   <br>
   <div class="card card-body">
     <h4>Shipping Address</h4> <br>
-    <p><span style="font-weight: bold;">Name:</span>{{checkoutData.shippingAddress.firstName}} {{checkoutData.shippingAddress.lastName}}</p>
+    <p><span style="font-weight: bold;">Name: </span>{{checkoutData.shippingAddress.firstName}} {{checkoutData.shippingAddress.lastName}}</p>
     <p><span style="font-weight: bold;">Address: </span>
       <span>{{checkoutData.shippingAddress.street1}}, </span>
       <span *ngIf="checkoutData.shippingAddress.street2.length > 0">{{checkoutData.shippingAddress.street2}}, </span>
@@ -13,13 +13,13 @@
       <span>{{checkoutData.shippingAddress.zipCode}}, </span>
       <span>{{checkoutData.shippingAddress.country}}</span>
     </p>
-    <p><span style="font-weight: bold;">Phone: </span> 64111223344</p>
+    <p><span style="font-weight: bold;">Phone Number: </span>{{checkoutData.shippingAddress.phoneNumber}}</p>
   </div>
   <br>
   <div class="card card-body">
     <h4>Billing Address</h4> <br>
     <p><span style="font-weight: bold;">Name: </span>{{checkoutData.billingAddress.firstName}} {{checkoutData.billingAddress.lastName}}</p>
-    <p><span style="font-weight: bold;">Address:</span>
+    <p><span style="font-weight: bold;">Address: </span>
       <span>{{checkoutData.billingAddress.street1}}, </span>
       <span *ngIf="checkoutData.billingAddress.street2.length > 0">{{checkoutData.billingAddress.street2}}, </span>
       <span>{{checkoutData.billingAddress.city}}, </span>
@@ -27,7 +27,7 @@
       <span>{{checkoutData.billingAddress.zipCode}}, </span>
       <span>{{checkoutData.billingAddress.country}}</span>
     </p>
-    <p><span style="font-weight: bold;">Phone: </span> 64111223344</p>
+    <p><span style="font-weight: bold;">Phone Number: </span>{{checkoutData.billingAddress.phoneNumber}}</p>
   </div>
   <br>
   <div class="card card-body">

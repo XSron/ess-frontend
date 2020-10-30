@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AddressService} from '../../../services/address.service';
 import {AddressModel} from '../../../model/AddressModel';
-import {AddressType} from '../../../common/enum';
 
 @Component({
   selector: 'app-address',
@@ -12,8 +11,7 @@ import {AddressType} from '../../../common/enum';
 
 export class AddressComponent implements OnInit {
 
-  @Input() addressType: AddressType = AddressType.shipping;
-  public AddressType = AddressType;
+  @Input() addressEditing: AddressModel;
   public addressList: AddressModel[] = [];
 
   private form: FormGroup;
@@ -27,15 +25,15 @@ export class AddressComponent implements OnInit {
   ngOnInit(): void {
     // Form setup
     this.form = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      street1: ['', Validators.required],
-      street2: [''],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      zipCode: ['', Validators.required],
-      country: ['', Validators.required],
+      firstName: [this.addressEditing ? this.addressEditing.firstName : '', Validators.required],
+      lastName: [this.addressEditing ? this.addressEditing.lastName : '', Validators.required],
+      phoneNumber: [this.addressEditing ? this.addressEditing.phoneNumber : '', Validators.required],
+      street1: [this.addressEditing ? this.addressEditing.street1 : '', Validators.required],
+      street2: [this.addressEditing ? this.addressEditing.street2 : ''],
+      city: [this.addressEditing ? this.addressEditing.city : '', Validators.required],
+      state: [this.addressEditing ? this.addressEditing.state : '', Validators.required],
+      zipCode: [this.addressEditing ? this.addressEditing.zipCode : '', Validators.required],
+      country: [this.addressEditing ? this.addressEditing.country : '', Validators.required],
     });
 
     // Load Address data

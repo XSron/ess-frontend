@@ -7,11 +7,24 @@ import {AddressModel} from '../../../../model/AddressModel';
   selector: 'manage-address',
   templateUrl: 'manage-address.component.html'
 })
+
 export class ManageAddressComponent implements OnInit {
 
   @ViewChild('userProfileAddressComponent') userProfileAddressComponent: AddressComponent;
 
   public isAddNewAddress = false;
+  public selectedAddress = new AddressModel({
+    // Mock selected address to Edit
+    firstName: 'firstName',
+    lastName: 'lastName',
+    phoneNumber: 'phoneNumber',
+    street1: 'street1',
+    street2: 'street2',
+    city: 'city',
+    state: 'state',
+    zipCode: 123456,
+    country: 'Viet Nam'
+  });
 
   constructor(private route: ActivatedRoute) {}
 
@@ -30,16 +43,12 @@ export class ManageAddressComponent implements OnInit {
 
     if (this.isAddNewAddress) {
       // Call add address API.
-      alert(
-        'SUCCESS!! :-)\n Call ADD user address API.' +
-        JSON.stringify(userProfileAddress, null, 4)
-      );
+      alert('SUCCESS!! :-)\n Call ADD user address API.' +
+        JSON.stringify(userProfileAddress, null, 4));
     } else {
       // Call edit address API.
-      alert(
-        'SUCCESS!! :-)\n Call EDIT user address API.' +
-        JSON.stringify(userProfileAddress, null, 4)
-      );
+      alert('SUCCESS!! :-)\n Call EDIT user address API.' +
+        JSON.stringify(userProfileAddress, null, 4));
     }
 
   }

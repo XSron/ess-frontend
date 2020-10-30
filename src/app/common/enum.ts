@@ -3,10 +3,10 @@ export enum Layout {
   list
 }
 
-export enum AddressType {
-  shipping,
-  billing
-}
+// export enum AddressType {
+//   shipping,
+//   billing
+// }
 
 // export enum CreditCardType {
 //   master,
