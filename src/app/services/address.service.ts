@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AddressModel } from '../model/AddressModel';
-import { AppConfig } from '../common/global-constants';
+import { Endpoint } from '../common/global-constants';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AddressService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // MARK: - Delivery Address Service
-
-  getDeliveryAddressList(): any {
-    return this.httpClient.get<AddressModel[]>(AppConfig.REST_API_SERVER + '/address');
+  getAddress(): any {
+    return this.httpClient.get<AddressModel[]>(Endpoint.Payment.ShippingAddress);
   }
 
-  addDeliveryAddress(body): any {
-    return this.httpClient.post(AppConfig.REST_API_SERVER + '/address', body);
+  addAddress( body): any {
+    return this.httpClient.post(Endpoint.Payment.ShippingAddress, body);
   }
 
-  updateDeliveryAddress(id, body): any {
-    return this.httpClient.put(AppConfig.REST_API_SERVER + '/address/' + id, body);
+  updateAddress(id, body): any {
+    return this.httpClient.put(Endpoint.Payment.ShippingAddress + `/${id}`, body);
   }
 
-  deleteDeliveryAddress(id): any {
-    return this.httpClient.delete(AppConfig.REST_API_SERVER + '/address/' + id);
+  deleteAddress(id): any {
+    return this.httpClient.delete(Endpoint.Payment.ShippingAddress + `/${id}`);
   }
 
 }
