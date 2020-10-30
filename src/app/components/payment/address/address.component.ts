@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { AddressService } from '../../../services/address.service';
-import { AddressModel } from '../../../model/AddressModel';
+import {Component, Input, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AddressService} from '../../../services/address.service';
+import {AddressModel} from '../../../model/AddressModel';
+import {AddressType} from '../../../common/enum';
 
 @Component({
   selector: 'app-address',
@@ -11,13 +12,16 @@ import { AddressModel } from '../../../model/AddressModel';
 
 export class AddressComponent implements OnInit {
 
+  @Input() addressType: AddressType = AddressType.shipping;
+  public AddressType = AddressType;
   public addressList: AddressModel[] = [];
+
   private form: FormGroup;
   private submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private deliveryAddressService: AddressService
+    private addressService: AddressService
   ) { }
 
   ngOnInit(): void {
@@ -34,8 +38,8 @@ export class AddressComponent implements OnInit {
     });
 
     // Load Address data
-    this.deliveryAddressService
-      .getDeliveryAddressList()
+    this.addressService
+      .getAddress()
       .subscribe(data => {
         this.addressList = data;
       });
@@ -46,42 +50,45 @@ export class AddressComponent implements OnInit {
     return this.form.controls;
   }
 
-  onSubmit(): void {
+  submitAction(): boolean {
     this.submitted = true;
     if (this.form.invalid) {
-      return;
+      return false;
     }
-    console.log(this.form.value);
-    this.addDeliveryAddress(this.form.value);
+    // console.log(this.form.value);
+    // this.addAddress(this.form.value);
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    return true;
   }
 
-  onReset() {
+  resetAction(): void {
     this.submitted = false;
     this.form.reset();
   }
 
-  addDeliveryAddress(address): void {
-    // const mockBody = {
-    //   // id: 4,
-    //   number: '332',
-    //   street: 'ACV',
-    //   city: 'SDD',
-    //   state: 'EF',
-    //   zipCode: 34255,
-    //   country: 'AG',
-    //   isDefault: false
-    // };
-    this.deliveryAddressService
-      .addDeliveryAddress(address)
+  getAddress(): AddressModel {
+    return new AddressModel({
+      firstName: this.form.value.firstName,
+      lastName: this.form.value.lastName,
+      street1: this.form.value.street1,
+      street2: this.form.value.street2,
+      city: this.form.value.city,
+      state: this.form.value.state,
+      zipCode: this.form.value.zipCode,
+      country: this.form.value.country
+    });
+  }
+
+  addAddress(address): void {
+    this.addressService
+      .addAddress(address)
       .subscribe(data => {
         console.log(data);
       });
   }
 
-  updateDeliveryAddress(addressID): void {
+  updateAddress(addressID): void {
     const mockBody = {
-      // id: 3,
       number: '333',
       street: 'AAA',
       city: 'SSS',
@@ -90,16 +97,16 @@ export class AddressComponent implements OnInit {
       country: 'BB',
       isDefault: false
     };
-    this.deliveryAddressService
-      .updateDeliveryAddress(addressID, mockBody)
+    this.addressService
+      .updateAddress(addressID, mockBody)
       .subscribe(data => {
         console.log(data);
       });
   }
 
-  deleteDeliveryAddress(addressID): void {
-    this.deliveryAddressService
-      .deleteDeliveryAddress(addressID)
+  deleteAddress(addressID): void {
+    this.addressService
+      .deleteAddress(addressID)
       .subscribe(data => {
         console.log(data);
       });

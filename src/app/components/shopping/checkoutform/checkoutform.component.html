@@ -1,32 +1,33 @@
 <br>
 <div class="container">
-    <div class="row">
-        <div class="card card-body">
-            <h4>Shipping Address</h4>
-            <app-address></app-address> <br>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" [(ngModel)]="isCheck">
-                <label class="form-check-label">Billing address is the same as my shipping address</label>
-            </div>
-        </div>
+  <div class="row">
+    <div class="card card-body">
+      <h4>Shipping Address</h4>
+      <app-address #shippingAddressComponent [addressType]="AddressType.shipping"></app-address>
+      <br>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" [(ngModel)]="isUsingSameAddress">
+        <label class="form-check-label">Billing address is the same as my shipping address</label>
+      </div>
     </div>
-    <br>
-    <div class="row" *ngIf="!isCheck">
-        <div class="card card-body">
-            <h4>Billing Address</h4>
-            <app-address></app-address>
-        </div>
+  </div>
+  <br>
+  <div class="row" *ngIf="!isUsingSameAddress">
+    <div class="card card-body">
+      <h4>Billing Address</h4>
+      <app-address #billingAddressComponent [addressType]="AddressType.billing"></app-address>
     </div>
-    <br *ngIf="!isCheck">
-    <div class="row">
-        <div class="card card-body">
-            <h4>Credit card</h4>
-            <app-credit-card></app-credit-card>
-        </div>
+  </div>
+  <br *ngIf="!isUsingSameAddress">
+  <div class="row">
+    <div class="card card-body">
+      <h4>Credit card</h4>
+      <app-credit-card #creditCardComponent></app-credit-card>
     </div>
-    <br>
-    <div class="row">
-        <button class="btn btn-primary" (click)="handleReview()">Review Shipping Information</button>
-    </div>
-    <br>
+  </div>
+  <br>
+  <div class="row">
+    <button class="btn btn-primary" (click)="handleReview()">Review Shipping Information</button>
+  </div>
+  <br>
 </div>
