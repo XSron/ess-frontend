@@ -66,7 +66,8 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     const navigationExtras: NavigationExtras = { state: checkoutData };
 
     if (this.auth && confirm('Do you want to save the Shipping address & Credit Card information to your User Profile?')) {
-      console.log('call API to save address and credit card information to the current user profile');
+      console.log('call API to save Shipping Address to the current user profile');
+      console.log('call API to save Credit Card information to the current user profile');
     }
 
     this.router.navigate(['/checkout'], navigationExtras);

@@ -1,6 +1,6 @@
 <div class="container">
   <br>
-  <app-address #userProfileAddressComponent [addressType]="AddressType.shipping"></app-address>
+  <app-address #userProfileAddressComponent></app-address>
   <div class="row d-flex justify-content-end" style="margin-top: 25px; margin-bottom: 25px">
     <button class="btn btn-primary" (click)="handleAddress()">
       {{isAddNewAddress ? 'Add New Address' : 'Update Address'}}

@@ -10,35 +10,29 @@ export class UserProfileComponent {
 
   constructor(private router: Router) {}
 
-  public newAddress() {
-    this.router.navigate(['/user/manage-address'], {
-      fragment: "new"
-    });
+  public newAddress(): void {
+    this.router.navigate(['/user/manage-address'], {fragment: 'new'});
   }
 
-  public editAddress() {
-    this.router.navigate(['/user/manage-address'], {
-      fragment: "edit"
-    });
+  public editAddress(): void {
+    this.router.navigate(['/user/manage-address'], {fragment: 'edit'});
   }
 
-  public removeAddress() {
+  public removeAddress(): void {
 
   }
 
-  public newCard() {
-    this.router.navigate(['/user/manage-card'], {
-      fragment: "new"
-    });
+  public newCard(): void {
+    this.router.navigate(['/user/manage-card']);
   }
 
-  public editCard() {
-    this.router.navigate(['/user/manage-card'], {
-      fragment: "edit"
-    });
-  }
+  // public editCard() {
+  //   this.router.navigate(['/user/manage-card'], {
+  //     fragment: "edit"
+  //   });
+  // }
 
-  public removeCard() {
+  public removeCard(): void {
 
   }
 

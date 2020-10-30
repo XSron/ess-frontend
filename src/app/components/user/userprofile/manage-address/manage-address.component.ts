@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AddressType } from '../../../../common/enum';
 import {AddressComponent} from '../../../shopping/address/address.component';
 import {AddressModel} from '../../../../model/AddressModel';
 
@@ -13,7 +12,6 @@ export class ManageAddressComponent implements OnInit {
   @ViewChild('userProfileAddressComponent') userProfileAddressComponent: AddressComponent;
 
   public isAddNewAddress = false;
-  public AddressType = AddressType;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -33,18 +31,17 @@ export class ManageAddressComponent implements OnInit {
     if (this.isAddNewAddress) {
       // Call add address API.
       alert(
-        'SUCCESS!! :-)\n\n Call add user address API.' +
+        'SUCCESS!! :-)\n Call ADD user address API.' +
         JSON.stringify(userProfileAddress, null, 4)
       );
     } else {
       // Call edit address API.
       alert(
-        'SUCCESS!! :-)\n\n Call edit user address API.' +
+        'SUCCESS!! :-)\n Call EDIT user address API.' +
         JSON.stringify(userProfileAddress, null, 4)
       );
     }
 
   }
-
 
 }
