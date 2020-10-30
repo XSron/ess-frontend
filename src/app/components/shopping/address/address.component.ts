@@ -29,6 +29,7 @@ export class AddressComponent implements OnInit {
     this.form = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
       street1: ['', Validators.required],
       street2: [''],
       city: ['', Validators.required],
@@ -64,6 +65,7 @@ export class AddressComponent implements OnInit {
     return new AddressModel({
       firstName: this.form.value.firstName,
       lastName: this.form.value.lastName,
+      phoneNumber: this.form.value.phoneNumber,
       street1: this.form.value.street1,
       street2: this.form.value.street2,
       city: this.form.value.city,
