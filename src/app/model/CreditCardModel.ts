@@ -1,14 +1,25 @@
-export enum CreditCardType {
-  master,
-  visa
-}
+export class CreditCardModel {
 
-export interface CreditCardModel {
   id: number;
   name: string;
   number: string;
-  cvv: number;
+  cvv: string;
   expiredDate: string;
-  type: CreditCardType;
+  type: string;
   isDefault: boolean;
+
+  constructor(args: {
+    name: string,
+    number: string,
+    cvv: string,
+    expiredDate: string,
+    type: string,
+  }) {
+    this.name = args.name;
+    this.number = args.number;
+    this.cvv = args.cvv;
+    this.expiredDate = args.expiredDate;
+    this.type = args.type;
+  }
+
 }

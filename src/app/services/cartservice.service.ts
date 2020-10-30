@@ -53,17 +53,14 @@ export class CartService {
         this.carts.clear();
         this.cartSubject.next(Array.from(this.carts.values()));
     }
-    public calculateTotal(products: ProductModel[]) {
-        //reset count & calculate
-        let totalItem: number = 0; 
-        let subTotal: number = 0;
-        products.forEach((product: ProductModel) => {
-            totalItem += +product.qty;
-            subTotal += +product.qty * +product.price;
-        });
-        return {
-            totalItem,
-            subTotal: +subTotal.toFixed(2)
-        }
+    public calculateTotal(products: ProductModel[]): { totalItem: number; subTotal: number } {
+      // reset count & calculate
+      let totalItem = 0;
+      let subTotal = 0;
+      products.forEach((product: ProductModel) => {
+        totalItem += +product.qty;
+        subTotal += +product.qty * +product.price;
+      });
+      return { totalItem, subTotal: +subTotal.toFixed(2) };
     }
 }

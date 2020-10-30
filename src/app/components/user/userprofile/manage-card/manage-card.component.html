@@ -1,6 +1,7 @@
 <div class="container">
-    <br>
-    <app-credit-card></app-credit-card>
-    <button class="btn btn-primary">{{ isAdd? 'Add New Card': 'Update Card' }}</button>
-    <br> <br>
+  <br>
+  <app-credit-card #creditCardComponent></app-credit-card>
+  <div class="row d-flex justify-content-end" style="margin-top: 25px; margin-bottom: 25px">
+    <button class="btn btn-primary" (click)="handleCreditCard()">Add New Card</button>
+  </div>
 </div>

@@ -15,9 +15,9 @@ import { ProductItemGridComponent } from './components/home/product-item-grid/pr
 import { CartComponent } from './components/shopping/cart/cart.component';
 import { ProductDetailComponent } from './components/home/productdetail/productdetail.component';
 import { CheckoutComponent } from './components/shopping/checkout/checkout.component';
-import { CreditCardComponent } from './components/payment/credit-card/credit-card.component';
+import { CreditCardComponent } from './components/shopping/credit-card/credit-card.component';
 import { CheckoutFormComponent } from './components/shopping/checkoutform/checkoutform.component';
-import { AddressComponent } from './components/payment/address/address.component';
+import { AddressComponent } from './components/shopping/address/address.component';
 import { UserProfileComponent } from './components/user/userprofile/userprofile.component';
 import { ProductItemListComponent } from './components/home/product-item-list/product-item-list.component';
 import { ReportComponent } from './components/vendor/report/report.component';
@@ -48,28 +48,28 @@ const routes: Routes = [
   { path: 'checkoutform', component: CheckoutFormComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'admin', component: AdminComponent, children: [
-    { path: 'manageuser', component: ManageUserComponent},
-    { path: 'product', component: ApproveRejectProductComponent},
-    { path: 'report', component: ReportComponent}
-  ]},
+      { path: 'manageuser', component: ManageUserComponent},
+      { path: 'product', component: ApproveRejectProductComponent},
+      { path: 'report', component: ReportComponent}
+    ]},
   { path: 'vendor', component: VendorComponent, children: [
-    { path: 'product', component: VendorProductComponent}, 
-    { path: 'report', component: ReportComponent }
-  ]},
+      { path: 'product', component: VendorProductComponent},
+      { path: 'report', component: ReportComponent }
+    ]},
   { path: 'client', component: ClientComponent, children: [
-    { path: 'report', component: ReportComponent }
-  ]},
+      { path: 'report', component: ReportComponent }
+    ]},
   { path: 'user', component: UserComponent, children: [
-    { path: 'userprofile', component: UserProfileComponent },
-    { path: 'orderhistory', component: OrderHistoryComponent },
-    { path: 'historydetail/:id', component: HistoryDetailComponent },
-    { path: 'receipt/:id', component: ReceiptComponent },
-    { path: 'manage-address', component: ManageAddressComponent },
-    { path: 'manage-card', component: ManageCardComponent }
-  ]},
+      { path: 'userprofile', component: UserProfileComponent },
+      { path: 'orderhistory', component: OrderHistoryComponent },
+      { path: 'historydetail/:id', component: HistoryDetailComponent },
+      { path: 'receipt/:id', component: ReceiptComponent },
+      { path: 'manage-address', component: ManageAddressComponent },
+      { path: 'manage-card', component: ManageCardComponent }
+    ]},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
-]
+];
 
 @NgModule({
   declarations: [
@@ -119,4 +119,5 @@ const routes: Routes = [
     AppComponent
   ]
 })
+
 export class AppModule { }

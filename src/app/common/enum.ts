@@ -5,5 +5,10 @@ export enum Layout {
 
 export enum AddressType {
   shipping,
-  billing,
+  billing
 }
+
+// export enum CreditCardType {
+//   master,
+//   visa
+// }

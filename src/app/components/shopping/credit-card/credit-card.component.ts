@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CreditCardService} from '../../../services/credit-card.service';
-import {CreditCardModel, CreditCardType} from '../../../model/CreditCardModel';
+import {CreditCardModel} from '../../../model/CreditCardModel';
 
 @Component({
   selector: 'app-credit-card',
@@ -11,7 +11,7 @@ import {CreditCardModel, CreditCardType} from '../../../model/CreditCardModel';
 export class CreditCardComponent implements OnInit {
 
   public creditCardList: CreditCardModel[] = [];
-  private cardType: CreditCardType = CreditCardType.master;
+
   private form: FormGroup;
   private submitted = false;
 
@@ -32,7 +32,7 @@ export class CreditCardComponent implements OnInit {
 
     // Load Credit Card data
     this.creditCardService
-      .getCreditCardList(this.cardType)
+      .getCreditCard()
       .subscribe(data => {
         this.creditCardList = data;
       });
@@ -43,33 +43,29 @@ export class CreditCardComponent implements OnInit {
     return this.form.controls;
   }
 
-  onSubmit(): void {
+  submitAction(): boolean {
     this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
-    console.log(this.form.value);
-    this.addCreditCard(this.form.value);
+    return this.form.invalid === false;
   }
 
-  onReset() {
+  resetAction(): void {
     this.submitted = false;
     this.form.reset();
   }
 
+  getCreditCard(): CreditCardModel {
+    return new CreditCardModel({
+      name: this.form.value.name,
+      number: this.form.value.number,
+      cvv: this.form.value.cvv,
+      expiredDate: this.form.value.expiredDate,
+      type: this.form.value.type
+    });
+  }
+
   addCreditCard(creditCard): void {
-    // const mockBody = {
-    //   // id: 4,
-    //   name: 'Gabriel Campbell',
-    //   number: '5380531937114059',
-    //   cvv: '357',
-    //   expiredDate: '12/2021',
-    //   type: 'Master Card',
-    //   limit: '1049',
-    //   isDefault: false
-    // };
     this.creditCardService
-      .addCreditCard(this.cardType, creditCard)
+      .addCreditCard(creditCard)
       .subscribe(data => {
         console.log(data);
       });
@@ -77,7 +73,7 @@ export class CreditCardComponent implements OnInit {
 
   deleteCreditCard(addressID): void {
     this.creditCardService
-      .deleteCreditCard(this.cardType, addressID)
+      .deleteCreditCard(addressID)
       .subscribe(data => {
         console.log(data);
       });
