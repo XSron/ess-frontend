@@ -1,6 +1,9 @@
 <div class="container">
-    <br>
-    <app-address></app-address>
-    <button class="btn btn-primary">{{ isAdd? 'Add New Address': 'Update Address' }}</button>
-    <br> <br>
+  <br>
+  <app-address #userProfileAddressComponent [addressType]="AddressType.shipping"></app-address>
+  <div class="row d-flex justify-content-end" style="margin-top: 25px; margin-bottom: 25px">
+    <button class="btn btn-primary" (click)="handleAddress()">
+      {{isAddNewAddress ? 'Add New Address' : 'Update Address'}}
+    </button>
+  </div>
 </div>

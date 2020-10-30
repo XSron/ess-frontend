@@ -6,6 +6,7 @@ export enum Layout {
 export enum AddressType {
   shipping,
   billing,
+  userProfile
 }
 
 export enum CreditCardType {

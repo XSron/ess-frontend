@@ -15,9 +15,9 @@ import { ProductItemGridComponent } from './components/home/product-item-grid/pr
 import { CartComponent } from './components/shopping/cart/cart.component';
 import { ProductDetailComponent } from './components/home/productdetail/productdetail.component';
 import { CheckoutComponent } from './components/shopping/checkout/checkout.component';
-import { CreditCardComponent } from './components/payment/credit-card/credit-card.component';
+import { CreditCardComponent } from './components/shopping/credit-card/credit-card.component';
 import { CheckoutFormComponent } from './components/shopping/checkoutform/checkoutform.component';
-import { AddressComponent } from './components/payment/address/address.component';
+import { AddressComponent } from './components/shopping/address/address.component';
 import { UserProfileComponent } from './components/user/userprofile/userprofile.component';
 import { ProductItemListComponent } from './components/home/product-item-list/product-item-list.component';
 import { ReportComponent } from './components/vendor/report/report.component';
