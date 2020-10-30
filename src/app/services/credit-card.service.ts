@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { CreditCardModel, CreditCardType } from '../model/CreditCardModel';
-import { AppConfig } from '../common/global-constants';
+import { AppConfig } from '../common/app-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreditCardService {
 
-  private REST_API_SERVER_MASTER = AppConfig.REST_API_SERVER + '/master-cards';
-  private REST_API_SERVER_VISA = AppConfig.REST_API_SERVER + '/visa-cards';
+  private REST_API_SERVER_MASTER = AppConfig + '/master-cards';
+  private REST_API_SERVER_VISA = AppConfig + '/visa-cards';
 
   constructor(private httpClient: HttpClient) { }
 

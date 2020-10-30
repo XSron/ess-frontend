@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { AppConfig } from 'src/app/common/app-config';
 import { ProductModel } from 'src/app/model/ProductModel';
 import { ProductService } from 'src/app/services/productservice.service';
-import { AppConfig } from '../../../common/global-constants';
 import { Layout } from '../../../common/enum';
 
 @Component({

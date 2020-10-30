@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthModel } from '../model/AuthModel';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AppConfig } from '../common/global-constants';
+import { Endpoint } from '../common/endpoint';
+import { AppConfig } from '../common/app-config';
  
 @Injectable()
 export class AuthenticationService {
@@ -10,7 +11,7 @@ export class AuthenticationService {
     constructor(private http: HttpClient) {}
     public signUp(username: string, password: string, roleId: number): Observable<any> {
         return (
-            this.http.post(AppConfig.USER_SIGNUP, {
+            this.http.post(Endpoint.USER_ENDPOINT.USER_SIGNUP, {
                 username: username,
                 password: password,
                 roles: [{
@@ -27,7 +28,7 @@ export class AuthenticationService {
                                                 .set("password", password)
                                                 .set("grant_type", 'password');
         return (
-            this.http.post<AuthModel>(AppConfig.SIGN_IN_ENDPOINT, {}, {
+            this.http.post<AuthModel>(Endpoint.AUTH_ENDPOINT.SIGN_IN_ENDPOINT, {}, {
                 headers: httpHeaders,
                 params: httpParams
             })
