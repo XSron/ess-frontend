@@ -52,13 +52,7 @@ export class AddressComponent implements OnInit {
 
   submitAction(): boolean {
     this.submitted = true;
-    if (this.form.invalid) {
-      return false;
-    }
-    // console.log(this.form.value);
-    // this.addAddress(this.form.value);
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-    return true;
+    return this.form.invalid === false;
   }
 
   resetAction(): void {

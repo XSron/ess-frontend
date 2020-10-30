@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthModel } from 'src/app/model/AuthModel';
 import { AuthenticationService } from 'src/app/services/authservice.service';
@@ -7,6 +7,8 @@ import { AddressType } from '../../../common/enum';
 import { AddressComponent } from '../../payment/address/address.component';
 import { CreditCardComponent } from '../../payment/credit-card/credit-card.component';
 import { AddressModel } from '../../../model/AddressModel';
+import { CreditCardModel } from '../../../model/CreditCardModel';
+import { CheckoutModel } from '../../../model/CheckoutModel';
 
 @Component({
   selector: 'checkoutform',
@@ -25,7 +27,10 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   private auth: AuthModel;
   private authSubscription: Subscription;
 
-  constructor(private router: Router, private authService: AuthenticationService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.authSubscription = this.authService.userSubject.subscribe((auth: AuthModel) => {
@@ -40,19 +45,24 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public handleReview(): void {
 
     if (this.shippingAddressComponent.submitAction() === false) {
-      alert('RETURN!! :-) Shopping');
+      alert('Please enter Shipping Address.');
       return;
     }
 
     if (this.isUsingSameAddress === false && this.billingAddressComponent.submitAction() === false) {
-      alert('RETURN!! :-) Billing');
+      alert('Please enter Billing Address.');
+      return;
+    }
+
+    if (this.creditCardComponent.submitAction() === false) {
+      alert('Please enter Credit Card information.');
       return;
     }
 
     const shippingAddress: AddressModel = this.shippingAddressComponent.getAddress();
     const billingAddress: AddressModel = this.isUsingSameAddress ? shippingAddress : this.billingAddressComponent.getAddress();
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(billingAddress, null, 4));
-
+    const creditCard: CreditCardModel = this.creditCardComponent.getCreditCard();
+    const checkoutData: CheckoutModel = new CheckoutModel({ shippingAddress, billingAddress, creditCard });
 
     if (this.auth) {
       // User authenticated
@@ -61,9 +71,10 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
       }
     } else {
       // Guest user
-
+      const navigationExtras: NavigationExtras = { state: checkoutData };
+      this.router.navigate(['/checkout'], navigationExtras);
     }
-    // this.router.navigate(['/checkout']);
+
   }
 
 }

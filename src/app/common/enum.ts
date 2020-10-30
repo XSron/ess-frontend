@@ -7,3 +7,8 @@ export enum AddressType {
   shipping,
   billing,
 }
+
+export enum CreditCardType {
+  master,
+  visa
+}

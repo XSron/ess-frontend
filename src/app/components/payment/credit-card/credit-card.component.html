@@ -1,7 +1,7 @@
 <div *ngIf="creditCardList.length > 0; then showCreditCardList; else showCreditCardInputForm"></div>
 
 <ng-template #showCreditCardInputForm>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="submitAction()">
     <div class="row">
       <div class="col-md-6 mb-3">
         <label>Name on card</label>
