@@ -1,10 +1,23 @@
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { AuthModel } from '../model/AuthModel';
 import { ProductModel } from '../model/ProductModel';
+import { AuthenticationService } from './authservice.service';
 
+@Injectable()
 export class CartService {
     public cartSubject: BehaviorSubject<ProductModel[]> = new BehaviorSubject<ProductModel[]>(null);
     public carts: Map<number, ProductModel> = new Map<number, ProductModel>();
+    private auth: AuthModel = null;
+    constructor(private authService: AuthenticationService) {
+        this.authService.userSubject.subscribe((auth: AuthModel) => {
+            this.auth = auth;
+        })
+    }
     public addToCart(product: ProductModel) {
+        if(this.auth) { //CALL API
+            return;
+        }
         let updatingProduct: ProductModel = Object.create(product);
         if(this.carts.get(product.productId)) {
             updatingProduct = this.carts.get(product.productId);
@@ -14,6 +27,9 @@ export class CartService {
         this.cartSubject.next(Array.from(this.carts.values()));
     }
     public changeCartQty(productId: number, newQty: number) {
+        if(this.auth) { //CALL API
+            return;
+        }
         if(this.carts.get(productId)) {
             let updatingProduct: ProductModel = this.carts.get(productId);
             //check if they select the same qty
@@ -24,10 +40,16 @@ export class CartService {
         }
     }
     public deleteFromCart(productId: number) {
+        if(this.auth) { //CALL API
+            return;
+        }
         this.carts.delete(productId);
         this.cartSubject.next(Array.from(this.carts.values()));
     }
     public clearCart() {
+        if(this.auth) { //CALL API
+            return;
+        }
         this.carts.clear();
         this.cartSubject.next(Array.from(this.carts.values()));
     }
