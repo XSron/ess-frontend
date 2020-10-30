@@ -28,13 +28,6 @@ export class CreditCardComponent implements OnInit {
       expiredDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])([0-9]{2})$')]],
       cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]]
     });
-
-    // Load Credit Card data
-    this.creditCardService
-      .getCreditCard()
-      .subscribe(data => {
-        this.creditCardList = data;
-      });
   }
 
   // convenience getter for easy access to form fields
@@ -60,21 +53,4 @@ export class CreditCardComponent implements OnInit {
       expiredDate: this.form.value.expiredDate,
     });
   }
-
-  addCreditCard(creditCard): void {
-    this.creditCardService
-      .addCreditCard(creditCard)
-      .subscribe(data => {
-        console.log(data);
-      });
-  }
-
-  deleteCreditCard(addressID): void {
-    this.creditCardService
-      .deleteCreditCard(addressID)
-      .subscribe(data => {
-        console.log(data);
-      });
-  }
-
 }

@@ -36,9 +36,13 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
             this.error = null;
 
             //storing user & token
-            localStorage.setItem("auth", JSON.stringify(auth));
-            this.authService.broadcastUserFromLocalStorage();
-            this.router.navigate(['/'])
+            if(this.isLogin) {
+                localStorage.setItem("auth", JSON.stringify(auth));
+                this.authService.broadcastUserFromLocalStorage();
+                return this.router.navigate(['/'])
+            }
+            alert("Create User Succeed!");
+            this.isLogin = true;
         }, error => {
             this.error = JSON.stringify(error.error.error_description);
             this.isLoading = false;

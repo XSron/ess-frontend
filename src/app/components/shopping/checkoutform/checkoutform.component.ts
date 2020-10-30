@@ -8,14 +8,13 @@ import { CreditCardComponent } from '../credit-card/credit-card.component';
 import { AddressModel } from '../../../model/AddressModel';
 import { CreditCardModel } from '../../../model/CreditCardModel';
 import { CheckoutModel } from '../../../model/CheckoutModel';
+import { CreditCardService } from 'src/app/services/credit-card.service';
 
 @Component({
   selector: 'checkoutform',
   templateUrl: 'checkoutform.component.html'
 })
-
 export class CheckoutFormComponent implements OnInit, OnDestroy {
-
   @ViewChild('shippingAddressComponent') shippingAddressComponent: AddressComponent;
   @ViewChild('billingAddressComponent') billingAddressComponent: AddressComponent;
   @ViewChild('creditCardComponent') creditCardComponent: CreditCardComponent;
@@ -24,10 +23,12 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   private auth: AuthModel;
   private authSubscription: Subscription;
+  public isLoading: boolean;
 
   constructor(
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private creditCardService: CreditCardService
   ) {}
 
   ngOnInit(): void {
@@ -41,18 +42,17 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   }
 
   public handleReview(): void {
-
-    if (this.shippingAddressComponent.submitAction() === false) {
+    if (!this.shippingAddressComponent.submitAction()) {
       alert('Please enter Shipping Address.');
       return;
     }
 
-    if (this.isUsingSameAddress === false && this.billingAddressComponent.submitAction() === false) {
+    if (!this.isUsingSameAddress && !this.billingAddressComponent.submitAction()) {
       alert('Please enter Billing Address.');
       return;
     }
 
-    if (this.creditCardComponent.submitAction() === false) {
+    if (!this.creditCardComponent.submitAction()) {
       alert('Please enter Credit Card information.');
       return;
     }
@@ -63,12 +63,20 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     const checkoutData: CheckoutModel = new CheckoutModel({ shippingAddress, billingAddress, creditCard });
     const navigationExtras: NavigationExtras = { state: checkoutData };
 
-    if (this.auth && confirm('Do you want to save the Shipping address & Credit Card information to your User Profile?')) {
-      console.log('call API to save Shipping Address to the current user profile');
-      console.log('call API to save Credit Card information to the current user profile');
-    }
-
-    this.router.navigate(['/checkout'], navigationExtras);
+    //Validate Credit Card
+    this.isLoading = true;
+    this.creditCardService.cardVerification(creditCard.number, creditCard.name, creditCard.expiredDate, +creditCard.cvv).subscribe((cc: any) => {
+      creditCard.type = cc['cardType'];
+      this.isLoading = false;
+      if (this.auth && confirm('Do you want to save the Shipping address & Credit Card information to your User Profile?')) {
+        console.log('call API to save Shipping Address to the current user profile');
+        console.log('call API to save Credit Card information to the current user profile');
+      }
+      this.router.navigate(['/checkout'], navigationExtras);
+    }, (error: any) => {
+      this.isLoading = false;
+      alert(JSON.stringify(error['error']));
+    })
   }
 
 }

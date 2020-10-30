@@ -1,5 +1,3 @@
-import { isBoolean } from 'util';
-
 export class Endpoint {
     // Product Endpoint
   public static PRODUCT_ENDPOINT = {
@@ -18,12 +16,13 @@ export class Endpoint {
 
   // Cart Endpoint
   public static CART_ENDPOINT = {
-    GET_CART_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart/"
+    GET_CART_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart/",
+    ADD_TO_CARD_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart/"
   }
 
   // Payment Endpoint
   public static PAYMENT_ENDPOINT = {
-    CARD_VERIFICATION_ENDPOINT: "https://pm-payment-gateway.herokuapp.com/api/payment/process-transaction/1?amount=1"
+    CARD_VERIFICATION_ENDPOINT: "https://pm-payment-gateway.herokuapp.com/api/payment/verify-card"
   }
 
   public static ORDER_ENDPOINT = {

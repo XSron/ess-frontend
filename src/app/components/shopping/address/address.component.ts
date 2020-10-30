@@ -35,13 +35,6 @@ export class AddressComponent implements OnInit {
       zipCode: [this.addressEditing ? this.addressEditing.zipCode : '', Validators.required],
       country: [this.addressEditing ? this.addressEditing.country : '', Validators.required],
     });
-
-    // Load Address data
-    this.addressService
-      .getAddress()
-      .subscribe(data => {
-        this.addressList = data;
-      });
   }
 
   // convenience getter for easy access to form fields
@@ -72,38 +65,4 @@ export class AddressComponent implements OnInit {
       country: this.form.value.country
     });
   }
-
-  addAddress(address): void {
-    this.addressService
-      .addAddress(address)
-      .subscribe(data => {
-        console.log(data);
-      });
-  }
-
-  updateAddress(addressID): void {
-    const mockBody = {
-      number: '333',
-      street: 'AAA',
-      city: 'SSS',
-      state: 'AA',
-      zipCode: 12345,
-      country: 'BB',
-      isDefault: false
-    };
-    this.addressService
-      .updateAddress(addressID, mockBody)
-      .subscribe(data => {
-        console.log(data);
-      });
-  }
-
-  deleteAddress(addressID): void {
-    this.addressService
-      .deleteAddress(addressID)
-      .subscribe(data => {
-        console.log(data);
-      });
-  }
-
 }
