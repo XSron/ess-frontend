@@ -13,13 +13,11 @@ export class CreditCardModel {
     number: string,
     cvv: string,
     expiredDate: string,
-    type: string,
   }) {
     this.name = args.name;
     this.number = args.number;
     this.cvv = args.cvv;
     this.expiredDate = args.expiredDate;
-    this.type = args.type;
   }
 
 }

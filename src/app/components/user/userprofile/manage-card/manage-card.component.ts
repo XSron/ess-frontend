@@ -14,10 +14,7 @@ export class ManageCardComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    // Credit card cannot edit, just add & remove only.
-    // this.isAdd = this.route.snapshot.fragment === 'new'? true: false;
-  }
+  ngOnInit(): void { }
 
   public handleCreditCard(): void {
 

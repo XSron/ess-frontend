@@ -25,18 +25,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 mb-4">
-        <label>Card Type</label>
-        <select formControlName="type" class="form-control no-border"
-                [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
-          <option selected value="master">Master Card</option>
-          <option value="visa">Visa Card</option>
-        </select>
-        <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
-          <div *ngIf="f.type.errors.required">Please select card type</div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
+<!--      <div class="col-md-4 mb-4">-->
+<!--        <label>Card Type</label>-->
+<!--        <select formControlName="type" class="form-control no-border"-->
+<!--                [ngClass]="{ 'is-invalid': submitted && f.type.errors }">-->
+<!--          <option selected value="master">Master Card</option>-->
+<!--          <option value="visa">Visa Card</option>-->
+<!--        </select>-->
+<!--        <div *ngIf="submitted && f.type.errors" class="invalid-feedback">-->
+<!--          <div *ngIf="f.type.errors.required">Please select card type</div>-->
+<!--        </div>-->
+<!--      </div>-->
+      <div class="col-md-6 mb-4">
         <label>Expiration</label>
         <input type="text" formControlName="expiredDate" class="form-control" placeholder="MMYY"
                [ngClass]="{ 'is-invalid': submitted && f.expiredDate.errors }">
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 mb-4">
+      <div class="col-md-6 mb-4">
         <label>CVV</label>
         <input type="text" formControlName="cvv" class="form-control" placeholder="•••"
                [ngClass]="{ 'is-invalid': submitted && f.cvv.errors }">

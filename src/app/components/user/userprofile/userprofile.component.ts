@@ -26,12 +26,6 @@ export class UserProfileComponent {
     this.router.navigate(['/user/manage-card']);
   }
 
-  // public editCard() {
-  //   this.router.navigate(['/user/manage-card'], {
-  //     fragment: "edit"
-  //   });
-  // }
-
   public removeCard(): void {
 
   }
