@@ -43,7 +43,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     // Load products
     this.products = [];
-    this.subscription = this.productService.productSubject.subscribe((products: ProductModel[]) => {
+    this.subscription = this.productService.getAllProducts().subscribe((products: ProductModel[]) => {
       this.products = products.slice();
     });
   }

@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Endpoint } from '../common/endpoint';
 import { AuthModel } from '../model/AuthModel';
 import { ProductModel } from '../model/ProductModel';
 import { AuthenticationService } from './authservice.service';
@@ -9,14 +11,18 @@ export class CartService {
     public cartSubject: BehaviorSubject<ProductModel[]> = new BehaviorSubject<ProductModel[]>(null);
     public carts: Map<number, ProductModel> = new Map<number, ProductModel>();
     private auth: AuthModel = null;
-    constructor(private authService: AuthenticationService) {
+    constructor(private authService: AuthenticationService, private http: HttpClient) {
         this.authService.userSubject.subscribe((auth: AuthModel) => {
             this.auth = auth;
+
+            
         })
     }
     public addToCart(product: ProductModel) {
         if(this.auth) { //CALL API
-            return;
+            this.http.post(Endpoint.CART_ENDPOINT.ADD_TO_CART_ENDPOINT + ``, {
+
+            })
         }
         let updatingProduct: ProductModel = Object.create(product);
         if(this.carts.get(product.productId)) {
