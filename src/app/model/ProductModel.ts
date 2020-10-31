@@ -6,7 +6,9 @@ export class ProductModel {
     public price: number,
     public url: string,
     public qty: number,
+    public vendorId: number,
     public vendor: string,
+    public categoryId: number,
     public category: string
   ) {}
 }

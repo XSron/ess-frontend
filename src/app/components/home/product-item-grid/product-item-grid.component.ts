@@ -22,7 +22,6 @@ export class ProductItemGridComponent {
   ) { }
 
   // MARK: - Item functions
-
   public addToCart(): void {
     const selectedProduct = new ProductModel(
       this.product.productId,
@@ -31,8 +30,8 @@ export class ProductItemGridComponent {
       this.product.price,
       this.product.url,
       1,
-      '',
-      '');
+      0, '',
+      0, '');
     this.cartService.addToCart(selectedProduct);
   }
 
