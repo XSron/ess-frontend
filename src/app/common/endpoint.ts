@@ -1,12 +1,15 @@
 export class Endpoint {
-    // Product Endpoint
+  // Product Endpoint
   public static PRODUCT_ENDPOINT = {
-
+    GET_ALL_PRODUCT: "https://thawing-castle-81725.herokuapp.com/products/",
+    GET_PRODUCT_BY_PRODUCT_ID: "",
+    GET_PRODUCT_BY_CATEGORY_ID: ""
   };
 
   // User Endpoint
   public static USER_ENDPOINT = {
-    USER_SIGNUP: "https://pm-user-service-v2.herokuapp.com/user/register"
+    USER_SIGNUP: "https://pm-user-service-v2.herokuapp.com/user/register",
+    GET_USER_PROFILE_BY_ID: ""
   }
 
   // Auth Endpoint
@@ -16,8 +19,9 @@ export class Endpoint {
 
   // Cart Endpoint
   public static CART_ENDPOINT = {
-    GET_CART_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart/",
-    ADD_TO_CARD_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart/"
+    GET_CART_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart",
+    ADD_TO_CART_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart",
+    REMOVE_FROM_CART_ENDPOINT: ""
   }
 
   // Payment Endpoint

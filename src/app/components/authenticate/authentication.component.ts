@@ -1,10 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../../services/authservice.service';
 import { AuthModel } from '../../model/AuthModel';
 import { Router } from '@angular/router';
 import { MenuService } from 'src/app/services/menuservice.service';
+import { CartService } from 'src/app/services/cartservice.service';
+import { ProductModel } from 'src/app/model/ProductModel';
 
 @Component({
     selector: 'signin',
@@ -15,7 +17,9 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     public isLogin: boolean = false;
     public isLoading: boolean = false;
     public error: string;
-    constructor(private authService: AuthenticationService, private menuService: MenuService, private router: Router) {}
+    @ViewChild('username') username: ElementRef;
+    constructor(private authService: AuthenticationService, private menuService: MenuService, 
+                private cartService: CartService, private router: Router) {}
     ngOnInit() {
         this.menuService.routingChangeSubject.next(true);
     }
@@ -35,16 +39,23 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
             this.isLoading = false;
             this.error = null;
 
-            //storing user & token
             if(this.isLogin) {
+                //storing user & token
                 localStorage.setItem("auth", JSON.stringify(auth));
                 this.authService.broadcastUserFromLocalStorage();
-                return this.router.navigate(['/'])
+                
+                //load cart from authenticated user
+                this.cartService.loadCartFromUserAfterLoggedin().subscribe((products: ProductModel[]) => {
+                    this.cartService.updateCartModelAndUI(products);
+                    this.router.navigate(['/'])
+                })
+                return;
             }
             alert("Create User Succeed!");
             this.isLogin = true;
+            form.resetForm(); this.username.nativeElement.focus();
         }, error => {
-            this.error = JSON.stringify(error.error.error_description);
+            this.error = JSON.stringify(error);
             this.isLoading = false;
         })
     }

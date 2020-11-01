@@ -28,19 +28,19 @@ export class ProductItemListComponent implements OnInit {
 
   public addToCart(): void {
     const selectedProduct = new ProductModel(
-      this.product.productId,
+      this.product.id,
       this.product.name,
       this.product.description,
-      this.product.price,
-      this.product.url,
+      this.product.unitPrice,
+      this.product.imageUrl,
       1,
-      '',
-      '');
+      0,'',
+      0, '');
     this.cartService.addToCart(selectedProduct);
   }
 
   public viewDetail(): void {
-    this.router.navigate(['/productdetail', this.product.productId]);
+    this.router.navigate(['/productdetail', this.product.id]);
   }
 
 }

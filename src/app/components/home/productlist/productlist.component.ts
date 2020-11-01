@@ -42,9 +42,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     });
 
     // Load products
-    this.products = [];
-    this.subscription = this.productService.productSubject.subscribe((products: ProductModel[]) => {
-      this.products = products.slice();
+    this.subscription = this.productService.getAllProducts().subscribe((products: any) => {
+      this.products = products['content'];
     });
   }
 
@@ -53,7 +52,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   // MARK: - Toolbar functions
-
   get f(): { [p: string]: AbstractControl } {
     return this.searchForm.controls;
   }

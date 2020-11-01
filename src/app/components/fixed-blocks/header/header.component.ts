@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if(this.auth) {
         let afterDecoded: string = jwt_decode(auth.access_token);
         this.username = afterDecoded['user_name'].toUpperCase();
+        this.authService.userId = +this.auth.user_id;
         return this.roles = afterDecoded['authorities'];
       }
       this.roles = null; //reset roles in case the user logout
