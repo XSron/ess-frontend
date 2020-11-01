@@ -38,6 +38,12 @@ export class Endpoint {
     CARD_VERIFICATION_ENDPOINT: "https://pm-payment-gateway.herokuapp.com/api/payment/verify-card"
   }
 
+  // Report endpoint
+  public static REPORT_ENDPOINT = {
+    REPORT_PRODUCT: "http://localhost:9090/api/generateReportProduct",
+    REPORT_DOLLAR_VALUE: "http://localhost:9090/api/generateReportDollarValue"
+  }
+
   // Order Endpoint
   public static ORDER_ENDPOINT = {
     PLACE_ORDER_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/order",

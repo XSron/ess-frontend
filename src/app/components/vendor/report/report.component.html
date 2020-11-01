@@ -1,1 +1,4 @@
-<h1>Vendor Report</h1>
+<h2 class="text-center">{{reportName}}</h2>
+<embed *ngIf="displayProduct" src="/assets/pdf/ReportProduct.pdf" style="width: 100%;height: 800px" type="application/pdf">
+<!-- <embed *ngIf="displayProduct" src="files://c://report//ReportProduct.pdf" style="width: 100%;height: 800px" type="application/pdf"> -->
+<embed *ngIf="displayDollarvalue" src="/assets/pdf/ReportDollarvalue.pdf" style="width: 100%;height: 800px" type="application/pdf">
