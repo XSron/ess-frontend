@@ -17,7 +17,8 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="/vendor/product" routerLinkActive="active">Manage Product</a>
-          <a class="dropdown-item" routerLink="/vendor/report" routerLinkActive="active">View Report</a>
+          <a class="dropdown-item" routerLink="/vendor/reportproduct" routerLinkActive="active">View Report - In term of Products</a>
+          <a class="dropdown-item" routerLink="/vendor/reportdollarvalue" routerLinkActive="active">View Report - In term of Dollar Values</a>
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="hasRole('ROLE_ADMIN')">
@@ -27,7 +28,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="/admin/manageuser" routerLinkActive="active">Manage User</a>
           <a class="dropdown-item" routerLink="/admin/product" routerLinkActive="active">Approve/Reject Product</a>
-          <a class="dropdown-item" routerLink="/admin/report" routerLinkActive="active">View Report</a>
+          <a class="dropdown-item" [routerLink]="['admin/report', 'reportproduct']" routerLinkActive="active">View Report - In term of Products</a>
+          <a class="dropdown-item" [routerLink]="['admin/report', 'reportdollarvalue']" routerLinkActive="active">View Report - In term of Dollar Values</a>
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="hasRole('ROLE_CLIENT')">
@@ -35,7 +37,8 @@
           Client
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/client/reports" routerLinkActive="active">View Report</a>
+          <a class="dropdown-item" routerLink="/client/reportsreportproduct" routerLinkActive="active">View Report - In term of Products</a>
+          <a class="dropdown-item" routerLink="/client/reportsdollarvalue" routerLinkActive="active">View Report - In term of Dollar Values</a>
         </div>
       </li>
     </ul>

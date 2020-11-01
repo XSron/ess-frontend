@@ -10,7 +10,7 @@ export class Endpoint {
   public static USER_ENDPOINT = {
     USER_SIGNUP: "https://pm-user-service-v2.herokuapp.com/user/register",
     GET_USER_PROFILE_BY_ID: ""
-  } 
+  }
 
   // Auth Endpoint
   public static AUTH_ENDPOINT = {
@@ -27,6 +27,12 @@ export class Endpoint {
   // Payment Endpoint
   public static PAYMENT_ENDPOINT = {
     CARD_VERIFICATION_ENDPOINT: "https://pm-payment-gateway.herokuapp.com/api/payment/verify-card"
+  }
+
+  // Report endpoint
+  public static REPORT_ENDPOINT = {
+    REPORT_PRODUCT: "http://localhost:9090/api/generateReportProduct",
+    REPORT_DOLLAR_VALUE: "http://localhost:9090/api/generateReportDollarValue"
   }
 
   public static ORDER_ENDPOINT = {
