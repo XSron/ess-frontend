@@ -51,14 +51,14 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, children: [
       { path: 'manageuser', component: ManageUserComponent},
       { path: 'product', component: ApproveRejectProductComponent},
-      { path: 'report', component: ReportComponent}
+      { path: 'report/:par', component: ReportComponent}
     ]},
   { path: 'vendor', component: VendorComponent, children: [
       { path: 'product', component: VendorProductComponent},
-      { path: 'report', component: ReportComponent }
+      { path: 'report/:par', component: ReportComponent }
     ]},
   { path: 'client', component: ClientComponent, children: [
-      { path: 'report', component: ReportComponent }
+      { path: 'report/:par', component: ReportComponent }
     ]},
   { path: 'user', component: UserComponent, children: [
       { path: 'userprofile', component: UserProfileComponent },

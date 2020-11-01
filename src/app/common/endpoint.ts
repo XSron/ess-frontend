@@ -31,8 +31,8 @@ export class Endpoint {
 
   // Report endpoint
   public static REPORT_ENDPOINT = {
-    REPORT_PRODUCT: "http://localhost:9090/api/generateReportProduct/",
-    REPORT_DOLLAR_VALUE: "http://localhost:9090/api/generateReportDollarValue/"
+    REPORT_PRODUCT: "http://localhost:9090/api/generateReportProduct",
+    REPORT_DOLLAR_VALUE: "http://localhost:9090/api/generateReportDollarValue"
   }
 
   public static ORDER_ENDPOINT = {

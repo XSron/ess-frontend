@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Endpoint } from '../../../common/endpoint';
 import { CreditCardService } from 'src/app/services/credit-card.service';
 import { stringify } from 'querystring';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'report',
@@ -22,7 +23,8 @@ export class ReportComponent implements OnInit {
 
   reportName: string;
 
-  constructor(public authService: AuthenticationService, private http: HttpClient, private cardService: CreditCardService) {
+  constructor(public authService: AuthenticationService, private http: HttpClient, private activeRoute: ActivatedRoute) {
+
     this.userSubscription = this.authService.userSubject.subscribe((auth: AuthModel) => {
       this.auth = auth;
 
@@ -50,18 +52,28 @@ export class ReportComponent implements OnInit {
       this.reportName = 'Vendor Report';
     }
 
+    this.activeRoute.params.subscribe(params => {
+      console.log(params['par']);
 
+      if(params['par'] === 'reportproduct') {
+        this.http.get(Endpoint.REPORT_ENDPOINT.REPORT_PRODUCT + '/' + this.userid)
+        .subscribe((result) => {
+            console.log(result);
 
-    console.log(this.userid);
+            this.displayProduct = true;
+            this.displayDollarvalue = false;
+        });
+      }
+      else {
+        this.http.get(Endpoint.REPORT_ENDPOINT.REPORT_DOLLAR_VALUE + '/' + this.userid)
+        .subscribe((result) => {
+          console.log(result);
 
-    this.http.get(Endpoint.REPORT_ENDPOINT.REPORT_PRODUCT + '/' + this.userid)
-    .subscribe((result) => {
-        console.log(result);
-        this.displayProduct = true;
-
-
+          this.displayDollarvalue = true;
+          this.displayProduct = false;
+        });
+      }
     });
-
   }
 
   ngOnInit(): void {
