@@ -1,11 +1,11 @@
 export class ProductModel {
   constructor(
-    public productId: number,
+    public id: number,
     public name: string,
     public description: string,
-    public price: number,
-    public url: string,
-    public qty: number,
+    public unitPrice: number,
+    public imageUrl: string,
+    public unitsInStock: number,
     public vendorId: number,
     public vendor: string,
     public categoryId: number,

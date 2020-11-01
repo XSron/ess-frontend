@@ -17,10 +17,12 @@ export class InterceptorService implements HttpInterceptor {
             cloneHttpRequest = http.clone({
                 headers: http.headers
                                 .set("Authorization", `bearer ${this.auth.access_token}`)
-                                .set("Content-type", "application/x-www-form-urlencoded; charset=utf-8")
+                                .set("Content-type", "application/json; charset=utf-8")
             });
             return next.handle(cloneHttpRequest);
         }
-        return next.handle(http);
+        return next.handle(http.clone({
+            headers: http.headers.set("Content-type", "application/json; charset=utf-8")
+        }));
     }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Endpoint } from '../common/endpoint';
 import { AuthModel } from '../model/AuthModel';
 import { ProductModel } from '../model/ProductModel';
@@ -16,53 +16,64 @@ export class CartService {
             this.auth = auth;
         })
     }
-    public loadCartFromUserAfterLoggedin(): Observable<ProductModel[]> {
-        return this.http.get<ProductModel[]>(Endpoint.CART_ENDPOINT.GET_CART_ENDPOINT + `/${this.authService.userId}`);
+    public loadCartFromUserAfterLoggedin(): Observable<any> {
+        return this.http.get<any>(Endpoint.CART_ENDPOINT.GET_CART_ENDPOINT + `/${this.authService.userId}`);
     } 
-    public updateCartModelAndUI(products: ProductModel[]) {
-        if(products) {
+    public updateCartModelAndUI(result: any) {
+        if(result) {
+            //clear cart
+            this.carts.clear();
+
             //update cart model
+            const products: ProductModel[] = result['products'];
             products.forEach((product: ProductModel) => {
-                this.carts.set(product.productId, product);
+                this.carts.set(product.id, product);
             })
+            
             //update cart UI 
             this.cartSubject.next(products);
         }
     }
     public addToCart(product: ProductModel) {
         if(this.auth) { 
-            this.http.post(Endpoint.CART_ENDPOINT.ADD_TO_CART_ENDPOINT + `/${this.authService.userId}`, {
+            const sub: Subscription = this.http.post(Endpoint.CART_ENDPOINT.ADD_TO_CART_ENDPOINT + `/${this.authService.userId}`, {
                 description: product.description,
-                imageURL: product.url,
-                price: product.price,
-                productId: product.productId,
+                imageURL: product.imageUrl,
+                price: product.unitPrice,
+                productId: product.id,
                 productName: product.name,
-                quantity: product.qty,
+                quantity: product.unitsInStock,
                 vendorId: product.vendorId
+            }).subscribe((result) => {
+                console.log(JSON.stringify(result));
+                sub.unsubscribe();
+            }, error => {
+                console.log(JSON.stringify(error));
+                sub.unsubscribe();
             })
         }
         let updatingProduct: ProductModel = Object.create(product);
-        if(this.carts.get(product.productId)) {
-            updatingProduct = this.carts.get(product.productId);
-            updatingProduct.qty++;
+        if(this.carts.get(product.id)) {
+            updatingProduct = this.carts.get(product.id);
+            updatingProduct.unitsInStock++;
         } 
-        this.carts.set(updatingProduct.productId, updatingProduct); //store in the map
+        this.carts.set(updatingProduct.id, updatingProduct); //store in the map
         this.cartSubject.next(Array.from(this.carts.values()));
     }
     public changeCartQty(productId: number, newQty: number) {
         if(this.carts.get(productId)) {
             let updatingProduct: ProductModel = this.carts.get(productId);
             //check if they select the same qty
-            if(updatingProduct.qty === +newQty) return;
-            updatingProduct.qty = newQty;
+            if(updatingProduct.unitsInStock === +newQty) return;
+            updatingProduct.unitsInStock = newQty;
             if(this.auth) {
                 this.http.post(Endpoint.CART_ENDPOINT.ADD_TO_CART_ENDPOINT + `/${this.authService.userId}`, {
                     description: updatingProduct.description,
-                    imageURL: updatingProduct.url,
-                    price: updatingProduct.price,
-                    productId: updatingProduct.productId,
+                    imageURL: updatingProduct.imageUrl,
+                    price: updatingProduct.unitPrice,
+                    productId: updatingProduct.id,
                     productName: updatingProduct.name,
-                    quantity: updatingProduct.qty,
+                    quantity: updatingProduct.unitsInStock,
                     vendorId: updatingProduct.vendorId
                 })
             }
@@ -76,11 +87,11 @@ export class CartService {
             this.http.request('DELETE', Endpoint.CART_ENDPOINT.REMOVE_FROM_CART_ENDPOINT + `/${this.auth.user_id}`, {
               body: {
                 description: existingProduct.description,
-                imageURL: existingProduct.url,
-                price: existingProduct.price,
-                productId: existingProduct.productId,
+                imageURL: existingProduct.imageUrl,
+                price: existingProduct.unitPrice,
+                productId: existingProduct.id,
                 productName: existingProduct.name,
-                quantity: existingProduct.qty,
+                quantity: existingProduct.unitsInStock,
                 vendorId: existingProduct.vendorId
               }
             });
@@ -97,8 +108,8 @@ export class CartService {
       let totalItem = 0;
       let subTotal = 0;
       products.forEach((product: ProductModel) => {
-        totalItem += +product.qty;
-        subTotal += +product.qty * +product.price;
+        totalItem += +product.unitsInStock;
+        subTotal += +product.unitsInStock * +product.unitPrice;
       });
       return { totalItem, subTotal: +subTotal.toFixed(2) };
     }

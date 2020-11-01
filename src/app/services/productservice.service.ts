@@ -11,13 +11,13 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
   
-  public getAllProducts(): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_ALL_PRODUCT);
+  public getAllProducts(): Observable<any> {
+    return this.http.get<any>(Endpoint.PRODUCT_ENDPOINT.GET_ALL_PRODUCT);
   }
 
   public getProductById(productId: number): ProductModel {
     return this.products.filter((product: ProductModel) => {
-      return product.productId === +productId;
+      return product.id === +productId;
     })[0];
   }
 

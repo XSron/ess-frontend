@@ -11,13 +11,6 @@ export class AuthenticationService {
     public userId: number;
     constructor(private http: HttpClient) {}
     public signUp(username: string, password: string, roleId: number): Observable<any> {
-        console.log(JSON.stringify({
-            username: username,
-            password: password,
-            roles: [{
-                id: roleId
-            }]
-        }))
         return (
             this.http.post(Endpoint.USER_ENDPOINT.USER_SIGNUP, {
                 username: username,

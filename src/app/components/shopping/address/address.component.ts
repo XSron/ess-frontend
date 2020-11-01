@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AddressService} from '../../../services/address.service';
 import {AddressModel} from '../../../model/AddressModel';
 
 @Component({
@@ -19,7 +18,6 @@ export class AddressComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private addressService: AddressService
   ) { }
 
   ngOnInit(): void {

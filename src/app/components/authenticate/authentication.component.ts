@@ -40,12 +40,12 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
             this.error = null;
 
             if(this.isLogin) {
-                //load cart from user
+                //storing user & token
+                localStorage.setItem("auth", JSON.stringify(auth));
+                this.authService.broadcastUserFromLocalStorage();
+                
+                //load cart from authenticated user
                 this.cartService.loadCartFromUserAfterLoggedin().subscribe((products: ProductModel[]) => {
-                    //storing user & token
-                    localStorage.setItem("auth", JSON.stringify(auth));
-                    this.authService.broadcastUserFromLocalStorage();
-
                     this.cartService.updateCartModelAndUI(products);
                     this.router.navigate(['/'])
                 })
