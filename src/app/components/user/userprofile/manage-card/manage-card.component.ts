@@ -1,7 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CreditCardComponent } from '../../../shopping/credit-card/credit-card.component';
 import {CreditCardModel} from '../../../../model/CreditCardModel';
+import { UserService } from 'src/app/services/userservice.service';
+import { AuthenticationService } from 'src/app/services/authservice.service';
 
 @Component({
   selector: 'manage-card',
@@ -9,26 +11,19 @@ import {CreditCardModel} from '../../../../model/CreditCardModel';
 })
 
 export class ManageCardComponent implements OnInit {
-
   @ViewChild('creditCardComponent') creditCardComponent: CreditCardComponent;
-
-  constructor(private route: ActivatedRoute) {}
-
+  constructor(private router: Router, private authService: AuthenticationService, private userService: UserService) {}
   ngOnInit(): void { }
 
   public handleCreditCard(): void {
-
-    if (this.creditCardComponent.submitAction() === false) {
-      alert('Please enter Credit Card.');
-      return;
-    }
-
+    if (!this.creditCardComponent.submitAction()) 
+      return; alert('Please enter Credit Card.');
     const creditCard: CreditCardModel = this.creditCardComponent.getCreditCard();
-    alert(
-      'SUCCESS!! :-)\n Call ADD credit card API.' +
-      JSON.stringify(creditCard, null, 4)
-    );
-
+    this.userService.addCardToUser(this.authService.username, creditCard).subscribe((result) => {
+      this.router.navigate(['/user/userprofile'])
+    }, error => {
+      alert(JSON.stringify(error))
+    });
   }
 
 }

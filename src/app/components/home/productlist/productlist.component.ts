@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppConfig } from 'src/app/common/app-config';
+import { CategoryModel } from 'src/app/model/CategoryModel';
 import { ProductModel } from 'src/app/model/ProductModel';
+import { CategoryService } from 'src/app/services/categoryservice.service';
 import { ProductService } from 'src/app/services/productservice.service';
 import { Layout } from '../../../common/enum';
 
@@ -14,12 +16,13 @@ import { Layout } from '../../../common/enum';
 export class ProductListComponent implements OnInit, OnDestroy {
 
   // MARK: - Properties
-
   public products: ProductModel[];
+  public categorys: CategoryModel[];
   public Layout = Layout;
   public iconFolderPath = '../../../assets/icons';
   public searchForm: FormGroup;
   public searchFormSubmitted = false;
+  public isLoading: boolean = true;
 
   get productLayout(): Layout {
     return AppConfig.layout;
@@ -28,22 +31,27 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   // MARK: - Angular Core functions
-
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
     // Search form setup
     this.searchForm = this.formBuilder.group({
-      searchOption: ['all'],
+      searchOption: ['0'],
       searchKeyword: ['', Validators.required],
     });
 
     // Load products
     this.subscription = this.productService.getAllProducts().subscribe((products: any) => {
-      this.products = products['content'];
+      // Load category
+      this.categoryService.getAllCategory().subscribe((categorys: CategoryModel[]) => {
+        this.categorys = categorys;
+        this.products = products['content'];
+        this.isLoading = false;
+      })
     });
   }
 
@@ -58,11 +66,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.searchFormSubmitted = true;
-    if (this.searchForm.invalid) {
-      return;
-    }
-    console.log(this.searchForm.value);
-    alert('SUCCESS!! :-)\n' + JSON.stringify(this.searchForm.value, null, 5));
+    if (this.searchForm.invalid) return;
+    this.productService.getProductByName(this.searchForm.controls.searchOption.value).subscribe((products: ProductModel[]) => {
+      this.products = products.slice();
+    }, error => {
+      alert(JSON.stringify(error));
+    })
   }
 
   changeLayout(): void {
@@ -76,6 +85,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
       default:
         AppConfig.layout = Layout.grid;
     }
+  }
+
+  public changeCity(e: any) {
+    const categoryId: number = this.searchForm.controls.searchOption.value;
+    this.productService.getProductByCategoryId(categoryId).subscribe((products: ProductModel[]) => {
+      this.products = products.slice();
+    })
   }
 
 }

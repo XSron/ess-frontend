@@ -40,6 +40,8 @@ import { MenuService } from './services/menuservice.service';
 import { ManageAddressComponent } from './components/user/userprofile/manage-address/manage-address.component';
 import { ManageCardComponent } from './components/user/userprofile/manage-card/manage-card.component';
 import { UserService } from './services/userservice.service';
+import { OrderService } from './services/orderservice.service';
+import { CategoryService } from './services/categoryservice.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -100,7 +102,9 @@ const routes: Routes = [
     ClientComponent,
     UserComponent,
     ManageAddressComponent,
-    ManageCardComponent
+    ManageCardComponent,
+    HistoryDetailComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -115,6 +119,8 @@ const routes: Routes = [
     CartService,
     MenuService,
     UserService,
+    OrderService,
+    CategoryService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
   ],
   bootstrap: [

@@ -1,16 +1,17 @@
 
 <div class="container">
   <!--  Toolbar-->
-  <div class="row tool-bar">
+  <div class="row tool-bar"> 
     <!--  SearchBox-->
     <div class="col-md-11">
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <div class="row no-gutters">
           <div class="col-md-2 mr-2">
             <select formControlName="searchOption" class="form-control no-border"
-                    [ngClass]="{ 'is-invalid': searchFormSubmitted && f.searchOption.errors }">
-              <option selected value="all">All</option>
-              <option value="category">Category</option>
+                    [ngClass]="{ 'is-invalid': searchFormSubmitted && f.searchOption.errors }"
+                    (change)="changeCity($event)">
+              <option selected value="0">All</option>
+              <option *ngFor="let category of categorys;" [value]="category.id">{{ category.categoryName }}</option>
             </select>
             <div *ngIf="searchFormSubmitted && f.searchOption.errors" class="invalid-feedback">
               <div *ngIf="f.searchOption.errors.required">Please select search option</div>
@@ -31,6 +32,7 @@
         </div>
       </form>
     </div>
+
     <!--  Layout Button-->
     <div class="col-md-1" [ngSwitch]="productLayout">
       <ng-container *ngSwitchCase="Layout.grid" [ngTemplateOutlet]="gridButton" ]></ng-container>
@@ -43,6 +45,12 @@
     <ng-container *ngSwitchCase="Layout.grid" [ngTemplateOutlet]="gridLayout" ]></ng-container>
     <ng-container *ngSwitchCase="Layout.list" [ngTemplateOutlet]="listLayout" ]></ng-container>
     <ng-container *ngSwitchDefault [ngTemplateOutlet]="gridLayout" ]></ng-container>
+  </div>
+</div>
+
+<div class="container" *ngIf="isLoading" >
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
   </div>
 </div>
 

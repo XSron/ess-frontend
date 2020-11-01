@@ -1,13 +1,18 @@
 <div class="container">
+    <div class="row" *ngIf="isLoading" >
+        <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     <br>
-    <div class="jumbotron">
+    <div class="jumbotron" *ngIf="!isLoading">
         <img [src]="product.imageUrl" class="card-img-top" alt="Image not found" style="width: 300px; height: 220px;">
         <h1 class="display-4">Product Name: {{ product.name }}</h1>
         <p class="lead">Description: {{ product.description }}</p>
         <hr class="my-4">
         <p>Vendor: {{ product.vendor }}</p>
         <p>Category: {{ product.category }}</p>
-        <p>Available Qty: 100</p>
+        <p>Available Qty: {{ product.unitsInStock}}</p>
         <button class="btn btn-primary btn-lg" (click)="addToCart()">Add to Cart</button>
     </div>
 </div>

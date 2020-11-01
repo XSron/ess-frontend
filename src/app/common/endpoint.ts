@@ -2,14 +2,23 @@ export class Endpoint {
   // Product Endpoint
   public static PRODUCT_ENDPOINT = {
     GET_ALL_PRODUCT: "https://thawing-castle-81725.herokuapp.com/products/",
-    GET_PRODUCT_BY_PRODUCT_ID: "",
-    GET_PRODUCT_BY_CATEGORY_ID: ""
+    GET_PRODUCT_BY_PRODUCT_ID: "https://thawing-castle-81725.herokuapp.com/products",
+    GET_PRODUCT_BY_CATEGORY_ID: "https://thawing-castle-81725.herokuapp.com/products/search?categoryId=",
+    GET_PRODUCT_BY_NAME: "https://thawing-castle-81725.herokuapp.com/api/products/search?name="
   };
 
   // User Endpoint
   public static USER_ENDPOINT = {
     USER_SIGNUP: "https://pm-user-service-v2.herokuapp.com/user/register",
-    GET_USER_PROFILE_BY_ID: ""
+    GET_USER_PROFILE_BY_NAME: "https://pm-user-service-v2.herokuapp.com/api/users/username",
+    ADD_CARD_TO_USER_ENDPOINT: "https://pm-user-service-v2.herokuapp.com/api/user",
+    REMOVE_CARD_FROM_USER_ENDPOINT: "https://pm-user-service-v2.herokuapp.com/api/user",
+    ADD_ADDRESS_TO_USER_ENDPOINT: "https://pm-user-service-v2.herokuapp.com/api/users",
+    REMOVE_ADDRESS_FROM_USER_ENDPOINT: "https://pm-user-service-v2.herokuapp.com/api/users",
+    UPDATE_ADDRESS_FOR_USER_ENDPOINT: "https://pm-user-service-v2.herokuapp.com/api/users",
+    UPDATE_USER_PROFILE: "https://pm-user-service-v2.herokuapp.com/api/users",
+    SET_DEFAULT_ADDRESS: "https://pm-user-service-v2.herokuapp.com/api/users",
+    SET_DEFAULT_CREDIT_CARD: "https://pm-user-service-v2.herokuapp.com/api/user"
   } 
 
   // Auth Endpoint
@@ -21,7 +30,7 @@ export class Endpoint {
   public static CART_ENDPOINT = {
     GET_CART_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart",
     ADD_TO_CART_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart",
-    REMOVE_FROM_CART_ENDPOINT: ""
+    REMOVE_FROM_CART_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/cart"
   }
 
   // Payment Endpoint
@@ -29,9 +38,14 @@ export class Endpoint {
     CARD_VERIFICATION_ENDPOINT: "https://pm-payment-gateway.herokuapp.com/api/payment/verify-card"
   }
 
+  // Order Endpoint
   public static ORDER_ENDPOINT = {
-    ADDRESS_ENDPOINT: '/address',
-    CARD_ENDPOINT: '/card',
-    PLACE_ORDER_ENDPOINT: '/order'
+    PLACE_ORDER_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/order",
+    VIEW_ORDER_HISTORY_ENDPOINT: "https://shopping-cart-microservice.herokuapp.com:443/api/order"
+  }
+
+  // Category Endpoint
+  public static CATEGORY_ENDPOINT = {
+    GET_ALL_CATEGORY: "https://thawing-castle-81725.herokuapp.com/categories"
   }
 }

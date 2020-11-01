@@ -7,7 +7,6 @@ import { ProductModel } from '../model/ProductModel';
 @Injectable()
 export class ProductService {
   public productSubject: BehaviorSubject<ProductModel[]> = new BehaviorSubject<ProductModel[]>(null);
-  private products: ProductModel[];
   constructor(private http: HttpClient) {
   }
   
@@ -15,13 +14,15 @@ export class ProductService {
     return this.http.get<any>(Endpoint.PRODUCT_ENDPOINT.GET_ALL_PRODUCT);
   }
 
-  public getProductById(productId: number): ProductModel {
-    return this.products.filter((product: ProductModel) => {
-      return product.id === +productId;
-    })[0];
+  public getProductById(productId: number): Observable<ProductModel> {
+    return this.http.get<ProductModel>(Endpoint.PRODUCT_ENDPOINT.GET_PRODUCT_BY_PRODUCT_ID + `/${productId}`);
   }
 
   public getProductByCategoryId(categoryId: number): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_PRODUCT_BY_CATEGORY_ID + `/${categoryId}`);
+    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_PRODUCT_BY_CATEGORY_ID + `${categoryId}`);
+  }
+
+  public getProductByName(name: string): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_PRODUCT_BY_NAME + `${name}`)
   }
 }

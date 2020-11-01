@@ -9,6 +9,7 @@ import { AppConfig } from '../common/app-config';
 export class AuthenticationService {
     public userSubject: BehaviorSubject<AuthModel> = new BehaviorSubject<AuthModel>(null);
     public userId: number;
+    public username: string;
     constructor(private http: HttpClient) {}
     public signUp(username: string, password: string, roleId: number): Observable<any> {
         return (

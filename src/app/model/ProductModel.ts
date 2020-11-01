@@ -8,7 +8,9 @@ export class ProductModel {
     public unitsInStock: number,
     public vendorId: number,
     public vendor: string,
-    public categoryId: number,
-    public category: string
+    public category: {
+      categoryName: string,
+      id: number,
+    }
   ) {}
 }

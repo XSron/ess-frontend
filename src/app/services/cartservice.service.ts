@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { createNgModule } from '@angular/compiler/src/core';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Endpoint } from '../common/endpoint';
@@ -25,25 +26,32 @@ export class CartService {
             this.carts.clear();
 
             //update cart model
-            const products: ProductModel[] = result['products'];
-            products.forEach((product: ProductModel) => {
+            const products: any[] = result['products'];
+            products.forEach((pro: any) => {
+                let product = new ProductModel(pro['productId'], pro['productName'], pro['description'], pro['price'],
+                                        pro['imageUrl'], pro['quantity'], pro['vendorId'], '', null);
                 this.carts.set(product.id, product);
             })
             
             //update cart UI 
-            this.cartSubject.next(products);
+            this.cartSubject.next(Array.from(this.carts.values()));
         }
     }
     public addToCart(product: ProductModel) {
+        let updatingProduct: ProductModel = Object.create(product);
+        if(this.carts.get(product.id)) {
+            updatingProduct = this.carts.get(product.id);
+            updatingProduct.unitsInStock++;
+        } 
         if(this.auth) { 
             const sub: Subscription = this.http.post(Endpoint.CART_ENDPOINT.ADD_TO_CART_ENDPOINT + `/${this.authService.userId}`, {
-                description: product.description,
-                imageURL: product.imageUrl,
-                price: product.unitPrice,
-                productId: product.id,
-                productName: product.name,
-                quantity: product.unitsInStock,
-                vendorId: product.vendorId
+                description: updatingProduct.description,
+                imageURL: updatingProduct.imageUrl,
+                price: updatingProduct.unitPrice,
+                productId: updatingProduct.id,
+                productName: updatingProduct.name,
+                quantity: updatingProduct.unitsInStock,
+                vendorId: updatingProduct.vendorId
             }).subscribe((result) => {
                 console.log(JSON.stringify(result));
                 sub.unsubscribe();
@@ -52,11 +60,6 @@ export class CartService {
                 sub.unsubscribe();
             })
         }
-        let updatingProduct: ProductModel = Object.create(product);
-        if(this.carts.get(product.id)) {
-            updatingProduct = this.carts.get(product.id);
-            updatingProduct.unitsInStock++;
-        } 
         this.carts.set(updatingProduct.id, updatingProduct); //store in the map
         this.cartSubject.next(Array.from(this.carts.values()));
     }
@@ -67,7 +70,7 @@ export class CartService {
             if(updatingProduct.unitsInStock === +newQty) return;
             updatingProduct.unitsInStock = newQty;
             if(this.auth) {
-                this.http.post(Endpoint.CART_ENDPOINT.ADD_TO_CART_ENDPOINT + `/${this.authService.userId}`, {
+                const sub: Subscription = this.http.post(Endpoint.CART_ENDPOINT.ADD_TO_CART_ENDPOINT + `/${this.authService.userId}`, {
                     description: updatingProduct.description,
                     imageURL: updatingProduct.imageUrl,
                     price: updatingProduct.unitPrice,
@@ -75,6 +78,10 @@ export class CartService {
                     productName: updatingProduct.name,
                     quantity: updatingProduct.unitsInStock,
                     vendorId: updatingProduct.vendorId
+                }).subscribe((data) => {
+                    sub.unsubscribe();
+                }, (error) => {
+                    sub.unsubscribe();
                 })
             }
             this.carts.set(productId, updatingProduct);
@@ -84,7 +91,7 @@ export class CartService {
     public deleteFromCart(productId: number) {
         if(this.auth) { 
             let existingProduct: ProductModel = this.carts.get(productId);
-            this.http.request('DELETE', Endpoint.CART_ENDPOINT.REMOVE_FROM_CART_ENDPOINT + `/${this.auth.user_id}`, {
+            this.http.request('delete', Endpoint.CART_ENDPOINT.REMOVE_FROM_CART_ENDPOINT + `/${this.auth.user_id}`, {
               body: {
                 description: existingProduct.description,
                 imageURL: existingProduct.imageUrl,
@@ -94,6 +101,10 @@ export class CartService {
                 quantity: existingProduct.unitsInStock,
                 vendorId: existingProduct.vendorId
               }
+            }).subscribe((result) => {
+                console.log('delete ' + result)
+            }, (error) => {
+                console.log('delete error' + JSON.stringify(error))
             });
         }
         this.carts.delete(productId);
@@ -104,13 +115,17 @@ export class CartService {
         this.cartSubject.next(Array.from(this.carts.values()));
     }
     public calculateTotal(products: ProductModel[]): { totalItem: number; subTotal: number } {
-      // reset count & calculate
-      let totalItem = 0;
-      let subTotal = 0;
-      products.forEach((product: ProductModel) => {
-        totalItem += +product.unitsInStock;
-        subTotal += +product.unitsInStock * +product.unitPrice;
-      });
-      return { totalItem, subTotal: +subTotal.toFixed(2) };
+        if(!products) return {
+            totalItem: 0,
+            subTotal: 0
+        };
+        // reset count & calculate
+        let totalItem = 0;
+        let subTotal = 0;
+        products.forEach((product: ProductModel) => {
+            totalItem += +product.unitsInStock;
+            subTotal += +product.unitsInStock * +product.unitPrice;
+        });
+        return { totalItem, subTotal: +subTotal.toFixed(2) };
     }
 }
