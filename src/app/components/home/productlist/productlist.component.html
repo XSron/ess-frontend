@@ -9,7 +9,7 @@
           <div class="col-md-2 mr-2">
             <select formControlName="searchOption" class="form-control no-border"
                     [ngClass]="{ 'is-invalid': searchFormSubmitted && f.searchOption.errors }"
-                    (change)="changeCity($event)">
+                    (change)="changeCategory()">
               <option selected value="0">All</option>
               <option *ngFor="let category of categorys;" [value]="category.id">{{ category.categoryName }}</option>
             </select>

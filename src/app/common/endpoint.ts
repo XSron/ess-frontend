@@ -3,8 +3,10 @@ export class Endpoint {
   public static PRODUCT_ENDPOINT = {
     GET_ALL_PRODUCT: "https://thawing-castle-81725.herokuapp.com/products/",
     GET_PRODUCT_BY_PRODUCT_ID: "https://thawing-castle-81725.herokuapp.com/products",
-    GET_PRODUCT_BY_CATEGORY_ID: "https://thawing-castle-81725.herokuapp.com/products/search?categoryId=",
-    GET_PRODUCT_BY_NAME: "https://thawing-castle-81725.herokuapp.com/api/products/search?name="
+    GET_PRODUCT_BY_CATEGORY_ID: "https://thawing-castle-81725.herokuapp.com/products/searchByCategoryId",
+    GET_PRODUCT_BY_NAME: "https://thawing-castle-81725.herokuapp.com/products/searchByName",
+    GET_INACTIVE_PRODUCT: "https://thawing-castle-81725.herokuapp.com/api/products/inactive",
+    APPROVE_PRODUCT: "https://thawing-castle-81725.herokuapp.com/api/products/approve"
   };
 
   // User Endpoint

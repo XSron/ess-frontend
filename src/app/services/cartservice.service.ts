@@ -29,7 +29,7 @@ export class CartService {
             const products: any[] = result['products'];
             products.forEach((pro: any) => {
                 let product = new ProductModel(pro['productId'], pro['productName'], pro['description'], pro['price'],
-                                        pro['imageUrl'], pro['quantity'], pro['vendorId'], '', null);
+                                        pro['imageURL'], pro['quantity'], pro['vendorId'], '', null);
                 this.carts.set(product.id, product);
             })
             

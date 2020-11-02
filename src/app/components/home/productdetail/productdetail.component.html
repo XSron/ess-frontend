@@ -10,8 +10,10 @@
         <h1 class="display-4">Product Name: {{ product.name }}</h1>
         <p class="lead">Description: {{ product.description }}</p>
         <hr class="my-4">
-        <p>Vendor: {{ product.vendor }}</p>
-        <p>Category: {{ product.category }}</p>
+        <!--
+            <p>Vendor: {{ product.vendor }}</p>
+            <p>Category: {{ product.category }}</p>
+        -->
         <p>Available Qty: {{ product.unitsInStock}}</p>
         <button class="btn btn-primary btn-lg" (click)="addToCart()">Add to Cart</button>
     </div>

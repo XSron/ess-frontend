@@ -19,10 +19,18 @@ export class ProductService {
   }
 
   public getProductByCategoryId(categoryId: number): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_PRODUCT_BY_CATEGORY_ID + `${categoryId}`);
+    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_PRODUCT_BY_CATEGORY_ID + `/${categoryId}`);
   }
 
   public getProductByName(name: string): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_PRODUCT_BY_NAME + `${name}`)
+    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_PRODUCT_BY_NAME + `/${name}`)
+  }
+
+  public getInactiveProduct(): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_INACTIVE_PRODUCT)
+  }
+
+  public approveProduct(products: ProductModel[]): Observable<any> {
+    return this.http.put(Endpoint.PRODUCT_ENDPOINT.APPROVE_PRODUCT, products)
   }
 }

@@ -31,21 +31,24 @@ export class ManageAddressComponent implements OnInit {
         defaultAddress: boolean
       }
 
-      this.selectedAddress = new AddressModel({
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
-        street1: beforeMapping.street,
-        street2: beforeMapping.houseNumber + '',
-        city: beforeMapping.city,
-        state: beforeMapping.state,
-        country: beforeMapping.country,
-        zipCode: +beforeMapping.zipcode
-      })
+      if(beforeMapping) {
+        this.selectedAddress = new AddressModel({
+          firstName: '',
+          lastName: '',
+          phoneNumber: '',
+          street1: beforeMapping.street,
+          street2: beforeMapping.houseNumber + '',
+          city: beforeMapping.city,
+          state: beforeMapping.state,
+          country: beforeMapping.country,
+          zipCode: +beforeMapping.zipcode
+        })
+      }
     }
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit')
     this.isAddNewAddress = this.route.snapshot.fragment === 'new';
     this.username = this.route.snapshot.queryParams.username
     this.addressId = this.route.snapshot.queryParams.addressId

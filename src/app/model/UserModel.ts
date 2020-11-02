@@ -20,7 +20,7 @@ export interface UserModel {
     roles: [
         {
             id: number,
-            roleName: string
+            name: string
         }
     ],
     cards: [
@@ -29,7 +29,7 @@ export interface UserModel {
             name: string,
             expiredDate: string,
             cvv: string,
-            default: true
+            default: boolean
         }
     ]
 }

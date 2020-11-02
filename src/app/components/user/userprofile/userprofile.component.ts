@@ -42,6 +42,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   public removeAddress(addressId: number): void {
     this.userService.removeUserAddress(this.user.username, addressId).subscribe((result) => {
       //update UI
+      this.user.addresses.forEach((data, index) => {
+        if(data.addressId === +addressId) {
+          return this.user.addresses.splice(index, 1);
+        }
+      })
+      alert("Succeed");
     }, error => {
       alert(JSON.stringify(error));
     });
@@ -49,7 +55,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   public setDefaultAddress(addressId: number) {
     this.userService.setDefaultAddress(this.authService.username, addressId).subscribe((result) => {
-      //update UI
+      this.user.addresses.forEach((address, index) => {
+        if(address.addressId === +addressId) 
+          address.defaultAddress = true;
+        else
+          address.defaultAddress = false;
+        this.user.addresses[index] = address;
+      })
       alert('Succeed');
     }, error => {
       alert(JSON.stringify(error));
@@ -63,6 +75,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   public removeCard(cardNumber: string): void {
     this.userService.removeCardFromUser(this.authService.username, cardNumber).subscribe((result) => {
       //update UI
+      this.user.cards.forEach((data, index) => {
+        if(data.cardNumber === cardNumber) {
+          return this.user.cards.splice(index, 1);
+        }
+      })
       alert('Succeed')
     }, error => {
       alert(JSON.stringify(error));
@@ -72,9 +89,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   public getRoles(): string {
     let roles: string = ''
     this.user.roles.forEach((data) => {
-      roles += `${data.roleName}, `
+      roles += `${data.name}, `
     })
-    return roles.substring(0, roles.length - 2);
+    return roles.substring(0, roles.length - 2)
   }
 
   public updateProfile() {
@@ -87,7 +104,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   public setDefaultCard(cardNumber: string) {
     this.userService.setDefaultCreditCard(this.user.username, cardNumber).subscribe((result) => {
-      alert(JSON.stringify(result))
+      this.user.cards.forEach((card, index) => {
+        if(card.cardNumber === cardNumber) 
+          card.default = true;
+        else
+          card.default = false;
+        this.user.cards[index] = card;
+      })
+      alert('Succeed');
     }, error => {
       alert(JSON.stringify(error))
     })

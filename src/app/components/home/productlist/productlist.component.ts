@@ -14,7 +14,6 @@ import { Layout } from '../../../common/enum';
   styleUrls: ['./productlist.component.css']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
-
   // MARK: - Properties
   public products: ProductModel[];
   public categorys: CategoryModel[];
@@ -41,7 +40,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     // Search form setup
     this.searchForm = this.formBuilder.group({
       searchOption: ['0'],
-      searchKeyword: ['', Validators.required],
+      searchKeyword: [''],
     });
 
     // Load products
@@ -67,10 +66,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.searchFormSubmitted = true;
     if (this.searchForm.invalid) return;
-    this.productService.getProductByName(this.searchForm.controls.searchOption.value).subscribe((products: ProductModel[]) => {
-      this.products = products.slice();
+    this.productService.getProductByName(this.searchForm.controls.searchKeyword.value).subscribe((products: ProductModel[]) => {
+      if(products) this.products = products.slice();
     }, error => {
-      alert(JSON.stringify(error));
+      alert('Product Not Found!');
+      this.products = null;
     })
   }
 
@@ -87,10 +87,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public changeCity(e: any) {
+  public changeCategory() {
     const categoryId: number = this.searchForm.controls.searchOption.value;
     this.productService.getProductByCategoryId(categoryId).subscribe((products: ProductModel[]) => {
-      this.products = products.slice();
+      this.products = products['content'];
     })
   }
 

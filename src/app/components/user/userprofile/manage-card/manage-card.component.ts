@@ -17,9 +17,10 @@ export class ManageCardComponent implements OnInit {
 
   public handleCreditCard(): void {
     if (!this.creditCardComponent.submitAction()) 
-      return; alert('Please enter Credit Card.');
+      return alert('Please enter Credit Card.');
     const creditCard: CreditCardModel = this.creditCardComponent.getCreditCard();
     this.userService.addCardToUser(this.authService.username, creditCard).subscribe((result) => {
+      alert('Succeed')
       this.router.navigate(['/user/userprofile'])
     }, error => {
       alert(JSON.stringify(error))

@@ -14,7 +14,6 @@ export class HistoryDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((data: Params) => {
       this.order = this.orderService.getOrderById(data.id);
-      console.log(JSON.stringify(this.order));
     })
   }
   public goBack() :void {
