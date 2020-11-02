@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import {OrderModel} from '../../../../model/OrderModel';
+import {ActivatedRoute, Params} from '@angular/router';
+import {OrderService} from '../../../../services/orderservice.service';
 
 @Component({
   selector: 'app-receipt',
@@ -11,9 +14,28 @@ import html2canvas from 'html2canvas';
 
 export class ReceiptComponent implements OnInit {
 
-  constructor(private location: Location) { }
+  public order: OrderModel;
+
+  constructor(
+    private location: Location,
+    private route: ActivatedRoute,
+    public orderService: OrderService
+  ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.order = this.orderService.getOrderById(data.id);
+    });
+  }
+
+  public getDateTime(): string {
+    return  new Date(this.order.timestamp).toLocaleString();
+  }
+
+  public getTotalPrice(): number {
+    return this.order.products
+      .map(p => p.price * p.quantity)
+      .reduce((a, b) => a + b);
   }
 
   public openPDF(htmlData): void {
