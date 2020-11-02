@@ -1,5 +1,10 @@
 <br>
-<div class="container">
+<div class="container" *ngIf="isLoading" >
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div class="container" *ngIf="!isLoading">
     <h2>Order History</h2>
     <table class="table">
         <thead>
@@ -7,29 +12,21 @@
                 <th scope="col">#</th>
                 <th scope="col">Receipt #</th>
                 <th scope="col">Order Date</th>
+                <th scope="col">Status</th>
                 <th scope="col">Total</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>123456789</td>
-                <td>2020-01-01</td>
-                <td>$1000</td>
+            <tr *ngFor="let order of orders; let i = index;">
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ order.id }}</td>
+                <td>{{ order.timestamp }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ orderService.calculateTotal(order) }}</td>
                 <td>
-                    <a class="btn btn-primary" routerLink="/user/historydetail/1">Detail</a> &nbsp;
-                    <a class="btn btn-primary" routerLink="/user/receipt/1">Receipt</a> &nbsp;
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>123456789</td>
-                <td>2020-01-01</td>
-                <td>$1000</td>
-                <td>
-                    <a class="btn btn-primary" routerLink="/user/historydetail/1">Detail</a> &nbsp;
-                    <a class="btn btn-primary" routerLink="/user/receipt/1">Receipt</a> &nbsp;
+                    <a class="btn btn-primary" [routerLink]="['/user/historydetail', order.id]">Detail</a> &nbsp;
+                    <a class="btn btn-primary" [routerLink]="['/user/receipt', order.id]">Receipt</a> &nbsp;
                 </td>
             </tr>
         </tbody>

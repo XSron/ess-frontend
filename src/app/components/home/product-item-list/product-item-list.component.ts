@@ -35,7 +35,7 @@ export class ProductItemListComponent implements OnInit {
       this.product.imageUrl,
       1,
       0,'',
-      0, '');
+      null);
     this.cartService.addToCart(selectedProduct);
   }
 

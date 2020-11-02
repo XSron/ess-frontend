@@ -41,6 +41,8 @@ import { ManageAddressComponent } from './components/user/userprofile/manage-add
 import { ManageCardComponent } from './components/user/userprofile/manage-card/manage-card.component';
 import { UserService } from './services/userservice.service';
 import { ManageUserService } from './services/manage-user.service';
+import { OrderService } from './services/orderservice.service';
+import { CategoryService } from './services/categoryservice.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -101,7 +103,9 @@ const routes: Routes = [
     ClientComponent,
     UserComponent,
     ManageAddressComponent,
-    ManageCardComponent
+    ManageCardComponent,
+    HistoryDetailComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -117,6 +121,8 @@ const routes: Routes = [
     MenuService,
     UserService,
     ManageUserService,
+    OrderService,
+    CategoryService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
   ],
   bootstrap: [

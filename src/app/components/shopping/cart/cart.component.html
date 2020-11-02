@@ -5,20 +5,20 @@
         <div class="card mb-12">
             <div class="row no-gutters">
               <div class="col-md-2">
-                <img [src]="product.url" class="card-img" style="height: 150px;" alt="Invalid Image">
+                <img [src]="product.imageUrl" class="card-img" style="height: 150px;" alt="Invalid Image">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">{{ product.name }} <span style="color: red;">(${{ product.price }})</span></h5>
+                  <h5 class="card-title">{{ product.name }} <span style="color: red;">(${{ product.unitPrice }})</span></h5>
                   <p class="card-text">{{ product.description }}</p>
                   <label>
                       Qty
-                      <select #selectQty (change)="handleQtyChange(product.productId, selectQty.value)">
-                          <option *ngFor="let qty of [1,2,3,4,5,6,7,8,9,10]" [value]="qty" [selected]="product.qty == qty">{{ qty }}</option>
+                      <select #selectQty (change)="handleQtyChange(product.id, selectQty.value)">
+                          <option *ngFor="let qty of [1,2,3,4,5,6,7,8,9,10]" [value]="qty" [selected]="product.unitsInStock == qty">{{ qty }}</option>
                       </select>
                   </label>
                   &nbsp;
-                  <button class="btn btn-danger" (click)="handleDelete(product.productId)">Delete</button>
+                  <button class="btn btn-danger" (click)="handleDelete(product.id)">Delete</button>
                 </div>
               </div>
             </div>
