@@ -29,10 +29,15 @@ export class Endpoint {
     CARD_VERIFICATION_ENDPOINT: "https://pm-payment-gateway.herokuapp.com/api/payment/verify-card"
   }
 
-  // Report endpoint
+  // Report Endpoint
   public static REPORT_ENDPOINT = {
     REPORT_PRODUCT: "http://localhost:9090/api/generateReportProduct",
     REPORT_DOLLAR_VALUE: "http://localhost:9090/api/generateReportDollarValue"
+  }
+
+  // Manager User Endpoint
+  public static MANAGER_USER_ENDPOINT = {
+    ALL_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/users'
   }
 
   public static ORDER_ENDPOINT = {
