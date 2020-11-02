@@ -1,7 +1,7 @@
 export class Endpoint {
   // Product Endpoint
   public static PRODUCT_ENDPOINT = {
-    GET_ALL_PRODUCT: "https://thawing-castle-81725.herokuapp.com/products/",
+    GET_ALL_PRODUCT: "https://thawing-castle-81725.herokuapp.com/products?size=1000",
     GET_PRODUCT_BY_PRODUCT_ID: "https://thawing-castle-81725.herokuapp.com/products",
     GET_PRODUCT_BY_CATEGORY_ID: "https://thawing-castle-81725.herokuapp.com/products/searchByCategoryId",
     GET_PRODUCT_BY_NAME: "https://thawing-castle-81725.herokuapp.com/products/searchByName",

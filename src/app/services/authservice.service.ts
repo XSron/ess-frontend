@@ -10,6 +10,7 @@ export class AuthenticationService {
     public userSubject: BehaviorSubject<AuthModel> = new BehaviorSubject<AuthModel>(null);
     public userId: number;
     public username: string;
+    public roles: string[];
     constructor(private http: HttpClient) {}
     public signUp(username: string, password: string, roleId: number): Observable<any> {
         return (

@@ -14,7 +14,7 @@ import { ProductModel } from 'src/app/model/ProductModel';
     styleUrls: ['./authentication.component.css']
 })
 export class AuthenticationComponent implements OnInit, OnDestroy {
-    public isLogin: boolean = false;
+    public isLogin: boolean = true;
     public isLoading: boolean = false;
     public error: string;
     @ViewChild('username') username: ElementRef;

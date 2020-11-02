@@ -44,6 +44,8 @@ import { ManageUserService } from './services/manage-user.service';
 import { OrderService } from './services/orderservice.service';
 import { CategoryService } from './services/categoryservice.service';
 import { ProductFormComponent } from './components/product/product-form/product-form.component';
+import { UnAuthorizedComponent } from './components/fixed-blocks/unauthorized/unauthorized.component';
+import { AuthProtection } from './guards/auth-protection.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,19 +54,19 @@ const routes: Routes = [
   { path: 'mycart', component: CartComponent },
   { path: 'checkoutform', component: CheckoutFormComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'admin', component: AdminComponent, children: [
+  { path: 'admin', component: AdminComponent, canActivate: [AuthProtection], children: [
       { path: 'manageuser', component: ManageUserComponent},
       { path: 'product', component: ApproveRejectProductComponent},
       { path: 'report/:par', component: ReportComponent}
     ]},
-  { path: 'vendor', component: VendorComponent, children: [
+  { path: 'vendor', component: VendorComponent, canActivate: [AuthProtection], children: [
       { path: 'product', component: VendorProductComponent},
       { path: 'report/:par', component: ReportComponent }
     ]},
-  { path: 'client', component: ClientComponent, children: [
+  { path: 'client', component: ClientComponent, canActivate: [AuthProtection], children: [
       { path: 'report/:par', component: ReportComponent }
     ]},
-  { path: 'user', component: UserComponent, children: [
+  { path: 'user', component: UserComponent, canActivate: [AuthProtection], children: [
       { path: 'userprofile', component: UserProfileComponent },
       { path: 'orderhistory', component: OrderHistoryComponent },
       { path: 'historydetail/:id', component: HistoryDetailComponent },
@@ -72,6 +74,7 @@ const routes: Routes = [
       { path: 'manage-address', component: ManageAddressComponent },
       { path: 'manage-card', component: ManageCardComponent }
     ]},
+  { path: 'unauthorized', component: UnAuthorizedComponent},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
@@ -107,7 +110,8 @@ const routes: Routes = [
     ManageCardComponent,
     HistoryDetailComponent,
     UserProfileComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    UnAuthorizedComponent
   ],
   imports: [
     BrowserModule,
@@ -125,6 +129,7 @@ const routes: Routes = [
     ManageUserService,
     OrderService,
     CategoryService,
+    AuthProtection,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
   ],
   bootstrap: [

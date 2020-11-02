@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.username = afterDecoded['user_name'].toUpperCase();
         this.authService.userId = +this.auth.user_id;
         this.authService.username = this.username;
-        return this.roles = afterDecoded['authorities'];
+        return this.authService.roles = this.roles = afterDecoded['authorities'];
       }
       this.roles = null; //reset roles in case the user logout
     });
