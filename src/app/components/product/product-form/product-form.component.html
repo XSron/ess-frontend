@@ -1,0 +1,55 @@
+
+<form [formGroup]="form" (ngSubmit)="submitAction()">
+  <!--    Product Name-->
+  <div class="form-group">
+    <label>Product Name</label>
+    <input type="text" formControlName="productName" class="form-control" placeholder="Product Name"
+           [ngClass]="{ 'is-invalid': submitted && f.productName.errors }">
+    <div *ngIf="submitted && f.productName.errors" class="invalid-feedback">
+      <div *ngIf="f.productName.errors.required">Product Name is required</div>
+    </div>
+  </div>
+  <!--    Product Price & Quantity-->
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Product Price</label>
+      <input type="text" formControlName="unitPrice" class="form-control" placeholder="Product Price"
+             [ngClass]="{ 'is-invalid': submitted && f.unitPrice.errors }">
+      <div *ngIf="submitted && f.unitPrice.errors" class="invalid-feedback">
+        <div *ngIf="f.unitPrice.errors.required">Product Price is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Units In Stock</label>
+      <input type="text" formControlName="unitsInStock" class="form-control" placeholder="Units In Stock"
+             [ngClass]="{ 'is-invalid': submitted && f.unitsInStock.errors }">
+      <div *ngIf="submitted && f.unitsInStock.errors" class="invalid-feedback">
+        <div *ngIf="f.unitsInStock.errors.required">Units In Stock is required</div>
+      </div>
+    </div>
+  </div>
+  <!--    Description-->
+  <div class="form-group">
+    <label>Description</label>
+    <input type="textarea" formControlName="description" class="form-control" placeholder="Product Description" rows="5"
+           [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+      <div *ngIf="f.description.errors.required">Description is required</div>
+    </div>
+  </div>
+  <!--    Image Picker-->
+  <div class="form-group">
+    <label for="file">File</label>
+    <input formControlName="file" id="file" type="file" class="form-control"
+           (change)="onFileChange($event)">
+    <div *ngIf="submitted && f.file.errors" class="alert alert-danger">
+      <div *ngIf="f.file.errors.required">File is required.</div>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-start" style="margin-top: 25px; margin-bottom: 25px">
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 200px; width:200px">
+  </div>
+  <div class="row d-flex justify-content-end" style="margin-top: 25px; margin-bottom: 25px">
+    <button class="btn btn-primary" (click)="submitAction()">Submit</button>
+  </div>
+</form>
