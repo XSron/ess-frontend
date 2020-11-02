@@ -8,11 +8,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 
 export class NotFoundComponent implements OnInit, OnDestroy {
 
-  // MARK: - Properties
-
-
-  // MARK: - Angular Core functions
-
   constructor() {
   }
 
@@ -21,7 +16,5 @@ export class NotFoundComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
   }
-
-  // MARK: - NotFoundComponent functions
 
 }
