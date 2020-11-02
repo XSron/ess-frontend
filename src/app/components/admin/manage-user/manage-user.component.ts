@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { stringify } from 'querystring';
 import { Subscription } from 'rxjs';
 import { ManageUserService } from 'src/app/services/manage-user.service';
 
@@ -12,12 +13,36 @@ export class ManageUserComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private managerUserService: ManageUserService) {
+  }
 
+  onChangeStatus(username: string, enable: boolean) {
+    let status: string;
+    if (enable) {
+      status = 'Active';
+    }
+    else {
+      status = 'Inactive';
+    }
+
+    if (confirm('Are you sure to set user ' + username + ' status to ' + status + '?')) {
+      this.subscription = this.managerUserService.changeStatusUser(username, enable).subscribe(result => {
+        // Refresh the UI
+        this.users.forEach((user, index) => {
+          if (user.username === username) {
+            user.enable = enable;
+          }
+        });
+      }, error => {
+        alert(JSON.stringify(error));
+      });
+    }
   }
 
   ngOnInit(): void {
     this.subscription = this.managerUserService.getAllUsers().subscribe(result => {
       this.users = result;
+    }, error => {
+      alert(JSON.stringify(error));
     });
   }
 

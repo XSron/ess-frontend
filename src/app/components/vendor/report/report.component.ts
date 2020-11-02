@@ -62,6 +62,8 @@ export class ReportComponent implements OnInit {
 
             this.displayProduct = true;
             this.displayDollarvalue = false;
+        }, error => {
+          alert(JSON.stringify(error));
         });
       }
       else {
@@ -71,6 +73,8 @@ export class ReportComponent implements OnInit {
 
           this.displayDollarvalue = true;
           this.displayProduct = false;
+        }, error => {
+          alert(JSON.stringify(error));
         });
       }
     });

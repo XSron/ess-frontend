@@ -48,7 +48,8 @@ export class Endpoint {
 
   // Manager User Endpoint
   public static MANAGER_USER_ENDPOINT = {
-    ALL_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/users'
+    ALL_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/users',
+    CHANGE_STATUS_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/users'
   }
 
   // Order Endpoint

@@ -9,6 +9,7 @@
               <th scope="col">Last Name</th>
               <th scope="col">Email</th>
               <th scope="col">Role </th>
+              <th scope="col">Status</th>
               <th scope="col">Action</th>
           </tr>
       </thead>
@@ -22,9 +23,12 @@
               <td>
                 <span *ngFor="let r of u.roles"> {{r.name}} </span>
               </td>
+              <td *ngIf="u.enable" class="text-success"> Active </td>
+              <td *ngIf="!u.enable" class="text-danger"> Inactive </td>
               <td>
                   <a class="btn btn-primary" routerLink="/user/userprofile">Edit</a> &nbsp;
-                  <a class="btn btn-danger" routerLink="/user/userprofile">Delete</a> &nbsp;
+                  <button *ngIf="u.enable" class="btn btn-danger" type="button" (click)="onChangeStatus(u.username,false)">Disable</button>
+                  <button *ngIf="!u.enable" class="btn btn-success" type="button" (click)="onChangeStatus(u.username,true)">Enable</button>
               </td>
           </tr>
       </tbody>
