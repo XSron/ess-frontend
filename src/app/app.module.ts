@@ -42,6 +42,7 @@ import { ManageCardComponent } from './components/user/userprofile/manage-card/m
 import { UserService } from './services/userservice.service';
 import { OrderService } from './services/orderservice.service';
 import { CategoryService } from './services/categoryservice.service';
+import { ProductFormComponent } from './components/product/product-form/product-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -104,7 +105,8 @@ const routes: Routes = [
     ManageAddressComponent,
     ManageCardComponent,
     HistoryDetailComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,

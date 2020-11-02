@@ -23,15 +23,17 @@ export class ProductItemGridComponent {
 
   // MARK: - Item functions
   public addToCart(): void {
-    const selectedProduct = new ProductModel(
-      this.product.id,
-      this.product.name,
-      this.product.description,
-      this.product.unitPrice,
-      this.product.imageUrl,
-      1,
-      0, '',
-      null);
+    const selectedProduct = new ProductModel({
+      id: this.product.id,
+      name: this.product.name,
+      description: this.product.description,
+      unitPrice: this.product.unitPrice,
+      imageUrl: this.product.imageUrl,
+      unitsInStock: this.product.unitsInStock,
+      vendorId: this.product.vendorId,
+      vendor: this.product.vendor,
+      category: this.product.category
+    });
     this.cartService.addToCart(selectedProduct);
   }
 
