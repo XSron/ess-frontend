@@ -1,0 +1,23 @@
+img {
+  height: 200px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.btn {
+  z-index: 1;
+}
+
+.list-item {
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #eeeeee;
+}
+
+.list-item:hover{
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
