@@ -1,0 +1,33 @@
+<div class="container">
+  <h2> Manage User </h2>
+  <table class="table">
+      <thead>
+          <tr>
+              <th scope="col">Id</th>
+              <th scope="col">User Name</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role </th>
+              <th scope="col">Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let u of users">
+              <td>{{u.id}}</td>
+              <td>{{u.username}}</td>
+              <td>{{u.firstName}}</td>
+              <td>{{u.lastName}}</td>
+              <td>{{u.email}}</td>
+              <td>
+                <span *ngFor="let r of u.roles"> {{r.name}} </span>
+              </td>
+              <td>
+                  <a class="btn btn-primary" routerLink="/user/userprofile">Edit</a> &nbsp;
+                  <a class="btn btn-danger" routerLink="/user/userprofile">Delete</a> &nbsp;
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
