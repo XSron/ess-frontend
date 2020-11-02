@@ -17,122 +17,19 @@
                   <td class="content-block">
                     <table class="invoice">
                       <tbody><tr>
-                        <td>Anna Smith<br>Invoice #12345<br>June 01 2015</td>
+                        <td>User: {{order.userId}} <br>Invoice #{{order.id}} <br>{{getDateTime()}}</td>
                       </tr>
                       <tr>
                         <td>
                           <table class="invoice-items" cellpadding="0" cellspacing="0">
-                            <tbody><tr>
-                              <td>Service 1</td>
-                              <td class="alignright">$ 20.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 2</td>
-                              <td class="alignright">$ 10.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 2</td>
-                              <td class="alignright">$ 10.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
-                            </tr>
-                            <tr>
-                              <td>Service 3</td>
-                              <td class="alignright">$ 6.00</td>
+                            <tbody>
+                            <tr tr *ngFor="let product of order.products; let i = index;">
+                              <td>{{ product.productName }} x {{ product.quantity }}</td>
+                              <td class="alignright">$ {{ product.price }}</td>
                             </tr>
                             <tr class="total">
                               <td class="alignright" width="80%">Total</td>
-                              <td class="alignright">$ 36.00</td>
+                              <td class="alignright">$ {{getTotalPrice()}}</td>
                             </tr>
                             </tbody></table>
                         </td>
