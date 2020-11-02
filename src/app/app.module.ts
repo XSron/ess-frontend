@@ -46,6 +46,7 @@ import { CategoryService } from './services/categoryservice.service';
 import { ProductFormComponent } from './components/product/product-form/product-form.component';
 import { UnAuthorizedComponent } from './components/fixed-blocks/unauthorized/unauthorized.component';
 import { AuthProtection } from './guards/auth-protection.service';
+import { VendorProductItemComponent } from './components/vendor/vendor-product-item/vendor-product-item.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -111,7 +112,8 @@ const routes: Routes = [
     HistoryDetailComponent,
     UserProfileComponent,
     ProductFormComponent,
-    UnAuthorizedComponent
+    UnAuthorizedComponent,
+    VendorProductItemComponent
   ],
   imports: [
     BrowserModule,
