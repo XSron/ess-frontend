@@ -65,7 +65,7 @@ export class VendorProductComponent implements OnInit, OnDestroy {
     this.router.navigate(['/vendor/product-form'], navigationExtras);
   }
 
-  public deleteProduct(productId: number): void {
+  public deleteProductAction(productId: number): void {
     const sub: Subscription = this.vendorService
       .deleteProductById(productId)
       .subscribe((result) => {

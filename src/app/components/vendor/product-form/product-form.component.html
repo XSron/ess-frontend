@@ -2,7 +2,7 @@
   <div class="card card-body">
     <h4>Product Information</h4>
     <br/>
-    <form [formGroup]="form" (ngSubmit)="submitAction()">
+    <form [formGroup]="form">
       <!--    Product Name-->
       <div class="form-group">
         <label>Product Name</label>
@@ -54,7 +54,9 @@
 <!--      </div>-->
       <!--    Submit Button-->
       <div class="row justify-content-end" style="margin-top: 25px; margin-right: 0px;">
-        <button class="btn btn-primary" (click)="submitAction()">Add New Product</button>
+        <button class="btn btn-primary" (click)="submitAction()">
+          {{productEditing ? 'Update Product Information' : 'Add New Product'}}
+        </button>
       </div>
     </form>
   </div>

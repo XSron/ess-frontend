@@ -35,7 +35,8 @@
       <td><img [src]="product.imageUrl" width="50" height="50"></td>
       <td>{{ product.unitsInStock }}</td>
       <td>
-        <a class="btn btn-primary" style="cursor: pointer;" (click)="deleteProduct(product.id)">Approve</a> &nbsp;
+        <a class="btn btn-primary" style="cursor: pointer;" (click)="editProductAction(product.id)">Edit</a> &nbsp;
+        <a class="btn btn-danger" style="cursor: pointer;" (click)="deleteProductAction(product.id)">Delete</a> &nbsp;
       </td>
     </tr>
     </tbody>

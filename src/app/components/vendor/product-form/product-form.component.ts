@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductModel} from '../../../model/ProductModel';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -66,7 +66,15 @@ export class ProductFormComponent implements OnInit {
     const product: ProductModel = this.getProduct();
     if (this.productEditing) {
       // Editing Product Mode
-
+      const sub: Subscription = this.vendorService
+        .editProductById(this.productEditing.id, product)
+        .subscribe(result => {
+          sub.unsubscribe();
+          this.router.navigate(['/vendor/product']);
+        }, error => {
+          alert(JSON.stringify(error));
+          sub.unsubscribe();
+        });
     } else {
       // Add New Product Mode
       const sub: Subscription = this.vendorService
