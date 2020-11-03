@@ -4,6 +4,8 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {Router} from '@angular/router';
 import {VendorService} from '../../../services/vendor.service';
 import {Subscription} from 'rxjs';
+import {CategoryModel} from '../../../model/CategoryModel';
+import {CategoryService} from '../../../services/categoryservice.service';
 
 @Component({
   selector: 'app-product-form',
@@ -13,6 +15,7 @@ import {Subscription} from 'rxjs';
 export class ProductFormComponent implements OnInit {
 
   public productEditing: ProductModel;
+  public categoryList: CategoryModel[];
 
   public imageSrc: string;
   public form: FormGroup;
@@ -21,6 +24,7 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private categoryService: CategoryService,
     private vendorService: VendorService,
   ) {
     // Load init data
@@ -28,15 +32,23 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     // Form setup
     this.form = this.formBuilder.group({
       productName: [this.productEditing ? this.productEditing.name : '', Validators.required],
+      category: [this.productEditing ? this.productEditing.category : '', Validators.required],
       unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', Validators.required],
       unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', Validators.required],
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
       // file: ['', Validators.required],
       // fileSource: ['', Validators.required],
     });
+
+    // Load category data
+    this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
+      this.categoryList = categories;
+    });
+
   }
 
   // convenience getter for easy access to form fields
@@ -63,6 +75,7 @@ export class ProductFormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    alert(JSON.stringify(this.form.value));
     const product: ProductModel = this.getProduct();
     if (this.productEditing) {
       // Editing Product Mode
@@ -94,6 +107,7 @@ export class ProductFormComponent implements OnInit {
   getProduct(): ProductModel {
     return new ProductModel({
       name: this.form.value.productName,
+      category: this.form.value.category,
       unitPrice: this.form.value.unitPrice,
       unitsInStock: this.form.value.unitsInStock,
       description: this.form.value.description,

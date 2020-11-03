@@ -69,7 +69,10 @@ export class Endpoint {
 
   // Category Endpoint
   public static CATEGORY_ENDPOINT = {
-    GET_ALL_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories'
+    GET_ALL_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories',
+    ADD_NEW_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories',
+    EDIT_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories',
+    DELETE_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories',
   };
 
 }
