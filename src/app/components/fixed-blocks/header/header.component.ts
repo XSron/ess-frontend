@@ -23,21 +23,39 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userSubscription: Subscription;
   private cartSubscription: Subscription;
   private menuSubscription: Subscription;
+  private timer: any;
+
   constructor(public authService: AuthenticationService, private cartService: CartService,
               private menuService: MenuService, private router: Router) {}
   ngOnInit() {
     this.userSubscription = this.authService.userSubject.subscribe((auth: AuthModel) => {
       this.auth = auth;
 
-      //decode access token
       if(this.auth) {
+        //Auto Logout
+        let expiredInDuration: number = +this.auth.expires_in * 1000;
+        if(!localStorage.getItem("expiredIn")) {
+          const expiredIn = new Date().getTime() + (+this.auth.expires_in * 1000);
+          localStorage.setItem("expiredIn", expiredIn.toString());
+          expiredInDuration = (+this.auth.expires_in * 1000);
+          alert('First ' + expiredInDuration)
+        } else {
+          expiredInDuration = +localStorage.getItem("expiredIn") - new Date().getTime();
+          alert('First ' + expiredInDuration)
+        }
+        this.autoLogout(expiredInDuration);
+
+        //decode access token
         let afterDecoded: string = jwt_decode(auth.access_token);
         this.username = afterDecoded['user_name'].toUpperCase();
         this.authService.userId = +this.auth.user_id;
         this.authService.username = this.username;
         return this.authService.roles = this.roles = afterDecoded['authorities'];
       }
-      this.roles = null; //reset roles in case the user logout
+      //reset in case the user logout
+      this.authService.userId = null;
+      this.authService.username = null;
+      this.roles = null; 
     });
     this.cartSubscription = this.cartService.cartSubject.subscribe((products: ProductModel[]) => {
       if(products) this.totalCart = products.length;
@@ -62,7 +80,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.userSubject.next(null);
     this.cartService.clearCart();
+
+    //clear timeout and set it to null
+    if(this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+
     localStorage.removeItem("auth");
+    localStorage.removeItem("expiredIn");
     this.router.navigate(['/']);
+
+  }
+  autoLogout(expireIn: number) {
+    this.timer = setTimeout(() => {
+      this.onLogout();
+    }, expireIn);
   }
 }

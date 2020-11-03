@@ -60,7 +60,7 @@ const routes: Routes = [
       { path: 'report/:par', component: ReportComponent}
     ]},
   { path: 'vendor', component: VendorComponent, canActivate: [AuthProtection], children: [
-      { path: 'product', component: VendorProductComponent},
+      { path: 'product', component: VendorProductComponent },
       { path: 'report/:par', component: ReportComponent }
     ]},
   { path: 'client', component: ClientComponent, canActivate: [AuthProtection], children: [

@@ -15,13 +15,13 @@ export class ApproveRejectProductComponent implements OnInit, OnDestroy {
         this.productSubscription = this.productService.getInactiveProduct().subscribe((products: ProductModel[]) => {
             this.products = products;
             this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            alert('No Products to be approved!')
         })
     }
     public approveProduct(productId: number) {
-        const product: ProductModel[] = this.products.filter((product: ProductModel) => {
-            return product.id === +productId;
-        })
-        const sub: Subscription = this.productService.approveProduct(product).subscribe((result) => {
+        const sub: Subscription = this.productService.approveProduct([productId]).subscribe((result) => {
             //update UI
             this.products = this.products.filter((product: ProductModel) => {
                 return product.id !== productId;
