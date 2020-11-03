@@ -38,10 +38,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
           const expiredIn = new Date().getTime() + (+this.auth.expires_in * 1000);
           localStorage.setItem("expiredIn", expiredIn.toString());
           expiredInDuration = (+this.auth.expires_in * 1000);
-          alert('First ' + expiredInDuration)
+          // alert('First ' + expiredInDuration)
         } else {
           expiredInDuration = +localStorage.getItem("expiredIn") - new Date().getTime();
-          alert('First ' + expiredInDuration)
+          // alert('First ' + expiredInDuration)
         }
         this.autoLogout(expiredInDuration);
 
@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       //reset in case the user logout
       this.authService.userId = null;
       this.authService.username = null;
-      this.roles = null; 
+      this.roles = null;
     });
     this.cartSubscription = this.cartService.cartSubject.subscribe((products: ProductModel[]) => {
       if(products) this.totalCart = products.length;
