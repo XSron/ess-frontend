@@ -1,0 +1,20 @@
+<div class="row list-item">
+  <div class="col-9">
+    <div class="row mx-4 mt-4">
+      <h5 class="font-weight-bold stretched-link" (click)="viewDetail()">{{product.name}}</h5>
+    </div>
+    <div class="row mx-4 mt-2">
+      <p class="font-italic text-muted small">{{product.description}}</p>
+    </div>
+    <div class="row m-4 justify-content-between">
+      <h6 class="font-weight-bold">${{product.unitPrice}}</h6>
+      <button class="btn btn-danger" (click)="addToCart()">Add to Cart</button>
+    </div>
+  </div>
+  <div class="col-2">
+    <img [src]="product.imageUrl" alt="product image">
+  </div>
+</div>
+
+
+
