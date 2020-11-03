@@ -11,6 +11,7 @@ export class ManageUserComponent implements OnInit, OnDestroy {
 
   public users: any;
   private subscription: Subscription;
+  public isLoading: boolean = true;
 
   constructor(private managerUserService: ManageUserService) {
   }
@@ -41,6 +42,7 @@ export class ManageUserComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.managerUserService.getAllUsers().subscribe(result => {
       this.users = result;
+      this.isLoading = false;
     }, error => {
       alert(JSON.stringify(error));
     });
