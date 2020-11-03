@@ -43,10 +43,11 @@ import { UserService } from './services/userservice.service';
 import { ManageUserService } from './services/manage-user.service';
 import { OrderService } from './services/orderservice.service';
 import { CategoryService } from './services/categoryservice.service';
-import { ProductFormComponent } from './components/product/product-form/product-form.component';
+import { ProductFormComponent } from './components/vendor/product-form/product-form.component';
 import { UnAuthorizedComponent } from './components/fixed-blocks/unauthorized/unauthorized.component';
 import { AuthProtection } from './guards/auth-protection.service';
 import { UploadComponent } from './components/upload/upload.component';
+import { VendorProductItemComponent } from './components/vendor/vendor-product-item/vendor-product-item.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -62,6 +63,7 @@ const routes: Routes = [
     ]},
   { path: 'vendor', component: VendorComponent, canActivate: [AuthProtection], children: [
       { path: 'product', component: VendorProductComponent},
+      { path: 'product-form', component: ProductFormComponent },
       { path: 'report/:par', component: ReportComponent }
     ]},
   { path: 'client', component: ClientComponent, canActivate: [AuthProtection], children: [
@@ -113,7 +115,8 @@ const routes: Routes = [
     UserProfileComponent,
     ProductFormComponent,
     UnAuthorizedComponent,
-    UploadComponent
+    UploadComponent,
+    VendorProductItemComponent
   ],
   imports: [
     BrowserModule,

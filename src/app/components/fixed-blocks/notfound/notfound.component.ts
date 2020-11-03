@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
-import { cpuUsage } from 'process';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
-    selector: 'not-found',
-    templateUrl: 'notfound.component.html',
+  selector: 'not-found',
+  templateUrl: 'notfound.component.html',
+  styleUrls: ['./notfound.component.css']
 })
-export class NotFoundComponent {
-    
+
+export class NotFoundComponent implements OnInit, OnDestroy {
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+  }
+
 }

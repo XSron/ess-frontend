@@ -1,6 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductModel} from '../../../model/ProductModel';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {VendorService} from '../../../services/vendor.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
@@ -9,13 +12,20 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 })
 export class ProductFormComponent implements OnInit {
 
-  @Input() productEditing: ProductModel;
+  public productEditing: ProductModel;
 
   public imageSrc: string;
   public form: FormGroup;
   public submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private vendorService: VendorService,
+  ) {
+    // Load init data
+    this.productEditing = this.router.getCurrentNavigation().extras.state as ProductModel;
+  }
 
   ngOnInit(): void {
     // Form setup
@@ -24,8 +34,8 @@ export class ProductFormComponent implements OnInit {
       unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', Validators.required],
       unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', Validators.required],
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
-      file: ['', Validators.required],
-      fileSource: ['', Validators.required],
+      // file: ['', Validators.required],
+      // fileSource: ['', Validators.required],
     });
   }
 
@@ -48,9 +58,36 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  submitAction(): boolean {
+  submitAction(): void {
     this.submitted = true;
-    return this.form.invalid === false;
+    if (this.form.invalid) {
+      return;
+    }
+    const product: ProductModel = this.getProduct();
+    if (this.productEditing) {
+      // Editing Product Mode
+      const sub: Subscription = this.vendorService
+        .editProductById(this.productEditing.id, product)
+        .subscribe(result => {
+          sub.unsubscribe();
+          this.router.navigate(['/vendor/product']);
+        }, error => {
+          alert(JSON.stringify(error));
+          sub.unsubscribe();
+        });
+    } else {
+      // Add New Product Mode
+      const sub: Subscription = this.vendorService
+        .addNewProduct(product)
+        .subscribe(result => {
+          sub.unsubscribe();
+          this.router.navigate(['/vendor/product']);
+        }, error => {
+          alert(JSON.stringify(error));
+          sub.unsubscribe();
+        });
+    }
+
   }
 
   // https://www.itsolutionstuff.com/post/angular-10-image-upload-with-preview-exampleexample.html
