@@ -17,6 +17,7 @@ export class VendorProductComponent implements OnInit, OnDestroy {
   // MARK: - Properties
 
   public products: ProductModel[];
+  public selectedID: number;
   public isLoading = true;
 
   private productSubscription: Subscription;
@@ -65,13 +66,17 @@ export class VendorProductComponent implements OnInit, OnDestroy {
     this.router.navigate(['/vendor/product-form'], navigationExtras);
   }
 
+  public openDeletePopup(id: number): void {
+    this.selectedID = id;
+  }
+
   public deleteProductAction(productId: number): void {
     const sub: Subscription = this.vendorService
       .deleteProductById(productId)
       .subscribe((result) => {
         // Update UI
         this.products = this.products.filter(p => p.id !== productId);
-        alert('Succeed');
+        // alert('Succeed');
         sub.unsubscribe();
       }, (error) => {
         alert(JSON.stringify(error));
