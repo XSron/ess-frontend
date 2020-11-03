@@ -1,4 +1,10 @@
-<div class="container">
+<div *ngIf="isLoading" class="container">
+  <br>
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="!isLoading"  class="container">
   <h2> Manage User </h2>
   <table class="table">
       <thead>

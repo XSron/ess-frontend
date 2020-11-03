@@ -9,6 +9,7 @@ import { AddressModel } from '../../../model/AddressModel';
 import { CreditCardModel } from '../../../model/CreditCardModel';
 import { CheckoutModel } from '../../../model/CheckoutModel';
 import { CreditCardService } from 'src/app/services/credit-card.service';
+import { UserService } from 'src/app/services/userservice.service';
 
 @Component({
   selector: 'checkoutform',
@@ -28,7 +29,8 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private creditCardService: CreditCardService
+    private creditCardService: CreditCardService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -69,8 +71,13 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
       creditCard.type = cc['cardType'];
       this.isLoading = false;
       if (this.auth && confirm('Do you want to save the Shipping address & Credit Card information to your User Profile?')) {
-        console.log('call API to save Shipping Address to the current user profile');
-        console.log('call API to save Credit Card information to the current user profile');
+        this.userService.addUserAddress(this.authService.username, shippingAddress).subscribe((result) => {
+          this.userService.addCardToUser(this.authService.username, creditCard).subscribe(result => { }, error => {
+            alert('Card ' + JSON.stringify(error));
+          })
+        }, error => {
+          alert('Address ' + JSON.stringify(error));
+        })
       }
       this.router.navigate(['/checkout'], navigationExtras);
     }, (error: any) => {

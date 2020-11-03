@@ -30,7 +30,7 @@ export class ProductService {
     return this.http.get<ProductModel[]>(Endpoint.PRODUCT_ENDPOINT.GET_INACTIVE_PRODUCT)
   }
 
-  public approveProduct(products: ProductModel[]): Observable<any> {
-    return this.http.put(Endpoint.PRODUCT_ENDPOINT.APPROVE_PRODUCT, products)
+  public approveProduct(ids: number[]): Observable<any> {
+    return this.http.put(Endpoint.PRODUCT_ENDPOINT.APPROVE_PRODUCT, ids)
   }
 }

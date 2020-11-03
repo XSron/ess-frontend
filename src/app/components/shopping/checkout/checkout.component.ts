@@ -2,9 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductModel } from 'src/app/model/ProductModel';
+import { UserModel } from 'src/app/model/UserModel';
 import { AuthenticationService } from 'src/app/services/authservice.service';
 import { CartService } from 'src/app/services/cartservice.service';
 import { OrderService } from 'src/app/services/orderservice.service';
+import { UserService } from 'src/app/services/userservice.service';
 import { CheckoutModel } from '../../../model/CheckoutModel';
 
 @Component({
@@ -18,12 +20,15 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public subTotal = 0;
 
   private cartSubscription: Subscription;
+  private userSubscription: Subscription;
+  public isLoading: boolean = false;
 
   constructor(
     private router: Router,
     private cartService: CartService,
     private orderService: OrderService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {
     this.checkoutData = this.router.getCurrentNavigation().extras.state as CheckoutModel;
   }
@@ -43,6 +48,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   public placeAnOrder(): void {
+    let email: string;
+    this.isLoading = true;
+    if(this.authService.username) {
+      this.userSubscription = this.userService.getUserByName(this.authService.username).subscribe((user: UserModel) => {
+        email = user.email;
+        if(!email)
+          email = prompt("Enter email:");
+        this.sendOrderRequest(email); 
+      })
+    } else {
+      email = prompt("Enter email:");
+      this.sendOrderRequest(email);
+    }
+  }
+
+  public sendOrderRequest(email: string) {
     //create products 
     let products: any[] = [];
     const orignalProducts: ProductModel[] = Array.from(this.cartService.carts.values());
@@ -76,14 +97,23 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           street2: this.checkoutData.shippingAddress.street2,
           zip: this.checkoutData.shippingAddress.zipCode
         },
+      paymentCard: {
+          name: this.checkoutData.creditCard.name,
+          cardNumber: this.checkoutData.creditCard.number,
+          expDate: this.checkoutData.creditCard.expiredDate,
+          pin: this.checkoutData.creditCard.cvv
+      },
+      userEmail: email,
       userId: this.authService.userId
     }).subscribe((data: any) => {
+      this.isLoading = false;
       alert('You have been ordered!');
       sub.unsubscribe();
       //clear cart
       this.cartService.clearCart();
       this.router.navigate(['/']);
     }, error => {
+      this.isLoading = false;
       alert(JSON.stringify(error));
       sub.unsubscribe();
     })

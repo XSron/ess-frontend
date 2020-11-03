@@ -8,7 +8,6 @@ import { AuthenticationService } from './authservice.service';
 
 @Injectable()
 export class CartService {
-
   public cartSubject: BehaviorSubject<ProductModel[]> = new BehaviorSubject<ProductModel[]>(null);
   public carts: Map<number, ProductModel> = new Map<number, ProductModel>();
   private auth: AuthModel = null;
@@ -31,14 +30,12 @@ export class CartService {
       // update cart model
       const products: any[] = result.products;
       products.forEach((pro: any) => {
-        // const product = new ProductModel(pro.productId, pro.productName, pro.description, pro.price,
-        //   pro.imageUrl, pro.quantity, pro.vendorId, '', null);
         const product = new ProductModel({
           id: pro.productId,
           name: pro.productName,
           description: pro.description,
           unitPrice: pro.price,
-          imageUrl: pro.imageUrl,
+          imageUrl: pro.imageURL,
           unitsInStock: pro.quantity,
           vendorId: pro.vendorId,
           vendor: '',

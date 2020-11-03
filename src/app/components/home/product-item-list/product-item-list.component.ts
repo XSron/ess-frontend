@@ -33,7 +33,7 @@ export class ProductItemListComponent implements OnInit {
       description: this.product.description,
       unitPrice: this.product.unitPrice,
       imageUrl: this.product.imageUrl,
-      unitsInStock: this.product.unitsInStock,
+      unitsInStock: 1,
       vendorId: this.product.vendorId,
       vendor: this.product.vendor,
       category: this.product.category

@@ -20,6 +20,7 @@ export class ReportComponent implements OnInit {
   private userSubscription: Subscription;
   public displayProduct: boolean = false;
   public displayDollarvalue: boolean = false;
+  public isLoading: boolean = true;
 
   reportName: string;
 
@@ -77,6 +78,7 @@ export class ReportComponent implements OnInit {
           alert(JSON.stringify(error));
         });
       }
+      this.isLoading = false;
     });
   }
 
