@@ -12,9 +12,10 @@ export class Endpoint {
 
   // Vendor Endpoint
   public static VENDOR_ENDPOINT = {
-    GET_ALL_PRODUCT: 'http://localhost:3000/vendor-product',
-    EDIT_PRODUCT: 'http://localhost:3000/vendor-product',
-    DELETE_PRODUCT_BY_ID: 'http://localhost:3000/vendor-product'
+    GET_ALL_PRODUCT: 'http://localhost:3000/vendor-products',
+    ADD_NEW_PRODUCT: 'http://localhost:3000/vendor-products',
+    EDIT_PRODUCT: 'http://localhost:3000/vendor-products',
+    DELETE_PRODUCT_BY_ID: 'http://localhost:3000/vendor-products'
   };
 
   // User Endpoint

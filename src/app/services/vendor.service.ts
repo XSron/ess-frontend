@@ -15,12 +15,16 @@ export class VendorService {
     return this.http.get<any>(Endpoint.VENDOR_ENDPOINT.GET_ALL_PRODUCT);
   }
 
+  public addNewProduct(product: ProductModel): Observable<any> {
+    return this.http.post(Endpoint.VENDOR_ENDPOINT.ADD_NEW_PRODUCT, product);
+  }
+
   public editProductById(id: number, product: ProductModel): Observable<any> {
-    return this.http.get<any>(Endpoint.VENDOR_ENDPOINT.EDIT_PRODUCT + `/${id}`);
+    return this.http.put(Endpoint.VENDOR_ENDPOINT.EDIT_PRODUCT + `/${id}`, product);
   }
 
   public deleteProductById(id: number): Observable<any> {
-    return this.http.delete(Endpoint.VENDOR_ENDPOINT.DELETE_PRODUCT_BY_ID);
+    return this.http.delete(Endpoint.VENDOR_ENDPOINT.DELETE_PRODUCT_BY_ID + `/${id}`);
   }
 
 }

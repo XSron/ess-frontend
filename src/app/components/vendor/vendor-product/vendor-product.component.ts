@@ -2,6 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductModel} from '../../../model/ProductModel';
 import {Subscription} from 'rxjs';
 import {VendorService} from '../../../services/vendor.service';
+import {NavigationExtras, Router} from '@angular/router';
+import {UserModel} from '../../../model/UserModel';
+import {UserService} from '../../../services/userservice.service';
+import {AuthenticationService} from '../../../services/authservice.service';
 
 @Component({
   selector: 'vendor-product',
@@ -16,18 +20,32 @@ export class VendorProductComponent implements OnInit, OnDestroy {
   public isLoading = true;
 
   private productSubscription: Subscription;
+  private user: UserModel;
 
   // MARK: - Angular Core functions
 
-  constructor(private vendorService: VendorService) {}
+  constructor(
+    private router: Router,
+    private vendorService: VendorService,
+    private userService: UserService,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
+    // Load product data
     this.productSubscription = this.vendorService.
     getAllProducts()
       .subscribe((products: ProductModel[]) => {
         this.products = products;
         this.isLoading = false;
       });
+
+    // Load vendor information
+    // this.userService
+    //   .getUserByName(this.authService.username)
+    //   .subscribe((user: UserModel) => {
+    //     this.user = user;
+    //   });
   }
 
   ngOnDestroy(): void {
@@ -37,28 +55,15 @@ export class VendorProductComponent implements OnInit, OnDestroy {
   // MARK: - View Actions
 
   public addNewProductAction(): void {
-
+    this.router.navigate(['/vendor/product-form']);
   }
 
-
-  // MARK: - Services functions
-
-  // public editProduct(productId: number): void {
-  //   const product: ProductModel[] = this.products.filter((product: ProductModel) => {
-  //     return product.id === +productId;
-  //   });
-  //   const sub: Subscription = this.vendorService.approveProduct(product).subscribe((result) => {
-  //     // update UI
-  //     this.products = this.products.filter((product: ProductModel) => {
-  //       return product.id !== productId;
-  //     });
-  //     alert('Succeed');
-  //     sub.unsubscribe();
-  //   }, (error) => {
-  //     alert(JSON.stringify(error));
-  //     sub.unsubscribe();
-  //   });
-  // }
+  public editProductAction(productId: number): void {
+    const navigationExtras: NavigationExtras = {
+      state: this.products.filter(p => p.id === +productId)[0]
+    };
+    this.router.navigate(['/vendor/product-form'], navigationExtras);
+  }
 
   public deleteProduct(productId: number): void {
     const sub: Subscription = this.vendorService

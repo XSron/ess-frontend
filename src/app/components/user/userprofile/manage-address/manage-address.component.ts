@@ -4,7 +4,6 @@ import {AddressComponent} from '../../../shopping/address/address.component';
 import {AddressModel} from '../../../../model/AddressModel';
 import { UserService } from 'src/app/services/userservice.service';
 import { Subscription } from 'rxjs';
-import { ProductModel } from 'src/app/model/ProductModel';
 
 @Component({
   selector: 'manage-address',
