@@ -38,10 +38,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
           const expiredIn = new Date().getTime() + (+this.auth.expires_in * 1000);
           localStorage.setItem("expiredIn", expiredIn.toString());
           expiredInDuration = (+this.auth.expires_in * 1000);
-          alert('First ' + expiredInDuration)
+          // alert('First ' + expiredInDuration)
         } else {
           expiredInDuration = +localStorage.getItem("expiredIn") - new Date().getTime();
-          alert('First ' + expiredInDuration)
+          // alert('First ' + expiredInDuration)
         }
         this.autoLogout(expiredInDuration);
 

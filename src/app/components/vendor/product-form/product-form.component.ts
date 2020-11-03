@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductModel} from '../../../model/ProductModel';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {VendorService} from '../../../services/vendor.service';
 import {Subscription} from 'rxjs';
+import { ProductVendorModel } from '../../../model/ProductVendorModel';
 
 @Component({
   selector: 'app-product-form',
@@ -12,7 +12,7 @@ import {Subscription} from 'rxjs';
 })
 export class ProductFormComponent implements OnInit {
 
-  public productEditing: ProductModel;
+  public productEditing: ProductVendorModel;
 
   public imageSrc: string;
   public form: FormGroup;
@@ -24,7 +24,7 @@ export class ProductFormComponent implements OnInit {
     private vendorService: VendorService,
   ) {
     // Load init data
-    this.productEditing = this.router.getCurrentNavigation().extras.state as ProductModel;
+    this.productEditing = this.router.getCurrentNavigation().extras.state as ProductVendorModel;
   }
 
   ngOnInit(): void {
@@ -63,7 +63,7 @@ export class ProductFormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    const product: ProductModel = this.getProduct();
+    const product: ProductVendorModel = this.getProduct();
     if (this.productEditing) {
       // Editing Product Mode
       const sub: Subscription = this.vendorService
@@ -91,12 +91,14 @@ export class ProductFormComponent implements OnInit {
   }
 
   // https://www.itsolutionstuff.com/post/angular-10-image-upload-with-preview-exampleexample.html
-  getProduct(): ProductModel {
-    return new ProductModel({
+  getProduct(): ProductVendorModel {
+    return new ProductVendorModel({
       name: this.form.value.productName,
       unitPrice: this.form.value.unitPrice,
       unitsInStock: this.form.value.unitsInStock,
       description: this.form.value.description,
+      categoryId: 1,
+      active: false
     });
   }
 

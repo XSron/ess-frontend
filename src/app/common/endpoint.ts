@@ -20,9 +20,9 @@ export class Endpoint {
   // Vendor Endpoint
   public static VENDOR_ENDPOINT = {
     // Change server later with api gateway
-    // SERVICE_URL: 'https://thawing-castle-81725.herokuapp.com/',
-    SERVICE_URL: 'http://localhost:9090/',
-    
+    SERVICE_URL: 'https://thawing-castle-81725.herokuapp.com/',
+    // SERVICE_URL: 'http://localhost:9090/',
+
     GET_ALL_PRODUCT: 'api/products/',
     ADD_NEW_PRODUCT: 'api/products/',
     EDIT_PRODUCT: 'api/products/',

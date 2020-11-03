@@ -39,13 +39,18 @@ export class VendorProductComponent implements OnInit, OnDestroy {
       .subscribe((user: UserModel) => {
         this.user = user;
         if (this.user.id){
-          this.productSubscription = this.vendorService.getAllProducts(this.user.id)
-          .subscribe((products: ProductModel[]) => {
-            this.products = products;
-            this.isLoading = false;
-          });
+          this.productSubscription = this.publicloadProduct(this.user.id);
         }
       });
+  }
+
+  // load product
+  publicloadProduct(uid: number): any{
+    return this.vendorService.getAllProducts(uid)
+    .subscribe((products: ProductModel[]) => {
+      this.products = products;
+      this.isLoading = false;
+    });
   }
 
   ngOnDestroy(): void {
@@ -74,7 +79,7 @@ export class VendorProductComponent implements OnInit, OnDestroy {
       .deleteProductById(productId)
       .subscribe((result) => {
         // Update UI
-        this.products = this.products.filter(p => p.id !== productId);
+        this.publicloadProduct(this.user.id);
         // alert('Succeed');
         sub.unsubscribe();
       }, (error) => {
