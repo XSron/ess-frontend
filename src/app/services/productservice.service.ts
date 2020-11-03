@@ -9,7 +9,7 @@ export class ProductService {
   public productSubject: BehaviorSubject<ProductModel[]> = new BehaviorSubject<ProductModel[]>(null);
   constructor(private http: HttpClient) {
   }
-  
+
   public getAllProducts(): Observable<any> {
     return this.http.get<any>(Endpoint.PRODUCT_ENDPOINT.GET_ALL_PRODUCT);
   }

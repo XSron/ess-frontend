@@ -11,20 +11,24 @@ export class VendorService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllProducts(): Observable<any> {
-    return this.http.get<any>(Endpoint.VENDOR_ENDPOINT.GET_ALL_PRODUCT);
+  public getAllProducts(vendor: number): Observable<any> {
+    const url: string = Endpoint.VENDOR_ENDPOINT.SERVICE_URL + Endpoint.VENDOR_ENDPOINT.GET_ALL_PRODUCT + vendor;
+    return this.http.get<any>(url);
   }
 
   public addNewProduct(product: ProductModel): Observable<any> {
-    return this.http.post(Endpoint.VENDOR_ENDPOINT.ADD_NEW_PRODUCT, product);
+    const url: string = Endpoint.VENDOR_ENDPOINT.SERVICE_URL + Endpoint.VENDOR_ENDPOINT.ADD_NEW_PRODUCT;
+    return this.http.post(url, product);
   }
 
   public editProductById(id: number, product: ProductModel): Observable<any> {
-    return this.http.put(Endpoint.VENDOR_ENDPOINT.EDIT_PRODUCT + `/${id}`, product);
+    const url: string = Endpoint.VENDOR_ENDPOINT.SERVICE_URL + Endpoint.VENDOR_ENDPOINT.EDIT_PRODUCT;
+    return this.http.put(url + id , product);
   }
 
   public deleteProductById(id: number): Observable<any> {
-    return this.http.delete(Endpoint.VENDOR_ENDPOINT.DELETE_PRODUCT_BY_ID + `/${id}`);
+    const url: string = Endpoint.VENDOR_ENDPOINT.SERVICE_URL + Endpoint.VENDOR_ENDPOINT.DELETE_PRODUCT_BY_ID;
+    return this.http.delete(url + id);
   }
 
 }

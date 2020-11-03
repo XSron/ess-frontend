@@ -33,20 +33,19 @@ export class VendorProductComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Load product data
-    this.productSubscription = this.vendorService.
-    getAllProducts()
-      .subscribe((products: ProductModel[]) => {
-        this.products = products;
-        this.isLoading = false;
-      });
-
     // Load vendor information
-    // this.userService
-    //   .getUserByName(this.authService.username)
-    //   .subscribe((user: UserModel) => {
-    //     this.user = user;
-    //   });
+    this.userService
+      .getUserByName(this.authService.username)
+      .subscribe((user: UserModel) => {
+        this.user = user;
+        if (this.user.id){
+          this.productSubscription = this.vendorService.getAllProducts(this.user.id)
+          .subscribe((products: ProductModel[]) => {
+            this.products = products;
+            this.isLoading = false;
+          });
+        }
+      });
   }
 
   ngOnDestroy(): void {
