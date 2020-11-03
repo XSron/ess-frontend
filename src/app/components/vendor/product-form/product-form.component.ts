@@ -4,6 +4,9 @@ import {Router} from '@angular/router';
 import {VendorService} from '../../../services/vendor.service';
 import {Subscription} from 'rxjs';
 import { ProductVendorModel } from '../../../model/ProductVendorModel';
+import {CategoryModel} from '../../../model/CategoryModel';
+import {CategoryService} from '../../../services/categoryservice.service';
+import { AuthenticationService } from 'src/app/services/authservice.service';
 
 @Component({
   selector: 'app-product-form',
@@ -13,6 +16,7 @@ import { ProductVendorModel } from '../../../model/ProductVendorModel';
 export class ProductFormComponent implements OnInit {
 
   public productEditing: ProductVendorModel;
+  public categoryList: CategoryModel[];
 
   public imageSrc: string;
   public form: FormGroup;
@@ -21,22 +25,33 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private categoryService: CategoryService,
     private vendorService: VendorService,
+    private authService: AuthenticationService
   ) {
     // Load init data
     this.productEditing = this.router.getCurrentNavigation().extras.state as ProductVendorModel;
   }
 
   ngOnInit(): void {
+
     // Form setup
     this.form = this.formBuilder.group({
       productName: [this.productEditing ? this.productEditing.name : '', Validators.required],
+      category: [this.productEditing ? this.productEditing.categoryId : '', Validators.required],
       unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', Validators.required],
       unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', Validators.required],
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
+      categoryId: [this.productEditing ? this.productEditing.categoryId : '', Validators.required],
       // file: ['', Validators.required],
       // fileSource: ['', Validators.required],
     });
+
+    // Load category data
+    this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
+      this.categoryList = categories;
+    });
+
   }
 
   // convenience getter for easy access to form fields
@@ -94,11 +109,12 @@ export class ProductFormComponent implements OnInit {
   getProduct(): ProductVendorModel {
     return new ProductVendorModel({
       name: this.form.value.productName,
+      categoryId: this.form.value.category,
       unitPrice: this.form.value.unitPrice,
       unitsInStock: this.form.value.unitsInStock,
       description: this.form.value.description,
-      categoryId: 1,
-      active: false
+      active: false,
+      vendorId: this.authService.userId
     });
   }
 
