@@ -41,7 +41,8 @@ export class Endpoint {
     UPDATE_ADDRESS_FOR_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/users',
     UPDATE_USER_PROFILE: 'https://pm-user-service-v2.herokuapp.com/api/users',
     SET_DEFAULT_ADDRESS: 'https://pm-user-service-v2.herokuapp.com/api/users',
-    SET_DEFAULT_CREDIT_CARD: 'https://pm-user-service-v2.herokuapp.com/api/user'
+    SET_DEFAULT_CREDIT_CARD: 'https://pm-user-service-v2.herokuapp.com/api/user',
+    CHECK_DEFAULT_CARD_ADDRESS: "https://pm-user-service-v2.herokuapp.com/api/users"
   };
 
   // Auth Endpoint

@@ -58,4 +58,7 @@ export class UserService {
             phone: phone,
         })
     }
+    public getDefaultAddressAndCard(username: string): Observable<any> {
+        return this.http.get(Endpoint.USER_ENDPOINT.CHECK_DEFAULT_CARD_ADDRESS + `/${username}/default`);
+    }
 }
