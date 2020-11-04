@@ -10,7 +10,7 @@
       <h2> Manage Category </h2>
     </div>
     <div class="col-3">
-      <a class="btn btn-primary float-right" (click)="openAddNewModal('app-category-modal')">Add New Category</a>
+      <a class="btn btn-primary float-right" (click)="openModal('app-category-modal', null)">Add New Category</a>
     </div>
   </div>
 
@@ -28,7 +28,7 @@
         <td>{{category.id}}</td>
         <td>{{category.categoryName}}</td>
         <td>
-          <a class="btn btn-primary" (click)="openEditModal('app-category-modal', category)">Edit</a> &nbsp;
+          <a class="btn btn-primary" (click)="openModal('app-category-modal', category)">Edit</a> &nbsp;
           <a class="btn btn-danger" (click)="openDeleteModal('app-category-modal-delete', category)">Delete</a> &nbsp;
         </td>
       </tr>
@@ -39,41 +39,22 @@
 
 
 <app-category-modal id="app-category-modal">
-  <h4 class="modal-title">New Category Name:</h4>
-<!--  <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>-->
-<!--  <p>Home page text: <input type="text"/></p>-->
-<!--  <button (click)="closeModal('app-category-modal-add');">Close</button>-->
-  <form [formGroup]="form">
+  <h4 class="modal-title">{{selectedCategory ? 'Edit Category Name:' : 'New Category Name:'}}</h4>
+  <form [formGroup]="form" (ngSubmit)="submitAction('app-category-modal')">
     <div class="form-group">
-<!--      <label for="recipient-name" class="col-form-label">Category Name:</label>-->
-      <input type="text" formControlName="name" class="form-control" placeholder="Enter Category Name">
+<!--      <label>Address</label>-->
+      <input type="text" formControlName="name" class="form-control" placeholder="Category Name"
+             [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
       <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
         <div *ngIf="f.name.errors.required">Category Name is required</div>
       </div>
     </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeModal('app-category-modal');">Close</button>
+      <button type="submit" class="btn btn-primary">{{selectedCategory ? 'Edit Category' : 'Create New Category'}}</button>
+    </div>
   </form>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="closeModal('app-category-modal');">Close</button>
-    <button type="button" class="btn btn-primary" (click)="submitAction()">Create New Category</button>
-  </div>
 </app-category-modal>
-
-<!--<app-category-modal id="app-category-modal-edit">-->
-<!--  <h4 class="modal-title">New Category Name:</h4>-->
-<!--  &lt;!&ndash;  <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>&ndash;&gt;-->
-<!--  &lt;!&ndash;  <p>Home page text: <input type="text"/></p>&ndash;&gt;-->
-<!--  &lt;!&ndash;  <button (click)="closeModal('app-category-modal-add');">Close</button>&ndash;&gt;-->
-<!--  <form>-->
-<!--    <div class="form-group">-->
-<!--      &lt;!&ndash;      <label for="recipient-name" class="col-form-label">Category Name:</label>&ndash;&gt;-->
-<!--      <input type="text" class="form-control" id="category-edit-name">-->
-<!--    </div>-->
-<!--  </form>-->
-<!--  <div class="modal-footer">-->
-<!--    <button type="button" class="btn btn-secondary" (click)="closeModal('app-category-modal-add');">Close</button>-->
-<!--    <button type="button" class="btn btn-primary" (click)="addNewCategory()">Create New Category</button>-->
-<!--  </div>-->
-<!--</app-category-modal>-->
 
 <app-category-modal id="app-category-modal-delete">
   <h1>A Tall Custom Modal!</h1>

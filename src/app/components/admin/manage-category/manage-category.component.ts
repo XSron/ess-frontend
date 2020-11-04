@@ -35,7 +35,6 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
     });
 
     this.loadNewCategoryData();
-
   }
 
   ngOnDestroy(): void {
@@ -47,52 +46,32 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
 
-  submitAction(): void {
+  submitAction(id: string): void {
     this.submitted = true;
     if (this.form.invalid) {
       return;
     }
-    console.log(this.form.value);
     if (this.selectedCategory) {
       // Edit Category Mode
+      this.selectedCategory.categoryName = this.form.value.name;
+      this.categoryService.addNewCategory(this.selectedCategory).subscribe(result => {
+        this.closeModal(id);
+        this.loadNewCategoryData();
+      }, error => {
+        alert(JSON.stringify(error));
+      });
     } else {
       // Add New Category Mode
       const newCategory = {
         categoryName: this.form.value.name
       } as CategoryModel;
       this.categoryService.addNewCategory(newCategory).subscribe(result => {
-        // Refresh the UI
+        this.closeModal(id);
         this.loadNewCategoryData();
       }, error => {
         alert(JSON.stringify(error));
       });
     }
-  }
-
-  closeModal(id: string): void {
-    this.modalService.close(id);
-  }
-
-  // MARK: - Add New Category
-
-  openAddNewModal(id: string): void {
-    this.selectedCategory = null;
-    this.modalService.open(id);
-  }
-
-  addNewCategory(): void {
-
-  }
-
-  // MARK: - Edit Category
-
-  openEditModal(id: string, category: CategoryModel): void {
-    this.selectedCategory = category;
-    this.modalService.open(id);
-  }
-
-  editCategory(): void {
-
   }
 
   // MARK: - Delete Category
@@ -102,7 +81,20 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
     this.modalService.open(id);
   }
 
-  // MARK: -
+  // MARK: - Helper functions
+
+  openModal(id: string, category: CategoryModel): void {
+    this.selectedCategory = category;
+    if (this.selectedCategory) {
+      this.form.value.name = this.selectedCategory.categoryName;
+    }
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string): void {
+    this.selectedCategory = null;
+    this.modalService.close(id);
+  }
 
   loadNewCategoryData(): void {
     // Load category data
