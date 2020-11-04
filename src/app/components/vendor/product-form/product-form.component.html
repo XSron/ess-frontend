@@ -2,6 +2,7 @@
   <div class="card card-body">
     <h4>Product Information</h4>
     <br/>
+
     <form [formGroup]="form">
       <!--    Product Name-->
       <div class="form-group">
@@ -52,12 +53,6 @@
           <div *ngIf="f.description.errors.required">Description is required</div>
         </div>
       </div>
-      <!--    Image Picker-->
-
-      <app-upload>
-
-      </app-upload>
-
      <!-- <div class="form-group">
        <label for="file">File</label>
        <input formControlName="imageSrc" id="file" type="file" class="form-control"(change)="onFileChange($event)">

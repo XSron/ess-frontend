@@ -11,7 +11,7 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
   public uploadFile(formData): any {
-    this.http.post(Endpoint.UPLOAD_ENDPOINT.UPLOAD_LOCAL, formData).subscribe((result) => {
+    this.http.post(Endpoint.UPLOAD_ENDPOINT.UPLOAD, formData).subscribe((result) => {
       console.log(result);
       return result;
     }, error => {
