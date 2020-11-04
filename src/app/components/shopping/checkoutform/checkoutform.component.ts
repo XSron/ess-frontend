@@ -82,7 +82,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
       this.router.navigate(['/checkout'], navigationExtras);
     }, (error: any) => {
       this.isLoading = false;
-      alert(JSON.stringify(error.error));
+      alert(JSON.stringify(error.error.message));
     })
   }
 

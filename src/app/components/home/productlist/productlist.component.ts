@@ -50,7 +50,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.categorys = categorys;
         this.products = products['content'];
         this.isLoading = false;
+      }, error => {
+        this.isLoading = false;
       })
+    }, error => {
+      alert('No Product To Display!')
+      this.isLoading = false;
     });
   }
 

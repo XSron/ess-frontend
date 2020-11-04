@@ -14,7 +14,7 @@
                   <label>
                       Qty
                       <select #selectQty (change)="handleQtyChange(product.id, selectQty.value)">
-                          <option *ngFor="let qty of [1,2,3,4,5,6,7,8,9,10]" [value]="qty" [selected]="product.unitsInStock == qty">{{ qty }}</option>
+                          <option *ngFor="let qty of product.availableQty" [value]="qty" [selected]="product.unitsInStock == qty">{{ qty }}</option>
                       </select>
                   </label>
                   &nbsp;

@@ -33,8 +33,8 @@
   <div class="card card-body">
     <h4>Payment Method</h4> <br>
     <div>
-      <img *ngIf="checkoutData.creditCard.type=='visa'" src="../../../../assets/images/visa.png" width="50px" height="15px" style="float: left;">
-      <img *ngIf="checkoutData.creditCard.type=='master'" src="../../../../assets/images/master.png" width="50px" height="15px" style="float: left;">
+      <img *ngIf="checkoutData.creditCard.type=='VISA'" src="../../../../assets/images/visa.png" width="50px" height="15px" style="float: left;">
+      <img *ngIf="checkoutData.creditCard.type=='MASTERCARD'" src="../../../../assets/images/master.png" width="50px" height="15px" style="float: left;">
       <p style="position: absolute; top: 74px; left: 80px; font-size: 18px;">ending in {{checkoutData.creditCard.number.toString().slice(-4)}}</p>
     </div>
   </div>

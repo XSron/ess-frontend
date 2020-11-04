@@ -12,6 +12,7 @@ export class ProductModel {
     categoryName?: string,
     id?: number,
   };
+  public availableQty?: number[];
 
   constructor(args: {
     id?: number,
@@ -25,12 +26,14 @@ export class ProductModel {
     category?: {
       categoryName?: string,
       id?: number,
-    }
+    }, 
+    availableQty?: number[]
   }) {
     this.name = args.name;
     this.description = args.description;
     this.unitPrice = args.unitPrice;
     this.unitsInStock = args.unitsInStock;
+    this.availableQty = args.availableQty;
     if (args.id) {
       // existing product
       this.id = args.id;
