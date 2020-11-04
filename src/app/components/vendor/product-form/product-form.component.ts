@@ -7,6 +7,9 @@ import { ProductVendorModel } from '../../../model/ProductVendorModel';
 import {CategoryModel} from '../../../model/CategoryModel';
 import {CategoryService} from '../../../services/categoryservice.service';
 import { AuthenticationService } from 'src/app/services/authservice.service';
+import { UploadService } from 'src/app/services/upload.service';
+import { HttpClient } from '@angular/common/http';
+import { Endpoint } from '../../../common/endpoint';
 
 @Component({
   selector: 'app-product-form',
@@ -18,7 +21,7 @@ export class ProductFormComponent implements OnInit {
   public productEditing: ProductVendorModel;
   public categoryList: CategoryModel[];
 
-  public imageSrc: string;
+  public imageSrc: File;
   public form: FormGroup;
   public submitted = false;
 
@@ -27,7 +30,9 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private vendorService: VendorService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private uploadService: UploadService,
+    private http: HttpClient
   ) {
     // Load init data
     this.productEditing = this.router.getCurrentNavigation().extras.state as ProductVendorModel;
@@ -43,7 +48,7 @@ export class ProductFormComponent implements OnInit {
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
       categoryId: [this.productEditing ? this.productEditing.categoryId : '', Validators.required],
       vendorId: this.authService.userId,
-      // imageUrl: [this.productEditing ? this.productEditing.imageUrl : '']
+      // imageSrc: [this.productEditing ? this.productEditing.imageUrl : '']
       // file: ['', Validators.required],
       // fileSource: ['', Validators.required],
     });
@@ -60,19 +65,33 @@ export class ProductFormComponent implements OnInit {
     return this.form.controls;
   }
 
-  onFileChange(event): void {
-    const reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
-        this.form.patchValue({
-          fileSource: reader.result
-        });
-      };
-    }
+  // onFileChange(event): void {
+  //   const reader = new FileReader();
+  //   if (event.target.files && event.target.files.length) {
+  //     this.imageSrc  = event.target.files[0];
+  //     this.uploadFile();
+  //   }
+  // }
+
+  // uploadFile(): string{
+  //   const formData: FormData = new FormData();
+  //   formData.append('file', this.imageSrc, this.imageSrc.name);
+  //   return this.uploadService.uploadFile(formData);
+  // }
+
+  handleFileInput(files: FileList): void{
+    this.imageSrc = files.item(0);
   }
+  uploadFile(): void {
+    const formData: FormData = new FormData();
+    formData.append('file', this.imageSrc, this.imageSrc.name);
+    this.http.post(Endpoint.UPLOAD_ENDPOINT.UPLOAD_LOCAL, formData).subscribe((result) => {
+      alert(JSON.stringify(result));
+    }, error => {
+      alert(JSON.stringify(error));
+    });
+  }
+
 
   submitAction(): void {
     this.submitted = true;
@@ -103,7 +122,6 @@ export class ProductFormComponent implements OnInit {
           sub.unsubscribe();
         });
     }
-
   }
 
   // https://www.itsolutionstuff.com/post/angular-10-image-upload-with-preview-exampleexample.html

@@ -53,17 +53,22 @@
         </div>
       </div>
       <!--    Image Picker-->
+
+      <app-upload>
+
+      </app-upload>
+
      <!-- <div class="form-group">
        <label for="file">File</label>
-       <input formControlName="file" id="file" type="file" class="form-control"
-              (change)="onFileChange($event)">
+       <input formControlName="imageSrc" id="file" type="file" class="form-control"(change)="onFileChange($event)">
        <div *ngIf="submitted && f.file.errors" class="alert alert-danger">
          <div *ngIf="f.file.errors.required">File is required.</div>
        </div>
-     </div>
-     <div class="row d-flex justify-content-start" style="margin-top: 25px; margin-bottom: 25px">
+     </div> -->
+     <!-- <div class="row d-flex justify-content-start" style="margin-top: 25px; margin-bottom: 25px">
        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 200px; width:200px">
      </div> -->
+    
       <!--    Submit Button-->
       <div class="row justify-content-end" style="margin-top: 25px; margin-right: 0px;">
         <button class="btn btn-primary" (click)="submitAction()">

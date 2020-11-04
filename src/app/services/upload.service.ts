@@ -9,35 +9,15 @@ import {catchError} from 'rxjs/operators';
 })
 export class UploadService {
 
-  // constructor(
-  //   private http: HttpClient
-  // ) {}
-
-  // uploadFile(imageSrc): Observable<any> {
-  //   const formData = new FormData();
-  //   formData.append('file', imageSrc, imageSrc.name);
-  //   return this.http.post(Endpoint.UPLOAD_ENDPOINT.UPLOAD_LOCAL, formData, {
-  //     headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' })
-  //   });
-  // }
-
-
-  private baseUrl = Endpoint.UPLOAD_ENDPOINT.UPLOAD_LOCAL;
-
   constructor(private http: HttpClient) { }
-
-  uploadFile(file: File): Observable<HttpEvent<any>> {
-    const formData: FormData = new FormData();
-
-    formData.append('file', file);
-
-    const req = new HttpRequest('POST', `${this.baseUrl}`, formData, {
-      reportProgress: true,
-      responseType: 'json'
+  public uploadFile(formData): any {
+    this.http.post(Endpoint.UPLOAD_ENDPOINT.UPLOAD_LOCAL, formData).subscribe((result) => {
+      console.log(result);
+      return result;
+    }, error => {
+      console.log(error.message);
+      return error.message;
     });
-
-    return this.http.request(req);
   }
-
 }
 
