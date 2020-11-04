@@ -34,6 +34,7 @@ export class ProductVendorModel {
     this.categoryId = args.categoryId;
     this.active = args.active;
     this.vendorId = args.vendorId;
+    this.imageUrl = args.imageUrl;
   }
 
 }

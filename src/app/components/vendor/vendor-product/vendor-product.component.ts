@@ -28,7 +28,6 @@ export class VendorProductComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private vendorService: VendorService,
-    private userService: UserService,
     private authService: AuthenticationService
   ) {}
 

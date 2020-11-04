@@ -18,13 +18,12 @@
         <div class="form-group col-md-4">
           <label>Category</label>
           <select formControlName="categoryId" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                  [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }">
             <option value="" selected disabled>Choose Category</option>
-            <option *ngFor="let category of categoryList;" [value]="category.id"
-            [attr.selected]="category.id == categoryId"  >{{ category.categoryName }}</option>
+            <option *ngFor="let category of categoryList;" [value]="category.id">{{ category.categoryName }}</option>
           </select>
-          <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
-            <div *ngIf="f.category.errors.required">Category is required</div>
+          <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
+            <div *ngIf="f.categoryId.errors.required">Category is required</div>
           </div>
         </div>
         <div class="form-group col-md-4">
@@ -55,20 +54,29 @@
       </div>
       <!--    Image Picker-->
 
-      <app-upload>
-
-      </app-upload>
-
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <input type="file" formControlName="imageUrl" class="form-control"id="file" (change)="handleFileInput($event.target.files)">
+          <div *ngIf="submitted && f.imageUrl.errors" class="alert alert-danger">
+            <div *ngIf="f.imageUrl.errors.required">File is required.</div>
+          </div>
+          <div class="row d-flex justify-content-start" style="margin-top: 25px; margin-bottom: 25px">
+            <img [src]="imgurl" *ngIf="imgurl" 
+            style="height: 100px; width:100px"
+            [ngClass]="{ 'is-invalid': submitted && f.imageUrl.errors }">
+          </div>
+        </div>
+          <div class="form-group col-md-4">
+            <button (click)="uploadFile()">Upload</button>
+          </div>
+      </div>
+        
      <!-- <div class="form-group">
        <label for="file">File</label>
-       <input formControlName="imageSrc" id="file" type="file" class="form-control"(change)="onFileChange($event)">
-       <div *ngIf="submitted && f.file.errors" class="alert alert-danger">
-         <div *ngIf="f.file.errors.required">File is required.</div>
-       </div>
+       <input  id="file" type="file" (change)="onFileChange($event)">
+       
      </div> -->
-     <!-- <div class="row d-flex justify-content-start" style="margin-top: 25px; margin-bottom: 25px">
-       <img [src]="imageSrc" *ngIf="imageSrc" style="height: 200px; width:200px">
-     </div> -->
+     <!--  -->
     
       <!--    Submit Button-->
       <div class="row justify-content-end" style="margin-top: 25px; margin-right: 0px;">
