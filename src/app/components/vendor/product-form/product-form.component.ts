@@ -41,8 +41,8 @@ export class ProductFormComponent implements OnInit {
     // Form setup
     this.form = this.formBuilder.group({
       productName: [this.productEditing ? this.productEditing.name : '', Validators.required],
-      unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', Validators.required],
-      unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', Validators.required],
+      unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', [Validators.required, Validators.pattern('^[\\d.]+$')]],
+      unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', [Validators.required, Validators.pattern('^\\d*$')]],
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
       categoryId: [this.productEditing ? this.productEditing.category.id : '', Validators.required],
       vendorId: this.authService.userId,
