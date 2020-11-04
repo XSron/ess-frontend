@@ -49,6 +49,7 @@ import { AuthProtection } from './guards/auth-protection.service';
 import { VendorProductItemComponent } from './components/vendor/vendor-product-item/vendor-product-item.component';
 import { ManageCategoryComponent } from './components/admin/manage-category/manage-category.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { CategoryModalComponent } from './components/admin/manage-category/category-modal/category-modal.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -120,7 +121,8 @@ const routes: Routes = [
     UnAuthorizedComponent,
     UploadComponent,
     VendorProductItemComponent,
-    ManageCategoryComponent
+    ManageCategoryComponent,
+    CategoryModalComponent
   ],
   imports: [
     BrowserModule,

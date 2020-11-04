@@ -5,7 +5,15 @@
   </div>
 </div>
 <div *ngIf="!isLoading"  class="container">
-  <h2 style="margin-top: 10px;"> Manage Category </h2>
+  <div class="row justify-content-between" style="margin-top: 25px;">
+    <div class="col-9">
+      <h2> Manage Category </h2>
+    </div>
+    <div class="col-3">
+      <a class="btn btn-primary float-right" (click)="openModal('app-category-modal', null)">Add New Category</a>
+    </div>
+  </div>
+
   <div class="table-content">
     <table class="table">
       <thead>
@@ -20,10 +28,8 @@
         <td>{{category.id}}</td>
         <td>{{category.categoryName}}</td>
         <td>
-          <a class="btn btn-primary" >Edit</a> &nbsp;
-          <a class="btn btn-danger" >Delete</a> &nbsp;
-          <!--        <button *ngIf="u.enable" class="btn btn-danger" type="button" (click)="onChangeStatus(u.username,false)">Disable</button>-->
-          <!--        <button *ngIf="!u.enable" class="btn btn-success" type="button" (click)="onChangeStatus(u.username,true)">Enable</button>-->
+          <a class="btn btn-primary" (click)="openModal('app-category-modal', category)">Edit</a> &nbsp;
+          <a class="btn btn-danger" (click)="openDeleteModal('app-category-modal-delete', category)">Delete</a> &nbsp;
         </td>
       </tr>
       </tbody>
@@ -31,3 +37,26 @@
   </div>
 </div>
 
+
+<app-category-modal id="app-category-modal">
+  <h4 class="modal-title">{{selectedCategory ? 'Edit Category Name:' : 'New Category Name:'}}</h4>
+  <form [formGroup]="form" (ngSubmit)="submitAction('app-category-modal')">
+    <div class="form-group">
+<!--      <label>Address</label>-->
+      <input type="text" formControlName="name" class="form-control" placeholder="Category Name"
+             [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Category Name is required</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeModal('app-category-modal');">Close</button>
+      <button type="submit" class="btn btn-primary">{{selectedCategory ? 'Edit Category' : 'Create New Category'}}</button>
+    </div>
+  </form>
+</app-category-modal>
+
+<app-category-modal id="app-category-modal-delete">
+  <h1>A Tall Custom Modal!</h1>
+  <button (click)="closeModal('app-category-modal-delete');">Close</button>
+</app-category-modal>
