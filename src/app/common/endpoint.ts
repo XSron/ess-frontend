@@ -91,7 +91,6 @@ export class Endpoint {
 
   // Upload Endpoint
   public static UPLOAD_ENDPOINT = {
-    UPLOAD: 'https://upload-service-ess.herokuapp.com/api/uploadImage',
-    UPLOAD_LOCAL: 'http://localhost:8080/api/uploadImage'
+    UPLOAD: 'https://upload-service-ess.herokuapp.com/api/uploadImage'
   };
 }

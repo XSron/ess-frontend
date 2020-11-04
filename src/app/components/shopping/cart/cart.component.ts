@@ -29,7 +29,7 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cartSubscription = this.cartService.cartSubject.subscribe((products: ProductModel[]) => {
       this.products = products;
-      //load products for product availability
+      //load products for checking availability
       this.productService.getAllProducts().subscribe((product: any) => {
         const availableProduct: ProductModel[] = product['content'];
         this.products.forEach((product: ProductModel, index: number) => {

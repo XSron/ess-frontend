@@ -77,21 +77,7 @@ export class ProductFormComponent implements OnInit {
   //   formData.append('file', this.imageSrc, this.imageSrc.name);
   //   return this.uploadService.uploadFile(formData);
   // }
-
-  handleFileInput(files: FileList): void{
-    this.imageSrc = files.item(0);
-  }
-  uploadFile(): void {
-    const formData: FormData = new FormData();
-    formData.append('file', this.imageSrc, this.imageSrc.name);
-    this.http.post(Endpoint.UPLOAD_ENDPOINT.UPLOAD_LOCAL, formData).subscribe((result) => {
-      alert(JSON.stringify(result));
-    }, error => {
-      alert(JSON.stringify(error));
-    });
-  }
-
-
+  
   submitAction(): void {
     this.submitted = true;
     if (this.form.invalid) {
