@@ -48,6 +48,7 @@ import { UnAuthorizedComponent } from './components/fixed-blocks/unauthorized/un
 import { AuthProtection } from './guards/auth-protection.service';
 import { UploadComponent } from './components/upload/upload.component';
 import { VendorProductItemComponent } from './components/vendor/vendor-product-item/vendor-product-item.component';
+import { ManageCategoryComponent } from './components/admin/manage-category/manage-category.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -58,6 +59,7 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthProtection], children: [
       { path: 'manageuser', component: ManageUserComponent},
+      { path: 'manage-category', component: ManageCategoryComponent},
       { path: 'product', component: ApproveRejectProductComponent},
       { path: 'report/:par', component: ReportComponent}
     ]},
@@ -116,7 +118,8 @@ const routes: Routes = [
     ProductFormComponent,
     UnAuthorizedComponent,
     UploadComponent,
-    VendorProductItemComponent
+    VendorProductItemComponent,
+    ManageCategoryComponent
   ],
   imports: [
     BrowserModule,

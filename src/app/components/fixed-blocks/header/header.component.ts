@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       //reset in case the user logout
       this.authService.userId = null;
       this.authService.username = null;
-      this.roles = null; 
+      this.roles = null;
     });
     this.cartSubscription = this.cartService.cartSubject.subscribe((products: ProductModel[]) => {
       if(products) this.totalCart = products.length;
