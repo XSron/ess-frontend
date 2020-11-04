@@ -4,7 +4,8 @@ import { AuthModel } from '../model/AuthModel';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Endpoint } from '../common/endpoint';
 import { AppConfig } from '../common/app-config';
- 
+import { RoleModel } from '../model/RoleModel';
+
 @Injectable()
 export class AuthenticationService {
     public userSubject: BehaviorSubject<AuthModel> = new BehaviorSubject<AuthModel>(null);
@@ -23,6 +24,15 @@ export class AuthenticationService {
             })
         )
     }
+    public signUpMultipleRoles(username: string, password: string, role: RoleModel[]): Observable<any> {
+      return (
+          this.http.post(Endpoint.USER_ENDPOINT.USER_SIGNUP, {
+              username: username,
+              password: password,
+              roles: role
+          })
+      )
+  }
     public signIn(username: string, password: string): Observable<AuthModel> {
         let httpHeaders: HttpHeaders = new HttpHeaders()
                                             .set("Authorization", `Basic ${btoa(`${AppConfig.CLIENT_ID}:${AppConfig.SECRET_KEY}`)}`);

@@ -58,6 +58,15 @@ export class UserService {
             phone: phone,
         })
     }
+    // Add by Sovann
+    public updateUserByAdmin(user: any): Observable<any> {
+      return this.http.put(Endpoint.USER_ENDPOINT.UPDATE_USER_PROFILE + `/${user.username}`, {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone
+      });
+    }
     public getDefaultAddressAndCard(username: string): Observable<any> {
         return this.http.get(Endpoint.USER_ENDPOINT.CHECK_DEFAULT_CARD_ADDRESS + `/${username}/default`);
     }
