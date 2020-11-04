@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { stringify } from 'querystring';
 import { Subscription } from 'rxjs';
 import { ManageUserService } from 'src/app/services/manage-user.service';
@@ -13,7 +14,7 @@ export class ManageUserComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   public isLoading: boolean = true;
 
-  constructor(private managerUserService: ManageUserService) {
+  constructor(private managerUserService: ManageUserService, private router: Router) {
   }
 
   onChangeStatus(username: string, enable: boolean) {
@@ -50,6 +51,10 @@ export class ManageUserComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  newUser(): void {
+    this.router.navigate(['/admin/adduser']);
   }
 
 }

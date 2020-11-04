@@ -49,6 +49,7 @@ import { AuthProtection } from './guards/auth-protection.service';
 import { VendorProductItemComponent } from './components/vendor/vendor-product-item/vendor-product-item.component';
 import { ManageCategoryComponent } from './components/admin/manage-category/manage-category.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { AddUserComponent } from './components/admin/manage-user/add-user/add-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -60,6 +61,7 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthProtection], children: [
       { path: 'manageuser', component: ManageUserComponent},
+      { path: 'adduser', component: AddUserComponent },
       { path: 'manage-category', component: ManageCategoryComponent},
       { path: 'product', component: ApproveRejectProductComponent},
       { path: 'report/:par', component: ReportComponent}
@@ -120,7 +122,8 @@ const routes: Routes = [
     UnAuthorizedComponent,
     UploadComponent,
     VendorProductItemComponent,
-    ManageCategoryComponent
+    ManageCategoryComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="card card-body">
+        <h4>User Profile</h4>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-check-label">First Name</label>
+            <input type="text" [value]="" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label class="form-check-label">Last Name</label>
+            <input type="text" [value]="" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-check-label">Username</label>
+            <!-- <input type="text" [value]="user.username" class="form-control"> -->
+            <input type="text" [value]="" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label class="form-check-label">Email</label>
+            <!-- <input type="text" [(ngModel)]="user.email" class="form-control"> -->
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-check-label">Phone Number</label>
+            <!-- <input type="text" [(ngModel)]="user.phone" class="form-control"> -->
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label class="form-check-label"> Password </label>
+            <input class="form-check-label" type="password" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label  class="form-check-label">Roles</label>
+            <select class="custom-select" multiple>
+                <option value=1>Admin</option>
+                <option value=2>Vendor</option>
+                <option value=3>Client</option>
+                <option value=4>Register User</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" >Add User</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
