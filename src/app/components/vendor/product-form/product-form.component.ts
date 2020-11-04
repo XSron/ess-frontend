@@ -31,6 +31,7 @@ export class ProductFormComponent implements OnInit {
     private categoryService: CategoryService,
     private vendorService: VendorService,
     private authService: AuthenticationService,
+    private uploadService: UploadService,
     private http: HttpClient
   ) {
     // Load init data
