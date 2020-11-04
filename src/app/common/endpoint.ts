@@ -3,8 +3,13 @@ export class Endpoint {
 
   // Product Endpoint
   public static API_GATEWAY = {
-    URL: 'https://upload-service-ess.herokuapp.com/',
-    PRODUCT_SERVICE: 'PRODUCT-SERVICE'
+    URL: 'https://ess-api-gateway.herokuapp.com/',
+  };
+
+  public static SERVICE = {
+    PRODUCT_SERVICE: 'product-servcie',
+    USER_SERVICE: 'user-service',
+    UPLOAD_SERVICE: 'upload-service'
   };
 
   // Product Endpoint
@@ -91,6 +96,7 @@ export class Endpoint {
 
   // Upload Endpoint
   public static UPLOAD_ENDPOINT = {
-    UPLOAD: 'https://upload-service-ess.herokuapp.com/api/uploadImage'
+    // UPLOAD: Endpoint.API_GATEWAY.URL + Endpoint.SERVICE.UPLOAD_SERVICE + '/api/uploadImage'
+    UPLOAD: 'https://upload-service-ess.herokuapp.com/api/uploadImage',
   };
 }

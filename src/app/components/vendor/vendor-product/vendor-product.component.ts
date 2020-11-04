@@ -41,6 +41,9 @@ export class VendorProductComponent implements OnInit, OnDestroy {
     .subscribe((products: ProductModel[]) => {
       this.products = products;
       this.isLoading = false;
+    }, error => {
+      this.products = [];
+      this.isLoading = false;
     });
   }
 

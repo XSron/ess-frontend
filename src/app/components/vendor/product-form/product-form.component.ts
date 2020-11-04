@@ -52,6 +52,8 @@ export class ProductFormComponent implements OnInit {
     // Load category data
     this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
       this.categoryList = categories;
+    }, error => {
+      this.categoryList = [];
     });
 
   }

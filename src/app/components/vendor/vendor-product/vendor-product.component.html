@@ -24,6 +24,7 @@
       <th scope="col">Image Url</th>
       <th scope="col">Unit Qty</th>
       <th scope="col">Action</th>
+      <th scope="col">Approved</th>
     </tr>
     </thead>
     <tbody>
@@ -38,6 +39,7 @@
         <a class="btn btn-primary" style="cursor: pointer;" (click)="editProductAction(product.id)">Edit</a> &nbsp;
         <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" (click)="openDeletePopup(product.id)" style="cursor: pointer;">Delete</a> &nbsp;
       </td>
+      <td>{{ product.active}}</td>
     </tr>
     </tbody>
   </table>
