@@ -74,12 +74,14 @@ export class ProductFormComponent implements OnInit {
     }
     formData.append('file', this.imageSrc, this.imageSrc.name);
     this.uploadService.uploadFile(formData).subscribe((result) => {
-      this.imgurl = Object.values(result)[0].toString( );
+      this.imgurl = Object.values(result)[0].toString();
       console.log(this.imgurl);
+      this.form.patchValue({
+        imageUrl: this.imgurl
+      });
     }, error => {
       this.imgurl = error.message;
     });
-    console.log(this.imgurl);
   }
 
   submitAction(): void {
