@@ -37,7 +37,7 @@ export class Endpoint {
   // User Endpoint
   public static USER_ENDPOINT = {
 
-    USER_SIGNUP: 'https://pm-user-service-v2.herokuapp.com/user/register',
+    USER_SIGNUP: 'https://pm-user-service-v2.herokuapp.com/users',
     GET_USER_PROFILE_BY_NAME: 'https://pm-user-service-v2.herokuapp.com/api/users/username',
     ADD_CARD_TO_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/user',
     REMOVE_CARD_FROM_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/user',

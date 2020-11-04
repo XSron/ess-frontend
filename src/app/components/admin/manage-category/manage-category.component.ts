@@ -107,7 +107,7 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
 
   loadNewCategoryData(): void {
     // Load category data
-    this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
+    this.subscription = this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
       this.categoryList = categories;
       this.isLoading = false;
     }, error => {
