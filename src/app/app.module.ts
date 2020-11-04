@@ -46,9 +46,9 @@ import { CategoryService } from './services/categoryservice.service';
 import { ProductFormComponent } from './components/vendor/product-form/product-form.component';
 import { UnAuthorizedComponent } from './components/fixed-blocks/unauthorized/unauthorized.component';
 import { AuthProtection } from './guards/auth-protection.service';
-import { UploadComponent } from './components/upload/upload.component';
 import { VendorProductItemComponent } from './components/vendor/vendor-product-item/vendor-product-item.component';
 import { ManageCategoryComponent } from './components/admin/manage-category/manage-category.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -57,6 +57,7 @@ const routes: Routes = [
   { path: 'mycart', component: CartComponent },
   { path: 'checkoutform', component: CheckoutFormComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'upload', component: UploadComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthProtection], children: [
       { path: 'manageuser', component: ManageUserComponent},
       { path: 'manage-category', component: ManageCategoryComponent},
