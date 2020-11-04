@@ -56,7 +56,7 @@
 
       <div class="form-row">
         <div class="form-group col-md-4">
-          <input type="file" formControlName="imageUrl" class="form-control"id="file" (change)="handleFileInput($event.target.files)">
+          <input type="file" class="form-control" id="file" (change)="handleFileInput($event.target.files)">
           <div *ngIf="submitted && f.imageUrl.errors" class="alert alert-danger">
             <div *ngIf="f.imageUrl.errors.required">File is required.</div>
           </div>
@@ -70,13 +70,6 @@
             <button (click)="uploadFile()">Upload</button>
           </div>
       </div>
-        
-     <!-- <div class="form-group">
-       <label for="file">File</label>
-       <input  id="file" type="file" (change)="onFileChange($event)">
-       
-     </div> -->
-     <!--  -->
     
       <!--    Submit Button-->
       <div class="row justify-content-end" style="margin-top: 25px; margin-right: 0px;">

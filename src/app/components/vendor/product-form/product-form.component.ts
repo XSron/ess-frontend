@@ -44,11 +44,11 @@ export class ProductFormComponent implements OnInit {
       unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', Validators.required],
       unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', Validators.required],
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
-      categoryId: [this.productEditing ? this.productEditing.categoryId : '', Validators.required],
+      categoryId: [this.productEditing ? this.productEditing.category.id : '', Validators.required],
       vendorId: this.authService.userId,
-      imageUrl: [this.productEditing ? this.productEditing.imageUrl : this.imgurl, Validators.required]
+      imageUrl: [this.productEditing ? this.productEditing.imageUrl : '', Validators.required]
     });
-
+    this.imgurl = this.form.value.imageUrl;
     // Load category data
     this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
       this.categoryList = categories;
