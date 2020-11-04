@@ -23,21 +23,17 @@ export class ProductVendorModel {
     categoryId?: number,
     active?: boolean
   }) {
+    if (args.id) {
+      // existing product
+      this.id = args.id;
+    }
     this.name = args.name;
     this.description = args.description;
     this.unitPrice = args.unitPrice;
     this.unitsInStock = args.unitsInStock;
     this.categoryId = args.categoryId;
     this.active = args.active;
-    if (args.id) {
-      // existing product
-      this.id = args.id;
-      this.imageUrl = args.imageUrl;
-      this.vendorId = args.vendorId;
-      this.vendor = args.vendor;
-      this.categoryId = args.categoryId;
-      this.active = args.active;
-    }
+    this.vendorId = args.vendorId;
   }
 
 }

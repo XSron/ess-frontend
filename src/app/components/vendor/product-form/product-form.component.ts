@@ -38,11 +38,12 @@ export class ProductFormComponent implements OnInit {
     // Form setup
     this.form = this.formBuilder.group({
       productName: [this.productEditing ? this.productEditing.name : '', Validators.required],
-      category: [this.productEditing ? this.productEditing.categoryId : '', Validators.required],
       unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', Validators.required],
       unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', Validators.required],
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
       categoryId: [this.productEditing ? this.productEditing.categoryId : '', Validators.required],
+      vendorId: this.authService.userId,
+      // imageUrl: [this.productEditing ? this.productEditing.imageUrl : '']
       // file: ['', Validators.required],
       // fileSource: ['', Validators.required],
     });
@@ -109,11 +110,12 @@ export class ProductFormComponent implements OnInit {
   getProduct(): ProductVendorModel {
     return new ProductVendorModel({
       name: this.form.value.productName,
-      categoryId: this.form.value.category,
+      categoryId: this.form.value.categoryId,
       unitPrice: this.form.value.unitPrice,
       unitsInStock: this.form.value.unitsInStock,
       description: this.form.value.description,
       active: false,
+      imageUrl: this.form.value.imageUrl,
       vendorId: this.authService.userId
     });
   }

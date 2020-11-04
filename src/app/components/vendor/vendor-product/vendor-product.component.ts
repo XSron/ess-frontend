@@ -33,15 +33,7 @@ export class VendorProductComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Load vendor information
-    this.userService
-      .getUserByName(this.authService.username)
-      .subscribe((user: UserModel) => {
-        this.user = user;
-        if (this.user.id){
-          this.productSubscription = this.publicloadProduct(this.user.id);
-        }
-      });
+    this.productSubscription = this.publicloadProduct(this.authService.userId);
   }
 
   // load product

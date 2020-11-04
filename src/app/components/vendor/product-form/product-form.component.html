@@ -16,10 +16,11 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label>Category</label>
-          <select formControlName="category" class="form-control"
+          <select formControlName="categoryId" class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
             <option value="" selected disabled>Choose Category</option>
-            <option *ngFor="let category of categoryList;" [value]="category.id">{{ category.categoryName }}</option>
+            <option *ngFor="let category of categoryList;" [value]="category.id"
+            [attr.selected]="category.id == categoryId"  >{{ category.categoryName }}</option>
           </select>
           <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
             <div *ngIf="f.category.errors.required">Category is required</div>
@@ -52,17 +53,17 @@
         </div>
       </div>
       <!--    Image Picker-->
-<!--      <div class="form-group">-->
-<!--        <label for="file">File</label>-->
-<!--        <input formControlName="file" id="file" type="file" class="form-control"-->
-<!--               (change)="onFileChange($event)">-->
-<!--        <div *ngIf="submitted && f.file.errors" class="alert alert-danger">-->
-<!--          <div *ngIf="f.file.errors.required">File is required.</div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="row d-flex justify-content-start" style="margin-top: 25px; margin-bottom: 25px">-->
-<!--        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 200px; width:200px">-->
-<!--      </div>-->
+     <!-- <div class="form-group">
+       <label for="file">File</label>
+       <input formControlName="file" id="file" type="file" class="form-control"
+              (change)="onFileChange($event)">
+       <div *ngIf="submitted && f.file.errors" class="alert alert-danger">
+         <div *ngIf="f.file.errors.required">File is required.</div>
+       </div>
+     </div>
+     <div class="row d-flex justify-content-start" style="margin-top: 25px; margin-bottom: 25px">
+       <img [src]="imageSrc" *ngIf="imageSrc" style="height: 200px; width:200px">
+     </div> -->
       <!--    Submit Button-->
       <div class="row justify-content-end" style="margin-top: 25px; margin-right: 0px;">
         <button class="btn btn-primary" (click)="submitAction()">
