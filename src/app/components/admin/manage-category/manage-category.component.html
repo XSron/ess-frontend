@@ -29,7 +29,7 @@
         <td>{{category.categoryName}}</td>
         <td>
           <a class="btn btn-primary" (click)="openModal('app-category-modal', category)">Edit</a> &nbsp;
-          <a class="btn btn-danger" (click)="openDeleteModal('app-category-modal-delete', category)">Delete</a> &nbsp;
+          <a class="btn btn-danger" (click)="openModal('app-category-modal-delete', category)">Delete</a> &nbsp;
         </td>
       </tr>
       </tbody>
@@ -39,14 +39,18 @@
 
 
 <app-category-modal id="app-category-modal">
-  <h4 class="modal-title">{{selectedCategory ? 'Edit Category Name:' : 'New Category Name:'}}</h4>
-  <form [formGroup]="form" (ngSubmit)="submitAction('app-category-modal')">
-    <div class="form-group">
-<!--      <label>Address</label>-->
-      <input type="text" formControlName="name" class="form-control" placeholder="Category Name"
-             [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-        <div *ngIf="f.name.errors.required">Category Name is required</div>
+  <div class="modal-header">
+    <h5 class="modal-title">{{selectedCategory ? 'Edit Category Name:' : 'New Category Name:'}}</h5>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submitAddEditAction('app-category-modal')">
+    <div class="modal-body">
+      <div class="form-group" style="margin-top: 25px; margin-bottom: 25px;">
+        <input type="text" formControlName="name" class="form-control" placeholder="Category Name"
+               [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Category Name is required</div>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
@@ -57,6 +61,14 @@
 </app-category-modal>
 
 <app-category-modal id="app-category-modal-delete">
-  <h1>A Tall Custom Modal!</h1>
-  <button (click)="closeModal('app-category-modal-delete');">Close</button>
+  <div class="modal-header">
+    <h5 class="modal-title">Delete Category</h5>
+  </div>
+  <div class="modal-body">
+    <p>Do you want to permanently delete the <strong>{{selectedCategory?.categoryName}}</strong> category?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal('app-category-modal-delete');">Close</button>
+    <button type="submit" class="btn btn-danger" (click)="submitDeleteAction('app-category-modal-delete')">Delete</button>
+  </div>
 </app-category-modal>

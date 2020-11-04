@@ -46,7 +46,9 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
 
-  submitAction(id: string): void {
+  // MARK: - Edit & Update Category
+
+  submitAddEditAction(id: string): void {
     this.submitted = true;
     if (this.form.invalid) {
       return;
@@ -54,7 +56,7 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
     if (this.selectedCategory) {
       // Edit Category Mode
       this.selectedCategory.categoryName = this.form.value.name;
-      this.categoryService.addNewCategory(this.selectedCategory).subscribe(result => {
+      this.categoryService.editCategoryById(this.selectedCategory.id, this.selectedCategory).subscribe(result => {
         this.closeModal(id);
         this.loadNewCategoryData();
       }, error => {
@@ -76,9 +78,13 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
 
   // MARK: - Delete Category
 
-  openDeleteModal(id: string, category: CategoryModel): void {
-    this.selectedCategory = category;
-    this.modalService.open(id);
+  submitDeleteAction(id: string): void {
+    this.categoryService.deleteCategoryById(this.selectedCategory.id).subscribe(result => {
+      this.closeModal(id);
+      this.loadNewCategoryData();
+    }, error => {
+      alert(JSON.stringify(error));
+    });
   }
 
   // MARK: - Helper functions
@@ -86,7 +92,10 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
   openModal(id: string, category: CategoryModel): void {
     this.selectedCategory = category;
     if (this.selectedCategory) {
-      this.form.value.name = this.selectedCategory.categoryName;
+      console.log(this.selectedCategory.categoryName);
+      this.form.patchValue({
+        name: this.selectedCategory.categoryName
+      });
     }
     this.modalService.open(id);
   }
