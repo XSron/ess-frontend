@@ -8,6 +8,7 @@ import { Endpoint } from '../../../common/endpoint';
 import { CreditCardService } from 'src/app/services/credit-card.service';
 import { stringify } from 'querystring';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'report',
@@ -21,10 +22,12 @@ export class ReportComponent implements OnInit {
   public displayProduct: boolean = false;
   public displayDollarvalue: boolean = false;
   public isLoading: boolean = true;
+  public reportPath: SafeResourceUrl;
 
   reportName: string;
 
-  constructor(public authService: AuthenticationService, private http: HttpClient, private activeRoute: ActivatedRoute) {
+  constructor(public authService: AuthenticationService, private http: HttpClient, private activeRoute: ActivatedRoute,
+              private dom: DomSanitizer) {
 
     this.userSubscription = this.authService.userSubject.subscribe((auth: AuthModel) => {
       this.auth = auth;
@@ -57,29 +60,36 @@ export class ReportComponent implements OnInit {
       console.log(params['par']);
 
       if(params['par'] === 'reportproduct') {
-        this.http.get(Endpoint.REPORT_ENDPOINT.REPORT_PRODUCT + '/' + this.userid)
-        .subscribe((result) => {
-            console.log(result);
+        this.http.get<any>(Endpoint.REPORT_ENDPOINT.REPORT_PRODUCT + '/' + this.userid)
+        .subscribe(result => {
+            console.log(result.path);
+            this.reportPath = this.dom.bypassSecurityTrustResourceUrl(result.path);
 
             this.displayProduct = true;
             this.displayDollarvalue = false;
+            this.isLoading = false;
         }, error => {
           alert(JSON.stringify(error));
         });
       }
       else {
-        this.http.get(Endpoint.REPORT_ENDPOINT.REPORT_DOLLAR_VALUE + '/' + this.userid)
+        this.http.get<any>(Endpoint.REPORT_ENDPOINT.REPORT_DOLLAR_VALUE + '/' + this.userid)
         .subscribe((result) => {
           console.log(result);
+          this.reportPath = this.dom.bypassSecurityTrustResourceUrl(result.path);
 
           this.displayDollarvalue = true;
           this.displayProduct = false;
+          this.isLoading = false;
         }, error => {
           alert(JSON.stringify(error));
         });
       }
-      this.isLoading = false;
     });
+  }
+
+  getReportPath(path: string) {
+    return path;
   }
 
   ngOnInit(): void {
