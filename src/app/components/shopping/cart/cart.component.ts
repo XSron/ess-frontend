@@ -29,7 +29,11 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cartSubscription = this.cartService.cartSubject.subscribe((products: ProductModel[]) => {
       this.products = products;
+<<<<<<< Updated upstream
       //load products for checking availability
+=======
+      //load products for product availability
+>>>>>>> Stashed changes
       this.productService.getAllProducts().subscribe((product: any) => {
         const availableProduct: ProductModel[] = product['content'];
         this.products.forEach((product: ProductModel, index: number) => {
