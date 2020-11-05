@@ -109,7 +109,7 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
   loadNewCategoryData(): void {
     // Load category data
     this.subscription = this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
-      this.categoryList = categories;
+      this.categoryList = categories.sort((a, b) => a.id - b.id);
       this.isLoading = false;
     }, error => {
       alert(JSON.stringify(error));
