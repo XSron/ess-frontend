@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { stringify } from 'querystring';
+import {NavigationExtras, Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ManageUserService } from 'src/app/services/manage-user.service';
 
 @Component({
-    selector: 'manage-user',
-    templateUrl: 'manage-user.component.html'
+  selector: 'manage-user',
+  templateUrl: 'manage-user.component.html'
 })
 export class ManageUserComponent implements OnInit, OnDestroy {
 
@@ -55,6 +54,11 @@ export class ManageUserComponent implements OnInit, OnDestroy {
 
   newUser(): void {
     this.router.navigate(['/admin/adduser']);
+  }
+
+  editUser(user: any): void {
+    const navigationExtras: NavigationExtras = { state: user };
+    this.router.navigate(['/admin/adduser'], navigationExtras);
   }
 
 }
