@@ -37,7 +37,8 @@
               <td *ngIf="u.enable" class="text-success"> Active </td>
               <td *ngIf="!u.enable" class="text-danger"> Inactive </td>
               <td>
-                  <a class="btn btn-primary" routerLink="/user/userprofile">Edit</a> &nbsp;
+                <!-- [routerLink]="['client/report', 'reportdollarvalue']" -->
+                  <a class="btn btn-primary" [routerLink]="['/admin/edituser', u.username]">Edit</a> &nbsp;
                   <button *ngIf="u.enable" class="btn btn-danger" type="button" (click)="onChangeStatus(u.username,false)">Disable</button>
                   <button *ngIf="!u.enable" class="btn btn-success" type="button" (click)="onChangeStatus(u.username,true)">Enable</button>
               </td>

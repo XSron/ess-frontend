@@ -48,8 +48,9 @@ import { UnAuthorizedComponent } from './components/fixed-blocks/unauthorized/un
 import { AuthProtection } from './guards/auth-protection.service';
 import { VendorProductItemComponent } from './components/vendor/vendor-product-item/vendor-product-item.component';
 import { ManageCategoryComponent } from './components/admin/manage-category/manage-category.component';
-import { UploadComponent } from './components/upload/upload.component';
+//import { UploadComponent } from './components/upload/upload.component';
 import { AddUserComponent } from './components/admin/manage-user/add-user/add-user.component';
+import { EditUserComponent } from './components/admin/manage-user/edit-user/edit-user.component';
 import { CategoryModalComponent } from './components/admin/manage-category/category-modal/category-modal.component';
 
 const routes: Routes = [
@@ -62,6 +63,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthProtection], children: [
       { path: 'manageuser', component: ManageUserComponent},
       { path: 'adduser', component: AddUserComponent },
+      { path: 'edituser/:username', component: EditUserComponent },
       { path: 'manage-category', component: ManageCategoryComponent},
       { path: 'product', component: ApproveRejectProductComponent},
       { path: 'report/:par', component: ReportComponent}
@@ -123,7 +125,8 @@ const routes: Routes = [
     VendorProductItemComponent,
     ManageCategoryComponent,
     AddUserComponent,
-    CategoryModalComponent
+    CategoryModalComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

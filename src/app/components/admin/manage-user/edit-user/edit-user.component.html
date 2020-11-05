@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="card card-body">
+        <h4>Update User Profile</h4>
+        <br>
+
+        <form #userForm="ngForm">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-check-label">First Name</label>
+              <input type="text" #firstName [(ngModel)]="user.firstName" name="firstName" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-check-label">Last Name</label>
+              <input type="text" [(ngModel)]="user.lastName" name="lastName" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-check-label">Username</label>
+              <!-- <input type="text" [value]="user.username" class="form-control"> -->
+              <input type="text" disabled [(ngModel)]="user.username" name="username" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-check-label">Email</label>
+              <!-- <input type="text" [(ngModel)]="user.email" class="form-control"> -->
+              <input type="text" [(ngModel)]="user.email" name="email" class="form-control" required>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-check-label">Phone Number</label>
+              <!-- <input type="text" [(ngModel)]="user.phone" class="form-control"> -->
+              <input type="text" [(ngModel)]="user.phone" name="phone" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-check-label">Roles</label> <br/>
+              <span *ngFor="let r of user.roles"> {{r.name}} </span>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-primary" (click)="editUser()" [disabled]="!userForm.valid">Update</button>
+            </div>
+          </div>
+        </form>
+  </div>
+</div>
