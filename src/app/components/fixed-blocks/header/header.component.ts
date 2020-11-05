@@ -88,11 +88,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     localStorage.removeItem("auth");
     localStorage.removeItem("expiredIn");
     this.router.navigate(['/']);
-
   }
   autoLogout(expireIn: number) {
     this.timer = setTimeout(() => {
       this.onLogout();
     }, expireIn);
+  }
+  onGoHome() {
+    this.router.navigate(['/']);
   }
 }

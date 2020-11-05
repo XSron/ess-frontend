@@ -29,6 +29,8 @@ export class ReportComponent implements OnInit {
   constructor(public authService: AuthenticationService, private http: HttpClient, private activeRoute: ActivatedRoute,
               private dom: DomSanitizer) {
 
+    this.isLoading = true;
+
     this.userSubscription = this.authService.userSubject.subscribe((auth: AuthModel) => {
       this.auth = auth;
 

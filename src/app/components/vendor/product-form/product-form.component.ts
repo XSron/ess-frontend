@@ -41,8 +41,8 @@ export class ProductFormComponent implements OnInit {
     // Form setup
     this.form = this.formBuilder.group({
       productName: [this.productEditing ? this.productEditing.name : '', Validators.required],
-      unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', Validators.required],
-      unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', Validators.required],
+      unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', [Validators.required, Validators.pattern('^[\\d.]+$')]],
+      unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', [Validators.required, Validators.pattern('^\\d*$')]],
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
       categoryId: [this.productEditing ? this.productEditing.category.id : '', Validators.required],
       vendorId: this.authService.userId,
@@ -74,12 +74,14 @@ export class ProductFormComponent implements OnInit {
     }
     formData.append('file', this.imageSrc, this.imageSrc.name);
     this.uploadService.uploadFile(formData).subscribe((result) => {
-      this.imgurl = Object.values(result)[0].toString( );
+      this.imgurl = Object.values(result)[0].toString();
       console.log(this.imgurl);
+      this.form.patchValue({
+        imageUrl: this.imgurl
+      });
     }, error => {
       this.imgurl = error.message;
     });
-    console.log(this.imgurl);
   }
 
   submitAction(): void {
