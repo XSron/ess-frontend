@@ -48,7 +48,6 @@ import { UnAuthorizedComponent } from './components/fixed-blocks/unauthorized/un
 import { AuthProtection } from './guards/auth-protection.service';
 import { VendorProductItemComponent } from './components/vendor/vendor-product-item/vendor-product-item.component';
 import { ManageCategoryComponent } from './components/admin/manage-category/manage-category.component';
-import { UploadComponent } from './components/upload/upload.component';
 import { AddUserComponent } from './components/admin/manage-user/add-user/add-user.component';
 import { CategoryModalComponent } from './components/admin/manage-category/category-modal/category-modal.component';
 
