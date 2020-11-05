@@ -1,6 +1,7 @@
 .card{
   margin-bottom: 25px;
   background-color: #eeeeee;
+  height: 480px;
 }
 
 .card:hover{
@@ -16,3 +17,10 @@
   cursor: pointer;
 }
 
+.card-text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

@@ -1,8 +1,10 @@
 img {
   height: 200px;
+  max-width: 220px;
   margin-top: 15px;
   margin-bottom: 15px;
   border-radius: 8px;
+  object-fit: scale-down;
 }
 
 .btn {

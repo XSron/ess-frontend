@@ -58,23 +58,26 @@ export class UserService {
             phone: phone,
         })
     }
-<<<<<<< Updated upstream
     // Add by Sovann
     public updateUserByAdmin(user: any): Observable<any> {
       return this.http.put(Endpoint.USER_ENDPOINT.UPDATE_USER_PROFILE + `/${user.username}`, {
         firstName: user.firstName,
         lastName: user.lastName,
+        username: user.username,
+        password: user.password,
         email: user.email,
-        phone: user.phone
-      });
-    }
-    public getDefaultAddressAndCard(username: string): Observable<any> {
-        return this.http.get(Endpoint.USER_ENDPOINT.CHECK_DEFAULT_CARD_ADDRESS + `/${username}/default`);
-    }
+        phone: user.phone,
+        // roleId: user.roleId
+        roles: [
+          {
+            id: user.roleId
+          }
+        ]
+      }
+    );
+  }
+
+  public getDefaultAddressAndCard(username: string): Observable<any> {
+    return this.http.get(Endpoint.USER_ENDPOINT.CHECK_DEFAULT_CARD_ADDRESS + `/${username}/default`);
+  }
 }
-=======
-    public getDefaultAddressAndCard(username: string): Observable<any> {
-        return this.http.get(Endpoint.USER_ENDPOINT.CHECK_DEFAULT_CARD_ADDRESS + `/${username}/default`);
-    }
-}
->>>>>>> Stashed changes

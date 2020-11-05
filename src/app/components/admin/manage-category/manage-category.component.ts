@@ -65,8 +65,9 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
     } else {
       // Add New Category Mode
       const newCategory = {
-        categoryName: this.form.value.name
-      } as CategoryModel;
+        categoryName: this.form.value.name,
+        products: []
+      } as unknown as CategoryModel;
       this.categoryService.addNewCategory(newCategory).subscribe(result => {
         this.closeModal(id);
         this.loadNewCategoryData();
@@ -108,7 +109,7 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
   loadNewCategoryData(): void {
     // Load category data
     this.subscription = this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
-      this.categoryList = categories;
+      this.categoryList = categories.sort((a, b) => a.id - b.id);
       this.isLoading = false;
     }, error => {
       alert(JSON.stringify(error));

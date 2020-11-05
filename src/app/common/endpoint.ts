@@ -41,10 +41,11 @@ export class Endpoint {
     ADD_ADDRESS_TO_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/users',
     REMOVE_ADDRESS_FROM_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/users',
     UPDATE_ADDRESS_FOR_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/users',
+    ADD_USER_PROFILE: 'https://pm-user-service-v2.herokuapp.com/users',
     UPDATE_USER_PROFILE: 'https://pm-user-service-v2.herokuapp.com/api/users',
     SET_DEFAULT_ADDRESS: 'https://pm-user-service-v2.herokuapp.com/api/users',
     SET_DEFAULT_CREDIT_CARD: 'https://pm-user-service-v2.herokuapp.com/api/user',
-    CHECK_DEFAULT_CARD_ADDRESS: "https://pm-user-service-v2.herokuapp.com/api/users"
+    CHECK_DEFAULT_CARD_ADDRESS: 'https://pm-user-service-v2.herokuapp.com/api/users'
   };
 
   // Auth Endpoint
