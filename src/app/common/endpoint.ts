@@ -70,8 +70,8 @@ export class Endpoint {
 
   // Report Endpoint
   public static REPORT_ENDPOINT = {
-    REPORT_PRODUCT: 'http://localhost:9090/api/generateReportProduct',
-    REPORT_DOLLAR_VALUE: 'http://localhost:9090/api/generateReportDollarValue'
+    REPORT_PRODUCT: 'http://ec2-3-137-203-14.us-east-2.compute.amazonaws.com:9090/api/generateReportProduct',
+    REPORT_DOLLAR_VALUE: 'http://ec2-3-137-203-14.us-east-2.compute.amazonaws.com:9090/api/generateReportDollarValue'
   };
 
   // Manager User Endpoint

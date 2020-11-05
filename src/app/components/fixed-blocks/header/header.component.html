@@ -17,8 +17,8 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="/vendor/product" routerLinkActive="active">Manage Product</a>
-          <a class="dropdown-item" routerLink="/vendor/reportproduct" routerLinkActive="active">View Report - In term of Products</a>
-          <a class="dropdown-item" routerLink="/vendor/reportdollarvalue" routerLinkActive="active">View Report - In term of Dollar Values</a>
+          <a class="dropdown-item" [routerLink]="['vendor/report', 'reportproduct']" routerLinkActive="active">View Report - In term of Products</a>
+          <a class="dropdown-item" [routerLink]="['vendor/report', 'reportdollarvalue']" routerLinkActive="active">View Report - In term of Dollar Values</a>
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="hasRole('ROLE_ADMIN')">
@@ -38,8 +38,8 @@
           Client
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/client/reportsreportproduct" routerLinkActive="active">View Report - In term of Products</a>
-          <a class="dropdown-item" routerLink="/client/reportsdollarvalue" routerLinkActive="active">View Report - In term of Dollar Values</a>
+          <a class="dropdown-item" [routerLink]="['client/report', 'reportproduct']" routerLinkActive="active">View Report - In term of Products</a>
+          <a class="dropdown-item" [routerLink]="['client/report', 'reportdollarvalue']" routerLinkActive="active">View Report - In term of Dollar Values</a>
         </div>
       </li>
     </ul>
