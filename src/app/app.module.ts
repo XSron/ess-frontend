@@ -50,6 +50,7 @@ import { VendorProductItemComponent } from './components/vendor/vendor-product-i
 import { ManageCategoryComponent } from './components/admin/manage-category/manage-category.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { AddUserComponent } from './components/admin/manage-user/add-user/add-user.component';
+import { CategoryModalComponent } from './components/admin/manage-category/category-modal/category-modal.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -58,7 +59,6 @@ const routes: Routes = [
   { path: 'mycart', component: CartComponent },
   { path: 'checkoutform', component: CheckoutFormComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'upload', component: UploadComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthProtection], children: [
       { path: 'manageuser', component: ManageUserComponent},
       { path: 'adduser', component: AddUserComponent },
@@ -120,10 +120,10 @@ const routes: Routes = [
     UserProfileComponent,
     ProductFormComponent,
     UnAuthorizedComponent,
-    UploadComponent,
     VendorProductItemComponent,
     ManageCategoryComponent,
-    AddUserComponent
+    AddUserComponent,
+    CategoryModalComponent
   ],
   imports: [
     BrowserModule,

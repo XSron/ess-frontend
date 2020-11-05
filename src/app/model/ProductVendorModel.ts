@@ -10,6 +10,10 @@ export class ProductVendorModel {
   public vendor?: string;
   public categoryId?: number;
   public active?: boolean;
+  public category?: {
+    categoryName?: string,
+    id?: number,
+  };
 
   constructor(args: {
     id?: number,
@@ -21,10 +25,13 @@ export class ProductVendorModel {
     vendorId?: number,
     vendor?: string,
     categoryId?: number,
-    active?: boolean
+    active?: boolean,
+    category?: {
+      categoryName?: string,
+      id?: number,
+    },
   }) {
     if (args.id) {
-      // existing product
       this.id = args.id;
     }
     this.name = args.name;
@@ -34,6 +41,7 @@ export class ProductVendorModel {
     this.categoryId = args.categoryId;
     this.active = args.active;
     this.vendorId = args.vendorId;
+    this.imageUrl = args.imageUrl;
   }
 
 }

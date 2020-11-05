@@ -28,7 +28,6 @@ export class VendorProductComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private vendorService: VendorService,
-    private userService: UserService,
     private authService: AuthenticationService
   ) {}
 
@@ -41,6 +40,9 @@ export class VendorProductComponent implements OnInit, OnDestroy {
     return this.vendorService.getAllProducts(uid)
     .subscribe((products: ProductModel[]) => {
       this.products = products;
+      this.isLoading = false;
+    }, error => {
+      this.products = [];
       this.isLoading = false;
     });
   }

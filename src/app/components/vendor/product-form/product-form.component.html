@@ -18,13 +18,12 @@
         <div class="form-group col-md-4">
           <label>Category</label>
           <select formControlName="categoryId" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                  [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }">
             <option value="" selected disabled>Choose Category</option>
-            <option *ngFor="let category of categoryList;" [value]="category.id"
-            [attr.selected]="category.id == categoryId"  >{{ category.categoryName }}</option>
+            <option *ngFor="let category of categoryList;" [value]="category.id">{{ category.categoryName }}</option>
           </select>
-          <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
-            <div *ngIf="f.category.errors.required">Category is required</div>
+          <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
+            <div *ngIf="f.categoryId.errors.required">Category is required</div>
           </div>
         </div>
         <div class="form-group col-md-4">
@@ -33,6 +32,9 @@
                  [ngClass]="{ 'is-invalid': submitted && f.unitPrice.errors }">
           <div *ngIf="submitted && f.unitPrice.errors" class="invalid-feedback">
             <div *ngIf="f.unitPrice.errors.required">Product Price is required</div>
+            <div *ngIf="f.unitPrice.invalid && f.unitPrice.touched && f.unitPrice.errors.pattern">
+              Product Price only accept number.
+            </div>
           </div>
         </div>
         <div class="form-group col-md-4">
@@ -40,30 +42,44 @@
           <input type="text" formControlName="unitsInStock" class="form-control" placeholder="Quantity"
                  [ngClass]="{ 'is-invalid': submitted && f.unitsInStock.errors }">
           <div *ngIf="submitted && f.unitsInStock.errors" class="invalid-feedback">
-            <div *ngIf="f.unitsInStock.errors.required">Units In Stock is required</div>
+            <div *ngIf="f.unitsInStock.errors.required">Quantity is required</div>
+            <div *ngIf="f.unitsInStock.invalid && f.unitsInStock.touched && f.unitsInStock.errors.pattern">
+              Quantity only accept integer.
+            </div>
           </div>
         </div>
       </div>
       <!--    Description-->
       <div class="form-group">
         <label>Description</label>
-        <input type="textarea" formControlName="description" class="form-control" placeholder="Product Description" rows="5"
-               [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+        <textarea formControlName="description" class="form-control" placeholder="Product Description" rows="3"
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
         <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
           <div *ngIf="f.description.errors.required">Description is required</div>
         </div>
       </div>
-     <!-- <div class="form-group">
-       <label for="file">File</label>
-       <input formControlName="imageSrc" id="file" type="file" class="form-control"(change)="onFileChange($event)">
-       <div *ngIf="submitted && f.file.errors" class="alert alert-danger">
-         <div *ngIf="f.file.errors.required">File is required.</div>
-       </div>
-     </div> -->
-     <!-- <div class="row d-flex justify-content-start" style="margin-top: 25px; margin-bottom: 25px">
-       <img [src]="imageSrc" *ngIf="imageSrc" style="height: 200px; width:200px">
-     </div> -->
-    
+
+      <!--    Image Picker-->
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="file" class="form-control" id="file" (change)="handleFileInput($event.target.files)" style="padding: .2rem .75rem">
+          <div *ngIf="submitted && f.imageUrl.errors" class="alert alert-danger">
+            <div *ngIf="f.imageUrl.errors.required">File is required.</div>
+          </div>
+          <div  style="margin-top: 25px; margin-bottom: 25px">
+            <img [src]="imgurl" *ngIf="imgurl"
+            style="height: 100px; width:100px"
+            [ngClass]="{ 'is-invalid': submitted && f.imageUrl.errors }">
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <div class="row justify-content-start" >
+            <button class="btn btn-primary"  (click)="uploadFile()">Upload</button>
+          </div>
+        </div>
+      </div>
+
       <!--    Submit Button-->
       <div class="row justify-content-end" style="margin-top: 25px; margin-right: 0px;">
         <button class="btn btn-primary" (click)="submitAction()">

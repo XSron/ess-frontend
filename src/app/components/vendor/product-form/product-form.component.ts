@@ -8,8 +8,6 @@ import {CategoryModel} from '../../../model/CategoryModel';
 import {CategoryService} from '../../../services/categoryservice.service';
 import { AuthenticationService } from 'src/app/services/authservice.service';
 import { UploadService } from 'src/app/services/upload.service';
-import { HttpClient } from '@angular/common/http';
-import { Endpoint } from '../../../common/endpoint';
 
 @Component({
   selector: 'app-product-form',
@@ -24,6 +22,7 @@ export class ProductFormComponent implements OnInit {
   public imageSrc: File;
   public form: FormGroup;
   public submitted = false;
+  public imgurl: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +31,6 @@ export class ProductFormComponent implements OnInit {
     private vendorService: VendorService,
     private authService: AuthenticationService,
     private uploadService: UploadService,
-    private http: HttpClient
   ) {
     // Load init data
     this.productEditing = this.router.getCurrentNavigation().extras.state as ProductVendorModel;
@@ -43,19 +41,19 @@ export class ProductFormComponent implements OnInit {
     // Form setup
     this.form = this.formBuilder.group({
       productName: [this.productEditing ? this.productEditing.name : '', Validators.required],
-      unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', Validators.required],
-      unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', Validators.required],
+      unitPrice: [this.productEditing ? this.productEditing.unitPrice : '', [Validators.required, Validators.pattern('^[\\d.]+$')]],
+      unitsInStock: [this.productEditing ? this.productEditing.unitsInStock : '', [Validators.required, Validators.pattern('^\\d*$')]],
       description: [this.productEditing ? this.productEditing.description : '', Validators.required],
-      categoryId: [this.productEditing ? this.productEditing.categoryId : '', Validators.required],
+      categoryId: [this.productEditing ? this.productEditing.category.id : '', Validators.required],
       vendorId: this.authService.userId,
-      // imageSrc: [this.productEditing ? this.productEditing.imageUrl : '']
-      // file: ['', Validators.required],
-      // fileSource: ['', Validators.required],
+      imageUrl: [this.productEditing ? this.productEditing.imageUrl : '', Validators.required]
     });
-
+    this.imgurl = this.form.value.imageUrl;
     // Load category data
     this.categoryService.getAllCategory().subscribe((categories: CategoryModel[]) => {
       this.categoryList = categories;
+    }, error => {
+      this.categoryList = [];
     });
 
   }
@@ -65,20 +63,27 @@ export class ProductFormComponent implements OnInit {
     return this.form.controls;
   }
 
-  // onFileChange(event): void {
-  //   const reader = new FileReader();
-  //   if (event.target.files && event.target.files.length) {
-  //     this.imageSrc  = event.target.files[0];
-  //     this.uploadFile();
-  //   }
-  // }
+  handleFileInput(files: FileList): void {
+    this.imageSrc = files.item(0);
+  }
 
-  // uploadFile(): string{
-  //   const formData: FormData = new FormData();
-  //   formData.append('file', this.imageSrc, this.imageSrc.name);
-  //   return this.uploadService.uploadFile(formData);
-  // }
-  
+  uploadFile(): any {
+    const formData: FormData = new FormData();
+    if (this.imageSrc === undefined) {
+      return;
+    }
+    formData.append('file', this.imageSrc, this.imageSrc.name);
+    this.uploadService.uploadFile(formData).subscribe((result) => {
+      this.imgurl = Object.values(result)[0].toString();
+      console.log(this.imgurl);
+      this.form.patchValue({
+        imageUrl: this.imgurl
+      });
+    }, error => {
+      this.imgurl = error.message;
+    });
+  }
+
   submitAction(): void {
     this.submitted = true;
     if (this.form.invalid) {
@@ -110,7 +115,6 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  // https://www.itsolutionstuff.com/post/angular-10-image-upload-with-preview-exampleexample.html
   getProduct(): ProductVendorModel {
     return new ProductVendorModel({
       name: this.form.value.productName,
@@ -119,7 +123,7 @@ export class ProductFormComponent implements OnInit {
       unitsInStock: this.form.value.unitsInStock,
       description: this.form.value.description,
       active: false,
-      imageUrl: this.form.value.imageUrl,
+      imageUrl: this.imgurl,
       vendorId: this.authService.userId
     });
   }

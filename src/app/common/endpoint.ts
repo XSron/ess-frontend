@@ -3,8 +3,13 @@ export class Endpoint {
 
   // Product Endpoint
   public static API_GATEWAY = {
-    URL: 'https://upload-service-ess.herokuapp.com/',
-    PRODUCT_SERVICE: 'PRODUCT-SERVICE'
+    URL: 'https://ess-api-gateway.herokuapp.com/',
+  };
+
+  public static SERVICE = {
+    PRODUCT_SERVICE: 'product-servcie',
+    USER_SERVICE: 'user-service',
+    UPLOAD_SERVICE: 'upload-service'
   };
 
   // Product Endpoint
@@ -32,7 +37,7 @@ export class Endpoint {
   // User Endpoint
   public static USER_ENDPOINT = {
 
-    USER_SIGNUP: 'https://pm-user-service-v2.herokuapp.com/user/register',
+    USER_SIGNUP: 'https://pm-user-service-v2.herokuapp.com/users',
     GET_USER_PROFILE_BY_NAME: 'https://pm-user-service-v2.herokuapp.com/api/users/username',
     ADD_CARD_TO_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/user',
     REMOVE_CARD_FROM_USER_ENDPOINT: 'https://pm-user-service-v2.herokuapp.com/api/user',
@@ -84,13 +89,14 @@ export class Endpoint {
   // Category Endpoint
   public static CATEGORY_ENDPOINT = {
     GET_ALL_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories',
-    ADD_NEW_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories',
-    EDIT_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories',
-    DELETE_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/categories',
+    ADD_NEW_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/api/categories',
+    EDIT_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/api/categories',
+    DELETE_CATEGORY: 'https://thawing-castle-81725.herokuapp.com/api/categories',
   };
 
   // Upload Endpoint
   public static UPLOAD_ENDPOINT = {
-    UPLOAD: 'https://upload-service-ess.herokuapp.com/api/uploadImage'
+    // UPLOAD: Endpoint.API_GATEWAY.URL + Endpoint.SERVICE.UPLOAD_SERVICE + '/api/uploadImage'
+    UPLOAD: 'https://upload-service-ess.herokuapp.com/api/uploadImage',
   };
 }

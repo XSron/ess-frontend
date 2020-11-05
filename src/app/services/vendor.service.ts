@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Endpoint} from '../common/endpoint';
 import {ProductModel} from '../model/ProductModel';
 import {HttpClient} from '@angular/common/http';
+import { ProductVendorModel } from '../model/ProductVendorModel';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class VendorService {
     return this.http.get<any>(url);
   }
 
-  public addNewProduct(product: ProductModel): Observable<any> {
+  public addNewProduct(product: ProductVendorModel): Observable<any> {
     const url: string = Endpoint.VENDOR_ENDPOINT.SERVICE_URL + Endpoint.VENDOR_ENDPOINT.ADD_NEW_PRODUCT;
     return this.http.post(url, product);
   }
 
-  public editProductById(id: number, product: ProductModel): Observable<any> {
+  public editProductById(id: number, product: ProductVendorModel): Observable<any> {
     const url: string = Endpoint.VENDOR_ENDPOINT.SERVICE_URL + Endpoint.VENDOR_ENDPOINT.EDIT_PRODUCT;
     return this.http.put(url + id , product);
   }
