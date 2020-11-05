@@ -1,70 +1,61 @@
 <div class="container">
   <div class="row">
     <div class="card card-body">
-        <h4>User Profile</h4>
+      <h4>User Profile</h4>
+      <br>
+      <form [formGroup]="form" (ngSubmit)="submitAction()">
+        <div class="row">
+          <div class="col-md-6">
+            <div *ngIf="error" class="alert alert-danger" role="alert">
+              {{ error }}
+            </div>
+            <label class="form-check-label">First Name</label>
+            <input type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+          </div>
+          <div class="col-md-6">
+            <label class="form-check-label">Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-check-label">Username</label>
+            <input type="text" formControlName="username" class="form-control" placeholder="Username">
+          </div>
+          <div class="col-md-6">
+            <label class="form-check-label">Email</label>
+            <input type="text" formControlName="email" class="form-control" placeholder="Email">
+          </div>
+        </div>
         <br>
-
-        <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
-          <div class="row">
-            <div class="col-md-6">
-              <div *ngIf="error" class="alert alert-danger" role="alert">
-                {{ error }}
-              </div>
-              <label class="form-check-label">First Name</label>
-              <input type="text" #firstName ngModel name="firstName" class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label class="form-check-label">Last Name</label>
-              <input type="text" ngModel name="lastName" class="form-control">
-            </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-check-label">Phone Number</label>
+            <input type="text" formControlName="phone" class="form-control" placeholder="Phone Number">
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label class="form-check-label">Username</label>
-              <!-- <input type="text" [value]="user.username" class="form-control"> -->
-              <input type="text" ngModel name="username" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-check-label">Email</label>
-              <!-- <input type="text" [(ngModel)]="user.email" class="form-control"> -->
-              <input type="text" ngModel name="email" class="form-control" required>
-            </div>
+          <div *ngIf="!selectedUser" class="col-md-6">
+            <label class="form-check-label"> Password </label>
+            <input type="password" formControlName="password" class="form-control" placeholder="Password">
           </div>
-          <br>
-          <div class="row">
-            <div class="col-md-6">
-              <label class="form-check-label">Phone Number</label>
-              <!-- <input type="text" [(ngModel)]="user.phone" class="form-control"> -->
-              <input type="text" ngModel name="phone" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-check-label"> Password </label>
-              <input class="form-check-label" ngModel name="password" type="password" class="form-control" required>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label  class="form-check-label">Roles</label>
+            <select formControlName="roleId" class="form-control no-border">
+              <option value=1>Admin</option>
+              <option value=2>Vendor</option>
+              <option value=3>Client</option>
+              <option value=4>Register User</option>
+            </select>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label  class="form-check-label">Roles</label>
-              <!-- <select class="custom-select" multiple>
-                  <option value=1>Admin</option>
-                  <option value=2>Vendor</option>
-                  <option value=3>Client</option>
-                  <option value=4>Register User</option>
-              </select> -->
-              <select class="form-control" ngModel name="roleId" required>
-                <option value=1>Admin</option>
-                <option value=2>Vendor</option>
-                <option value=3>Client</option>
-                <option value=4>Register User</option>
-              </select>
-            </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" type="submit">{{selectedUser ? 'Update User' : 'Add User'}}</button>
           </div>
-          <br>
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-primary" type="submit" [disabled]="!userForm.valid">Add User</button>
-            </div>
-          </div>
-        </form>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
