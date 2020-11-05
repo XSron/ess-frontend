@@ -32,11 +32,11 @@ export class VendorProductComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.productSubscription = this.loadProduct(this.authService.userId);
+    this.productSubscription = this.publicloadProduct(this.authService.userId);
   }
 
   // load product
-  public loadProduct(uid: number): any{
+  publicloadProduct(uid: number): any{
     return this.vendorService.getAllProducts(uid)
     .subscribe((products: ProductModel[]) => {
       this.products = products;
@@ -73,7 +73,7 @@ export class VendorProductComponent implements OnInit, OnDestroy {
       .deleteProductById(productId)
       .subscribe((result) => {
         // Update UI
-        this.loadProduct(this.authService.userId);
+        this.publicloadProduct(this.user.id);
         // alert('Succeed');
         sub.unsubscribe();
       }, (error) => {
