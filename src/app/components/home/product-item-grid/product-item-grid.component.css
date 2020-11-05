@@ -1,7 +1,7 @@
 .card{
   margin-bottom: 25px;
   background-color: #eeeeee;
-  height: 420px;
+  height: 480px;
 }
 
 .card:hover{
@@ -18,8 +18,9 @@
 }
 
 .card-text{
-  max-height: 50px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
