@@ -58,9 +58,9 @@ export class UserService {
             phone: phone,
         })
     }
-    // Add by Sovann
-    public updateUserByAdmin(user: any): Observable<any> {
-      return this.http.put(Endpoint.USER_ENDPOINT.UPDATE_USER_PROFILE + `/${user.username}`, {
+  // Add by Sovann
+  public updateUserByAdmin(username: string, user: any): Observable<any> {
+    return this.http.put(Endpoint.USER_ENDPOINT.UPDATE_USER_PROFILE + `/${username}`, {
         firstName: user.firstName,
         lastName: user.lastName,
         username: user.username,

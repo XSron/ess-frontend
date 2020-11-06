@@ -14,6 +14,7 @@ export class OrderHistoryComponent implements OnInit {
     ngOnInit() {
         this.orderService.getOrderHistoryByUserId(this.authService.userId).subscribe((orders: OrderModel[]) => {
             this.orders = orders;
+            console.log(JSON.stringify(this.orders))
             this.orderService.orders = this.orders.slice();
             this.isLoading = false;
         })

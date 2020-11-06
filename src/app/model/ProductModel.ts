@@ -13,10 +13,7 @@ export class ProductModel {
     id?: number,
   };
   public availableQty?: number[];
-<<<<<<< Updated upstream
   public active: boolean;
-=======
->>>>>>> Stashed changes
 
   constructor(args: {
     id?: number,
@@ -30,24 +27,16 @@ export class ProductModel {
     category?: {
       categoryName?: string,
       id?: number,
-<<<<<<< Updated upstream
     },
     availableQty?: number[],
     active?: boolean,
-=======
-    }, 
-    availableQty?: number[]
->>>>>>> Stashed changes
   }) {
     this.name = args.name;
     this.description = args.description;
     this.unitPrice = args.unitPrice;
     this.unitsInStock = args.unitsInStock;
     this.availableQty = args.availableQty;
-<<<<<<< Updated upstream
     this.active = args.active;
-=======
->>>>>>> Stashed changes
     if (args.id) {
       // existing product
       this.id = args.id;
